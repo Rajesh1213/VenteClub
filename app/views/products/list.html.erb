@@ -1,0 +1,57 @@
+<h2><%= @page_title %></h2>
+
+<table class="table table-condensed">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Color</th>
+    <th>Size</th>
+    <th>Amount</th>
+    <th>Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @top_categories.each { |top_category| %>
+      <tr>
+        <th colspan="6"><%= top_category.name %></th>
+      </tr>
+      <% top_category.events.each { |event| %>
+          <tr>
+            <th></th>
+            <th colspan="4"><%= event.name %></th>
+            <th style="font-weight: normal;">
+              <%= link_to ({:controller => :products, :action => :new, :id => event}, :class => "btn btn-success", :style => "float: right;") do %>
+                  <i class="icon-plus-sign icon-white"></i> New Product
+              <% end %>
+            </th>
+          </tr>
+          <% event.products.each { |product| %>
+              <tr>
+                <td>
+                  <%= link_to product.name, :controller => :products, :action => :edit, :id => product %>
+                </td>
+                <td>
+                  <%= link_to :controller => :colors, :action => :edit, :id => product.color do %>
+                      <span class="badge" style="background-color: <%= product.color.html_val %>;"></span>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to product.size.name, :controller => :sizes, :action => :edit, :id => product.size %>
+                </td>
+                <td>
+                  <%= product.amount %>
+                </td>
+                <td>
+                  <%= number_to_currency product.price %>
+                </td>
+                <td>
+                  <%#= link_to ({:controller => :products, :action => :copy, :id => product}, :class => "btn btn-info", :style => "float: right;") do %>
+                      <!--<i class="icon-tags icon-white"></i> Copy-->
+                  <%# end %>
+                </td>
+              </tr>
+          <% } %>
+      <% } %>
+  <% } %>
+  </tbody>
+</table>

@@ -1,0 +1,24 @@
+<h2 style="float: left;"><%= @page_title %></h2>
+<%= link_to ({:controller => :top_categories, :action => :new}, :class => "btn btn-success", :style => "float: right;") do %>
+    <i class="icon-plus-sign icon-white"></i> New top category
+<% end %>
+<div class="cleaner"></div>
+
+<table class="table table-condensed">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Sorting</th>
+    <th>Subcategories</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @top_categories.each { |top_category| %>
+      <tr>
+        <td><%= link_to top_category.name, :controller => :top_categories, :action => :edit, :id => top_category %></td>
+        <td><%= top_category.sorting %></td>
+        <td><%= top_category.events.count %></td>
+      </tr>
+  <% } %>
+  </tbody>
+</table>

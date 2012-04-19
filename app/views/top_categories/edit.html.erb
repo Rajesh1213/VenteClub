@@ -1,0 +1,7 @@
+<h2 style="float: left;"><%= @page_title %></h2>
+<%= link_to ({:controller => :top_categories, :action => :delete, :id => @top_category}, :method => :post, :confirm => "All products and subcategories will be deleted as well. Are you sure?", :class => "btn btn-danger", :style => "float: right;") do %>
+    <i class="icon-trash icon-white"></i> Delete
+<% end %>
+<div class="cleaner"></div>
+
+<%= render :partial => "top_categories/form" %>

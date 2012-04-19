@@ -1,0 +1,5 @@
+<h2><%= @page_title %></h2>
+
+<%= nested_form_for @product, :as => :product, :url => {:controller => :products, :action => :new, :id => @event}, :method => :post, :html => {:class => "form-horizontal"} do |product| %>
+    <%= render :partial => "products/form", :locals => {:product => product} %>
+<% end %>

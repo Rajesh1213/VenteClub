@@ -1,0 +1,110 @@
+<%= product.error_messages(:class => "alert alert-block alert-error", :header_tag => "h4", :message => nil) %>
+<fieldset>
+  <legend></legend>
+  <div class="control-group">
+    <%= product.label(:event_id, "Event:", :class => "control-label") %>
+    <div class="controls">
+      <%= product.select(:event_id, @event.top_category.events.collect { |event| [event.name, event.id] }, {}, {:required => true, :class => "input-xlarge"}) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= product.label(:name, "Name:", :class => "control-label") %>
+    <div class="controls">
+      <%= product.text_field(:name, :required => true, :class => "input-xlarge") %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= product.label(:description, "Description:", :class => "control-label") %>
+    <div class="controls">
+      <%= product.text_area(:description, :required => true, :class => "input-xlarge", :rows => 3) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= product.label(:color_id, "Color:", :class => "control-label") %>
+    <div class="controls">
+      <%= product.select(:color_id, Color.all.collect { |color| [color.name, color.id] }, {}, {:required => true, :class => "input-xlarge"}) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= product.label(:size_id, "Size:", :class => "control-label") %>
+    <div class="controls">
+      <%= product.select(:size_id, Size.all.collect { |size| [size.name, size.id] }, {}, {:required => true, :class => "input-xlarge"}) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= product.label(:price, "Price:", :class => "control-label") %>
+    <div class="controls">
+      <%= product.text_field(:price, :required => true, :class => "input-xlarge", :value => number_to_currency(@product.price, :unit => "")) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= product.label(:amount, "Amount:", :class => "control-label") %>
+    <div class="controls">
+      <%= product.text_field(:amount, :required => true, :class => "input-xlarge") %>
+    </div>
+  </div>
+
+  <%= product.fields_for :properties do |property| %>
+      <legend></legend>
+      <%= property.link_to_remove(:class => "btn btn-danger") do %>
+          <i class="icon-trash icon-white"></i> Delete
+      <% end %>
+      <div class="cleaner"></div>
+      <div class="control-group">
+        <%= property.label(:name, "Name:", :class => "control-label") %>
+        <div class="controls">
+          <%= property.text_field(:name, :class => "input-xlarge") %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= property.label(:value, "Value:", :class => "control-label") %>
+        <div class="controls">
+          <%= property.text_field(:value, :class => "input-xlarge") %>
+        </div>
+      </div>
+  <% end %>
+  <%= product.link_to_add(:properties, :class => "btn btn-success") do %>
+      <i class="icon-plus-sign icon-white"></i> New property
+  <% end %>
+  <div class="cleaner" style="height: 27px;"></div>
+
+
+  <%= product.fields_for :images do |image| %>
+      <legend></legend>
+      <%= image.link_to_remove(:class => "btn btn-danger") do %>
+          <i class="icon-trash icon-white"></i> Delete
+      <% end %>
+      <div class="cleaner"></div>
+      <div class="control-group">
+        <div class="controls">
+          <%= image.hidden_field(:file_name, :class => "input-xlarge") %>
+          <% if image.object.file_name.nil? %>
+              <div class="file-uploader"></div>
+              <div class="progress" style="width: 280px;display: none;">
+                <div class="bar"></div>
+              </div>
+              <div class="btn btn-success">Browse</div>
+              <div class="admImage"></div>
+          <% elsif image.object.id %>
+              <div class="admImage">
+                <%= image_tag "/pictures/s/" + image.object.file_name, :alt => "" %>
+              </div>
+          <% else %>
+              <div class="admImage">
+                <%= image_tag "/tmp/s/" + image.object.file_name, :alt => "" %>
+              </div>
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+
+  <%= product.link_to_add(:images, :class => "btn btn-success") do %>
+      <i class="icon-plus-sign icon-white"></i> New image
+  <% end %>
+
+
+  <div class="form-actions">
+    <%= product.submit("Save", :class => "btn btn-primary") %>
+    <%= button_tag("Cancel", :type => "button", :class => "btn", :onclick => "window.history.back()") %>
+  </div>
+</fieldset>

@@ -1,0 +1,26 @@
+<h2 style="float: left;"><%= @page_title %></h2>
+<%= link_to ({:controller => :colors, :action => :new}, :class => "btn btn-success", :style => "float: right;") do %>
+    <i class="icon-plus-sign icon-white"></i> New color
+<% end %>
+<div class="cleaner"></div>
+
+<table class="table table-condensed">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>View</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @colors.each { |color| %>
+      <tr>
+        <td><%= link_to color.name, :controller => :colors, :action => :edit, :id => color %></td>
+        <td>
+          <%= link_to :controller => :colors, :action => :edit, :id => color do %>
+              <span class="badge" style="background-color: <%= color.html_val %>;"></span>
+          <% end %>
+        </td>
+      </tr>
+  <% } %>
+  </tbody>
+</table>

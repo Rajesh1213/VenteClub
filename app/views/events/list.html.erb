@@ -1,0 +1,32 @@
+<h2><%= @page_title %></h2>
+
+<table class="table table-condensed">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Start at</th>
+    <th>End at</th>
+    <th>Products</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @top_categories.each { |top_category| %>
+      <tr>
+        <th colspan="3"><%= link_to top_category.name, :controller => :top_categories, :action => :edit, :id => top_category %></th>
+        <th style="font-weight: normal;">
+          <%= link_to ({:controller => :events, :action => :new, :id => top_category}, :class => "btn btn-success", :style => "float: right;") do %>
+              <i class="icon-plus-sign icon-white"></i> New Event
+          <% end %>
+        </th>
+      </tr>
+      <% top_category.events.each { |event| %>
+          <tr>
+            <td><%= link_to event.name, :controller => :events, :action => :edit, :id => event %></td>
+            <td><%= l event.start_at.to_time, :format => :datetime %></td>
+            <td><%= l event.end_at.to_time, :format => :datetime %></td>
+            <td><%= event.products.count %></td>
+          </tr>
+      <% } %>
+  <% } %>
+  </tbody>
+</table>

@@ -1,0 +1,20 @@
+<h2 style="float: left;"><%= @page_title %></h2>
+<%= link_to ({:controller => :sizes, :action => :new}, :class => "btn btn-success", :style => "float: right;") do %>
+    <i class="icon-plus-sign icon-white"></i> New size
+<% end %>
+<div class="cleaner"></div>
+
+<table class="table table-condensed">
+  <thead>
+  <tr>
+    <th>Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @sizes.each { |size| %>
+      <tr>
+        <td><%= link_to size.name, {:controller => :sizes, :action => :edit, :id => size}, {:style => "padding: 0px 300px 0px 10px;"} %></td>
+      </tr>
+  <% } %>
+  </tbody>
+</table>

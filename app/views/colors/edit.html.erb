@@ -1,0 +1,7 @@
+<h2 style="float: left;"><%= @page_title %></h2>
+<%= link_to ({:controller => :colors, :action => :delete, :id => @color}, :method => :post, :confirm => "All products with this color will be deleted as well. Are you sure?", :class => "btn btn-danger", :style => "float: right;") do %>
+    <i class="icon-trash icon-white"></i> Delete
+<% end %>
+<div class="cleaner"></div>
+
+<%= render :partial => "colors/form" %>

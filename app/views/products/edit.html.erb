@@ -1,0 +1,9 @@
+<h2 style="float: left;"><%= @page_title %></h2>
+<%= link_to ({:controller => :products, :action => :delete, :id => @product}, :method => :post, :confirm => "Are you sure?", :class => "btn btn-danger", :style => "float: right;") do %>
+    <i class="icon-trash icon-white"></i> Delete
+<% end %>
+<div class="cleaner"></div>
+
+<%= nested_form_for @product, :as => :product, :url => {:controller => :products, :action => :edit, :id => @product}, :method => :post, :html => {:class => "form-horizontal"} do |product_form| %>
+    <%= render :partial => "products/form", :locals => {:product => product_form} %>
+<% end %>
