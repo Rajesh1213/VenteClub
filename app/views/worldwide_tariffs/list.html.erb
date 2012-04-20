@@ -1,0 +1,16 @@
+<h2><%= @page_title %></h2>
+
+<table class="table table-condensed">
+  <thead>
+  <tr>
+    <th>Country</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @tariffs.each { |tariff| %>
+      <tr>
+        <td><%= link_to tariff.country, {:controller => :worldwide_tariffs, :action => :edit, :id => tariff} %></td>
+      </tr>
+  <% } %>
+  </tbody>
+</table>

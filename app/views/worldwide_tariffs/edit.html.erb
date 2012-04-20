@@ -1,0 +1,26 @@
+<h2><%= @page_title %></h2>
+
+<%= form_for :tariff, :html => {:class => "form-horizontal"} do |f| %>
+    <%= f.error_messages(:class => "alert alert-block alert-error", :header_tag => "h4", :message => nil) %>
+    <fieldset>
+      <legend></legend>
+      <% i = 0.0 %>
+      <% while i < 30 %>
+          <% i += 0.5 %>
+          <% field_name_db = "w_" + i.to_s.gsub('.', '_') %>
+          <% field_name_view = i.to_s + " kg:" %>
+          <%= render :partial => "worldwide_tariffs/part", :locals => {:f => f, :field_name_db => field_name_db, :field_name_view => field_name_view} %>
+      <% end %>
+      <legend></legend>
+      <div class="control-group">
+        <%= f.label(:additional, "Additional:", :class => "control-label") %>
+        <div class="controls">
+          <%= f.text_field(:additional, :required => true, :class => "input-xlarge") %>
+        </div>
+      </div>
+      <div class="form-actions">
+        <%= f.submit("Save", :class => "btn btn-primary") %>
+        <%= button_tag("Cancel", :type => "button", :class => "btn", :onclick => "window.history.back()") %>
+      </div>
+    </fieldset>
+<% end %>

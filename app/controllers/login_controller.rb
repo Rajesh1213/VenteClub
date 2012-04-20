@@ -34,6 +34,40 @@ class LoginController < ApplicationController
     redirect_to :root
   end
 
+  def forgot_pass
+    if request.post?
+      user = User.find_by_mail(params[:mail])
+      if user
+        Mailer.forgot_pass(user).deliver
+        flash[:success] = "Mail with instructions sent"
+        redirect_to :action => :log_in
+      else
+        flash.now[:error] = "Email not found"
+      end
+    end
+  end
+
+  def reset_pass
+    unless request.post?
+      user = User.find_by_mail(params[:mail])
+      if user && params[:id] == user.pass[140..160]
+        @user = user
+        @user.pass = ""
+      else
+        flash[:error] = "Incorrect reset url"
+        redirect_to :action => :log_in
+      end
+    else
+      @user = User.find_by_mail(params[:user][:mail])
+      @user.pass = params[:user][:pass]
+      @user.pass_confirmation = params[:user][:pass_confirmation]
+      if @user.save
+        flash[:success] = "Password updated"
+        redirect_to :action => :log_in
+      end
+    end
+  end
+
   private
 
   def redirect_user(user)

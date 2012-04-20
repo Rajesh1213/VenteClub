@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   attr_accessor :pass_confirmation
 
+  attr_protected :role_id
+
   before_create :send_mail, :update_pass
   before_update :update_pass
 
