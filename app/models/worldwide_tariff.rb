@@ -6,8 +6,8 @@ class WorldwideTariff < ActiveRecord::Base
 
   attr_accessor :arr_data
 
-  #validates :additional, :numericality => {:greater_than => 0}, :on => :update
-  #validate :changed_attr, :on => :update
+  validates :additional, :numericality => {:greater_than => 0}
+  validate :changed_attr
 
   private
 

@@ -6,23 +6,23 @@
 #   cities = City.create([{ :name => 'Chicago' }. { :name => 'Copenhagen' }]])
 #   Mayor.create(:name => 'Emanuel'. :city => cities.first])
 
-#User.create(:mail => "vova4kin@list.ru", :pass => "111111", :role_id => 2)
-#User.create(:mail => "info@skypexamericas.com", :pass => "111111", :role_id => 2)
-#
-#TopCategory.create(:name => "DESIGNER", :sorting => 6)
-#TopCategory.create(:name => "WOMEN", :sorting => 5)
-#TopCategory.create(:name => "MEN", :sorting => 4)
-#TopCategory.create(:name => "TEENS", :sorting => 3)
-#TopCategory.create(:name => "HOME", :sorting => 2)
-#TopCategory.create(:name => "GADGETS", :sorting => 1)
-#
-#Color.create(:name => "White", :html_val => "#ffffff")
-#Color.create(:name => "Black", :html_val => "#000000")
-#
-#Size.create(:name => "1")
-#Size.create(:name => "2")
-#Size.create(:name => "3")
-#Size.create(:name => "4")
+User.create(:mail => "vova4kin@list.ru", :pass => "111111", :role_id => 2)
+User.create(:mail => "info@skypexamericas.com", :pass => "111111", :role_id => 2)
+
+TopCategory.create(:name => "DESIGNER", :sorting => 6)
+TopCategory.create(:name => "WOMEN", :sorting => 5)
+TopCategory.create(:name => "MEN", :sorting => 4)
+TopCategory.create(:name => "TEENS", :sorting => 3)
+TopCategory.create(:name => "HOME", :sorting => 2)
+TopCategory.create(:name => "GADGETS", :sorting => 1)
+
+Color.create(:name => "White", :html_val => "#ffffff")
+Color.create(:name => "Black", :html_val => "#000000")
+
+Size.create(:name => "1")
+Size.create(:name => "2")
+Size.create(:name => "3")
+Size.create(:name => "4")
 
 
 WorldwideTariff.create(:arr_data => ["Afghanistan", "23.21", "32.05", "38.03", "44.14", "50.12", "90.03", "101.60", "113.17", "124.74", "150.22", "160.36", "170.37", "180.38", "190.26", "200.40", "210.41", "220.42", "230.43", "240.44", "250.45", "258.51", "266.44", "274.37", "282.43", "290.36", "298.29", "306.35", "314.28", "322.21", "330.27", "338.20", "346.13", "354.19", "362.12", "370.05", "377.98", "386.04", "393.97", "401.90", "409.96", "416.07", "422.18", "428.29", "434.40", "440.51", "446.62", "452.73", "458.84", "464.95", "471.06", "477.17", "483.28", "489.52", "495.50", "501.61", "507.85", "513.96", "520.07", "526.18", "532.29", "15.67"])
