@@ -36,7 +36,8 @@ class ProductMyHabit
     properties = product_hash["productDescription"]["bullets"][0]["bulletsList"]
     properties = properties[1..properties.length-1]
     properties.each { |mh_property|
-      mh_property.gsub!("&quot;", '"').gsub!("&#39;", "'")
+      mh_property.gsub!("&quot;", '"')
+      mh_property.gsub!("&#39;", "'")
       splitted = mh_property.split(": ")
       property_name = splitted[0]
       property_value = splitted[1..splitted.size-1]
