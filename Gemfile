@@ -23,6 +23,12 @@ gem 'whenever', :require => false
 gem 'geocoder'
 gem 'nested_form', :git => "git://github.com/ryanb/nested_form.git"
 
+gem 'headless'
+gem 'watir-webdriver', '0.5.5'
+
+#gem 'multi_json'
+#gem 'selenium-webdriver', '3.0.4'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

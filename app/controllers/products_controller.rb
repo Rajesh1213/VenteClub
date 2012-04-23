@@ -14,7 +14,12 @@ class ProductsController < ApplicationController
     @javascript = true
     unless request.post?
       @event = Event.find(params[:id])
-      @product = @event.products.new
+      if session[:product]
+        @product = session[:product]
+        session.delete("product")
+      else
+        @product = @event.products.new
+      end
     else
       @product = Product.new(params[:product])
       @event = @product.event
@@ -22,6 +27,22 @@ class ProductsController < ApplicationController
         flash[:success] = "Product: #{@product.name} created"
         redirect_to :action => :list
       end
+    end
+  end
+
+  def from_myhabit
+    @page_title = "New product from MyHabit link"
+    @event = Event.find(params[:id])
+
+    if request.post?
+      @event = Event.find(params[:event_id])
+      @product = Product.new
+      Headless.ly do
+        @product = ProductMyHabit.new().product_from_url(params[:url])
+      end
+      @product.event_id = @event.id
+      session[:product] = @product
+      redirect_to :action => :new, :id => @event
     end
   end
 

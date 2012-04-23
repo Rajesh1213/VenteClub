@@ -20,9 +20,21 @@
             <th></th>
             <th colspan="4"><%= event.name %></th>
             <th style="font-weight: normal;">
-              <%= link_to ({:controller => :products, :action => :new, :id => event}, :class => "btn btn-success", :style => "float: right;") do %>
-                  <i class="icon-plus-sign icon-white"></i> New Product
-              <% end %>
+
+
+              <div class="btn-group pull-right">
+                <%= link_to ({:controller => :products, :action => :new, :id => event}, :class => "btn btn-success") do %>
+                    <i class="icon-plus-sign icon-white"></i> New Product
+                <% end %>
+                <a href="#1" data-toggle="dropdown" class="btn btn-success dropdown-toggle"><span class="caret"></span></a>
+                <ul class="dropdown-menu pull-right">
+                  <li>
+                    <%= link_to "From MyHabit", :controller => :products, :action => :from_myhabit, :id => event %>
+                  </li>
+                </ul>
+              </div>
+
+
             </th>
           </tr>
           <% event.products.each { |product| %>
@@ -46,7 +58,7 @@
                 </td>
                 <td>
                   <%#= link_to ({:controller => :products, :action => :copy, :id => product}, :class => "btn btn-info", :style => "float: right;") do %>
-                      <!--<i class="icon-tags icon-white"></i> Copy-->
+                  <!--<i class="icon-tags icon-white"></i> Copy-->
                   <%# end %>
                 </td>
               </tr>
