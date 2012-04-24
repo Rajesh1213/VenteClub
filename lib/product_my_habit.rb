@@ -1,11 +1,7 @@
 class ProductMyHabit
 
-  require 'open-uri'
-
-  #img =  Magick::Image.read(path).first
-  #pix = img.scale(1, 1)
-  #averageColor = pix.pixel_color(0,0)
-
+  require "open-uri"
+  require "process_image"
 
   def initialize
     @browser = Watir::Browser.new :firefox
@@ -28,6 +24,7 @@ class ProductMyHabit
     result["price"] = product_hash["detailJSON"]["ourPrice"]["amount"]
     result["properties"] = process_properties(product_hash)
     result["images"] = process_images(product_hash)
+    result["color_id"] = process_color(product_hash)
     result
   end
 
@@ -47,11 +44,35 @@ class ProductMyHabit
   end
 
   def process_images(product_hash)
-    []
+    images = []
+    images_arr = product_hash["detailJSON"]["asins"][0]["altviews"]
+    images_arr.each { |img_hash|
+      img = get_file(img_hash["zoomImage"])
+      filename = ProcessImage.new.for_product(img) + ".jpg"
+      images << Image.new(:file_name => filename)
+    }
+    images
   end
 
-  def html_color
+  def process_color(product_hash)
+    color_id = 1
+    html_val = html_color(product_hash)
+    color = Color.find_by_html_val(html_val)
+    if color
+      color_id = color.id
+    else
+      color_name = product_hash["detailJSON"]["variationMatrix"]["dimensionMatrix"][0]["values"][0]["displayText"]
+      new_color = Color.create(:name => color_name, :html_val => html_val)
+      color_id = new_color.id
+    end
+    color_id
+  end
 
+  def html_color(product_hash)
+    color_image_url = product_hash["detailJSON"]["asins"][0]["swatchImage"]
+    color_image = get_file(color_image_url)
+    color = ProcessImage.new.get_color(color_image).to_s
+    color
   end
 
   def product_hash_from_url(url)
@@ -81,6 +102,7 @@ class ProductMyHabit
     @browser.text_field(:name => 'email').set 'vova4kin@list.ru'
     @browser.text_field(:name => 'password').set 'vova147258'
     @browser.button(:id => "signInSubmit").click
+    @browser.div(:id => "altImage0").click
     js_start = @browser.html.index("var payload = {") + 14
     js_end = @browser.html.index('QueryLogUtils.recordTime("gw_ld");') - 3
     js = @browser.html[js_start..js_end]

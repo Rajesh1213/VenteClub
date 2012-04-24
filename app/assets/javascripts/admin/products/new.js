@@ -4,7 +4,7 @@ $('form').live('nested:fieldAdded', function (event) {
     var btn = $(event.field).find('.btn.btn-success');
     var uploader = new qq.FileUploaderBasic({
         element:up_div,
-        action:'/uploads/image_upload',
+        action:'/uploads/product_image_upload',
         debug:false,
         multiple:false,
         allowedExtensions:['jpg', 'jpeg', 'png', 'gif', 'bmp'],

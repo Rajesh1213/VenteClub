@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
 
+  require "product_my_habit"
+
   before_filter :authorize_admin
 
   layout "admin"
