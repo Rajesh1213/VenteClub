@@ -28,3 +28,6 @@ select.input-xlarge {
     margin-left: 460px;
     margin-bottom: -28px;
 }
+.admImage img {
+    padding-bottom: 15px;
+}

@@ -1,35 +1,65 @@
 <% @top_categories = TopCategory.all %>
-<%= form_for :event, :html => {:class => "form-horizontal"} do |f| %>
-    <%= f.error_messages(:class => "alert alert-block alert-error", :header_tag => "h4", :message => nil) %>
-    <fieldset>
-      <legend></legend>
+<%= f.error_messages(:class => "alert alert-block alert-error", :header_tag => "h4", :message => nil) %>
+<fieldset>
+  <legend></legend>
+  <div class="control-group">
+    <%= f.label(:top_category_id, "Top category:", :class => "control-label") %>
+    <div class="controls">
+      <%= f.select(:top_category_id, @top_categories.collect { |top_category| [top_category.name, top_category.id] }, {}, {:required => true, :class => "input-xlarge"}) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label(:name, "Name:", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_field(:name, :required => true, :class => "input-xlarge") %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label(:description, "Description:", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_area(:description, :required => true, :class => "input-xlarge", :rows => 3) %>
+    </div>
+  </div>
+
+  <%= f.fields_for :image do |image| %>
       <div class="control-group">
-        <%= f.label(:top_category_id, "Top category:", :class => "control-label") %>
-        <div class="controls">
-          <%= f.select(:top_category_id, @top_categories.collect { |top_category| [top_category.name, top_category.id] }, {}, {:required => true, :class => "input-xlarge"}) %>
+        <%= image.label(:file_name, "Image:", :class => "control-label") %>
+        <div class="controls" style="min-height: 28px;">
+          <%= image.hidden_field(:file_name, :required => true) %>
+          <% if image.object.file_name.nil? %>
+              <div class="admImage"></div>
+          <% elsif image.object.id %>
+              <div class="admImage">
+                <%= image_tag "/pictures/e/" + image.object.file_name, :alt => "" %>
+              </div>
+          <% else %>
+              <div class="admImage">
+                <%= image_tag "/tmp/e/" + image.object.file_name, :alt => "" %>
+              </div>
+          <% end %>
+          <div class="file-uploader"></div>
+          <div class="progress" style="width: 280px;display: none;">
+            <div class="bar"></div>
+          </div>
+          <div class="btn btn-success" id="browse">Browse for a new image</div>
         </div>
       </div>
-      <div class="control-group">
-        <%= f.label(:name, "Name:", :class => "control-label") %>
-        <div class="controls">
-          <%= f.text_field(:name, :required => true, :class => "input-xlarge") %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= f.label(:start_at, "Start at:", :class => "control-label") %>
-        <div class="controls">
-          <%= f.text_field(:start_at, :required => true, :class => "input-xlarge", :value => l(@event.start_at.to_time, :format => :datetime)) %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= f.label(:end_at, "End at:", :class => "control-label") %>
-        <div class="controls">
-          <%= f.text_field(:end_at, :required => true, :class => "input-xlarge", :value => l(@event.end_at.to_time, :format => :datetime)) %>
-        </div>
-      </div>
-      <div class="form-actions">
-        <%= f.submit("Save", :class => "btn btn-primary") %>
-        <%= button_tag("Cancel", :type => "button", :class => "btn", :onclick => "window.history.back()") %>
-      </div>
-    </fieldset>
-<% end %>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label(:start_at, "Start at:", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_field(:start_at, :required => true, :class => "input-xlarge", :value => l(@event.start_at.to_time, :format => :datetime)) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label(:end_at, "End at:", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_field(:end_at, :required => true, :class => "input-xlarge", :value => l(@event.end_at.to_time, :format => :datetime)) %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= f.submit("Save", :class => "btn btn-primary") %>
+    <%= button_tag("Cancel", :type => "button", :class => "btn", :onclick => "window.history.back()") %>
+  </div>
+</fieldset>

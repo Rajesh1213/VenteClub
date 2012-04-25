@@ -4,12 +4,12 @@ class UploadsController < ApplicationController
 
   before_filter :authorize_admin
 
-  def product_image_upload
+  def image_upload
     if request.post?
       filename = params[:qqfile]
       if check_img_ext(filename)
         img_data = request.body.read
-        new_filename = ProcessImage.new.for_product(img_data)
+        new_filename = ProcessImage.new.do_it(img_data, params[:type])
         if new_filename
           render :json => {:success => true, :new_filename => new_filename + ".jpg"}
         else

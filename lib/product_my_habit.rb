@@ -48,7 +48,7 @@ class ProductMyHabit
     images_arr = product_hash["detailJSON"]["asins"][0]["altviews"]
     images_arr.each { |img_hash|
       img = get_file(img_hash["zoomImage"])
-      filename = ProcessImage.new.for_product(img) + ".jpg"
+      filename = ProcessImage.new.do_it(img, "product") + ".jpg"
       images << Image.new(:file_name => filename)
     }
     images

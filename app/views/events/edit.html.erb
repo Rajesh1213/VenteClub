@@ -4,4 +4,6 @@
 <% end %>
 <div class="cleaner"></div>
 
-<%= render :partial => "events/form" %>
+<%= form_for @event, :as => :event, :url => {:controller => :events, :action => :edit, :id => @event}, :method => :post, :html => {:class => "form-horizontal"} do |f| %>
+    <%= render :partial => "events/form", :locals => {:f => f} %>
+<% end %>

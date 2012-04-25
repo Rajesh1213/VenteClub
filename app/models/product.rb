@@ -6,8 +6,7 @@ class Product < ActiveRecord::Base
   has_many :properties, :dependent => :destroy
   has_many :images, :dependent => :destroy
 
-  accepts_nested_attributes_for :images, :allow_destroy => true
-  accepts_nested_attributes_for :properties, :allow_destroy => true
+  default_scope :order => "name ASC"
 
   validates :event_id, :numericality => true
   validates :color_id, :numericality => true
@@ -16,6 +15,9 @@ class Product < ActiveRecord::Base
   validates :description, :presence => true
   validates :amount, :numericality => true
   validates :price, :numericality => true
+
+  accepts_nested_attributes_for :images, :allow_destroy => true
+  accepts_nested_attributes_for :properties, :allow_destroy => true
 
   after_initialize :set_init
 

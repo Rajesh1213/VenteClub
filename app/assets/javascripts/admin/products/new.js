@@ -4,14 +4,15 @@ $('form').live('nested:fieldAdded', function (event) {
     var btn = $(event.field).find('.btn.btn-success');
     var uploader = new qq.FileUploaderBasic({
         element:up_div,
-        action:'/uploads/product_image_upload',
+        action:'/uploads/image_upload',
         debug:false,
         multiple:false,
         allowedExtensions:['jpg', 'jpeg', 'png', 'gif', 'bmp'],
         sizeLimit:11000000,
         button:$(event.field).find('.btn.btn-success')[0],
         params:{
-            authenticity_token:$('meta[name=csrf-token]').attr("content")
+            authenticity_token:$('meta[name=csrf-token]').attr("content"),
+            type:"product"
         },
         onSubmit:function (id, fileName) {
             progress.show();
