@@ -1,8 +1,9 @@
 class LoginController < ApplicationController
 
   before_filter :current_user
+  before_filter :authorize_user, :only => ["customize"]
 
-  layout "admin"
+  layout "login"
 
   def log_in
     if @current_user
@@ -68,11 +69,30 @@ class LoginController < ApplicationController
     end
   end
 
+  def registration
+    @action_style = "padding-top: 20px;height:462px;"
+    @user = User.new(params[:user])
+    if request.post? && @user.save
+      session[:user_id] = @user.id
+      redirect_to :action => :customize
+    end
+  end
+
+  def customize
+    @action_style = "padding-top: 50px;height:432px;"
+    @top_categories = TopCategory.all
+    redirect_user(@current_user) if request.post? && @current_user.update_attributes(params[:user])
+  end
+
   private
 
   def redirect_user(user)
     update_ip
-    redirect_to :controller => :admin, :action => :dashboard
+    if user.role == "admin"
+      redirect_to :controller => :admin, :action => :dashboard
+    else
+      redirect_to :controller => :main, :action => :index
+    end
   end
 
 end

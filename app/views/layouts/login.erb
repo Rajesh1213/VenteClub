@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>VenteClub</title>
+  <%= stylesheet_link_tag "main/main", :media => "all" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="header">
+  <%= link_to (image_tag "img/logo.png"), :root %>
+</div>
+<div class="wrapper">
+  <div class="main-login" style="<%= @action_style if @action_style %>">
+    <div class="member-access">
+      <%= render(:partial => "main/flash_messages") %>
+      <%= yield %>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <p class="footer-links">
+    <%= link_to (image_tag "brands/tiffany.jpg"), "#1" %>
+    <%= link_to (image_tag "brands/Ralph-Lauren.jpg"), "#1" %>
+    <%= link_to (image_tag "brands/dolce-gabbana.jpg"), "#1" %>
+    <%= link_to (image_tag "brands/louis-vuitton.jpg"), "#1" %>
+    <%= link_to (image_tag "brands/giorgio-armani.jpg"), "#1" %>
+  </p>
+
+  <div class="clear"></div>
+  <p class="footer-copyright">© 2012 VENTECLUB</p>
+</div>
+<%= javascript_include_tag "main/main" %>
+</body>
+</html>

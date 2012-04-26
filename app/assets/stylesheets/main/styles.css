@@ -1,0 +1,611 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+}
+
+img {
+    border: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, Garuda, sans-serif;
+    font-size: 11px;
+    width: 1000px;
+}
+
+/***	Header	****/
+.header {
+    background: #fff;
+    padding: 10px 0 0;
+    height: 122px;
+}
+
+.header-link {
+    text-align: right;
+}
+
+.header-link p {
+    font-weight: bold;
+}
+
+.header-link p a {
+    text-decoration: none;
+    color: #747474;
+    font-weight: bold;
+}
+
+.header img {
+    margin: 24px 0 0;
+}
+
+/***	Homepage 	****/
+.nav {
+    font-size: 12px;
+}
+
+.upper-nav {
+    float: left;
+    display: block;
+    background: url(images/upper-nav-bg.jpg) no-repeat;
+    width: 461px;
+    height: 29px;
+}
+
+.upper-nav li {
+    display: inline;
+    line-height: 29px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.upper-nav li a {
+    text-decoration: none;
+    color: #808080;
+}
+
+.upper-nav li a:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+.store-language {
+    float: right;
+    border: 1px solid #d5d5d5;
+    width: 135px;
+    height: 18px;
+    color: #575757;
+}
+
+.email-template-container {
+    background: url(images/et-nav.jpg) no-repeat;
+    height: 33px;
+}
+
+.email-template-container li {
+    display: inline;
+    padding-left: 11px;
+    padding-right: 18px
+}
+
+.email-template-container li a {
+    font-size: 12px;
+    color: #848484;
+    text-decoration: none;
+    line-height: 33px;
+}
+
+.email-template-container li a:hover {
+    color: #000;
+}
+
+/***	Navigation 	****/
+.menu {
+    background: url(images/nav-bg.jpg) repeat-x;
+    height: 34px;
+}
+
+.menu  li {
+    display: inline;
+    line-height: 34px;
+    padding-left: 8px;
+    padding-right: 12px;
+}
+
+.menu  li a {
+    text-decoration: none;
+    color: #343333;
+}
+
+.menu  li a:hover {
+    text-decoration: none;
+    color: #fff;
+    height: 140px;
+    width: 50px;
+    background: url(images/nav-hover-bg.png) no-repeat;
+}
+
+/***	Homepage 	****/
+.wrapper {
+    display: block;
+    background: #000 url(../img/body-bg.jpg) no-repeat;
+    padding: 0 508px 0 101px;
+    border: 14px solid #f1f1f1;
+    height: 482px;
+}
+
+.main-wrapper {
+    background: #f1f1f1;
+    font-size: 12px;
+    min-height: 1000px;
+    padding: 14px;
+}
+
+.content {
+    float: right;
+    background: #fff;
+    border: 1px solid #a6a6a6;
+    padding: 19px;
+    font-size: 12px;
+    width: 663px;
+    min-height: 907px;
+}
+
+.content-title {
+    font-family: 'Arial Black';
+    font-size: 30px;
+    color: #343333;
+}
+
+.content-body {
+    margin-top: 19px;
+    border: 1px solid #a6a6a6;
+    padding: 33px 113px 35px 47px;
+    display: block;
+    background: url(images/my-account-bg.jpg) repeat-x;
+    height: 328px;
+}
+
+.content-text-style {
+    font-size: 14px;
+    color: #6b6b6b;
+}
+
+.my-account-content1 {
+    float: left;
+    text-align: right;
+    width: 158px;
+    height: 326px;
+}
+
+.my-account-content1 p {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-top: 5px;
+    padding-bottom: 8px;
+    color: #343333;
+}
+
+.my-account-content2 {
+    float: right;
+    width: 300px;
+    height: 326px;
+}
+
+.my-account-content2 p {
+    display: block;
+    margin-top: 11px;
+    margin-bottom: 5px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    color: #343333;
+}
+
+.my-account-text {
+    width: 317px;
+    height: 34px;
+}
+
+.my-account-radio {
+    text-align: left;
+    color: #343333;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.my-account-submit {
+    cursor: pointer;
+    color: #343333;
+    width: 124px;
+    height: 34px;
+}
+
+.my-suite-content1 {
+    width: 562px;
+    height: 107px;
+}
+
+.venteclub-img {
+    float: left;
+}
+
+.my-suite-content2 {
+    width: 299px;
+    height: 130px;
+}
+
+.ms-content-col1 {
+    float: left;
+    width: 67px;
+    height: 130px;
+    text-align: right;
+    color: #a5a5a5;
+}
+
+.ms-content-col2 {
+    float: right;
+    width: 222px;
+    height: 228px;
+    font-size: 14px;
+}
+
+.ms-content-col2 p {
+    border-bottom: 1px solid;
+}
+
+.my-suite-img {
+    float: right;
+}
+
+.lower-content {
+    float: right;
+    background: #fff;
+    padding: 27px 17px 30px;
+    border: 1px solid #a6a6a6;
+    width: 667px;
+    height: 55px;;
+}
+
+.lower-logo-vc {
+    float: left;
+    height: 55px;
+    width: 234px;
+}
+
+.lower-logo-vc img {
+    float: left;
+    padding-right: 10px;
+}
+
+.lower-logo-vc p {
+    float: left;
+    width: 169px;
+    color: #636262;
+}
+
+.lower-logo-facebook {
+    float: left;
+    height: 55px;
+    margin-left: 13px;
+    width: 207px;
+}
+
+.lower-logo-facebook img {
+    float: left;
+    padding-right: 10px;
+}
+
+.lower-logo-facebook p {
+    float: left;
+    padding-bottom: 12px;
+    color: #636262;
+}
+
+.lower-logo-twitter {
+    float: right;
+    height: 55px;
+    width: 196px;
+}
+
+.lower-logo-twitter img {
+    float: left;
+    padding-right: 10px;
+}
+
+.lower-logo-twitter p {
+    float: left;
+    padding-bottom: 12px;
+    color: #636262;
+}
+
+.space {
+    height: 12px;
+}
+
+.main-login {
+    margin: auto 0;
+    padding: 139px 0 0 0;
+    background: url(../img/login-bg.png) repeat-y;
+    width: 322px;
+    height: 342px;
+}
+
+.member-access {
+    width: 263px;
+    height: 210px;
+}
+
+.member-access-title {
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    clear: both;
+    padding-top: 10px;
+}
+
+.login_title {
+    color: white;
+    font-size: 24px;
+    padding-top: 12px;
+    text-align: center;
+}
+
+.input-text {
+    float: left;
+    margin: 4px 0;
+    background: #fff;
+    width: 263px;
+    height: 34px;
+}
+
+.field_with_errors .input-text {
+    color: #ff0000;
+}
+
+.input-member, .input-newmember {
+    float: right;
+    background: #d9d9d9;
+    margin: 4px 0;
+    width: 100px;
+    height: 33px;
+    font-weight: bold;
+    font-size: 10px;
+    color: #000;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+}
+
+.input-newmember {
+    float: left;
+}
+
+a.input-member, a.input-newmember {
+    font-size: 11px;
+    padding-top: 11px;
+    height: 22px;
+}
+
+.email-wrapper {
+    background: #f1f1f1;
+    min-height: 960px;
+    border: 1px solid;
+    padding: 10px;
+}
+
+.email-content {
+    background: #fff;
+    min-height: 960px;
+    padding: 53px 44px 40px;
+}
+
+.email-content p {
+    font-size: 12px;
+}
+
+.single-space {
+    line-height: 2em;
+}
+
+.double-space {
+    line-height: 3em;
+}
+
+.vspace {
+    padding-left: 5px;
+}
+
+/***	Sidebar	****/
+.left-sidebar {
+    float: left;
+    background: url(images/sidebar-bg.jpg) repeat-y;
+    border: 1px solid #a6a6a6;
+    padding: 19px;
+    width: 223px;
+    min-height: 907px;
+}
+
+.title {
+    color: #979797;
+    text-align: left;
+    font-family: 'Arial Black';
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 2px solid #a6a6a6;
+    padding-bottom: 10px;
+}
+
+.account {
+    width: 222px;
+    min-height: 192px;
+    margin-bottom: 20px;
+}
+
+.shop {
+    width: 222px;
+    min-height: 192px;
+}
+
+.shop img {
+    margin-top: 11px;
+    margin-bottom: 11px;
+    padding: 3px;
+}
+
+.follow {
+    width: 222px;
+    min-height: 192px;
+}
+
+.follow p img {
+    float: right;
+    display: block;
+    width: 61px;
+    height: 20px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.follow-post {
+    text-align: justify;
+    padding-top: 14px;
+    color: #343333;
+}
+
+.follow span {
+    font-weight: bold;
+}
+
+.left-sidebar ul {
+}
+
+.left-sidebar ul li {
+    display: block;
+    margin-top: 15px;
+}
+
+.left-sidebar ul li a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #343333;
+}
+
+.left-sidebar ul li a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.lower-sidebar {
+    float: left;
+    background: url(images/sidebar-bg.jpg) repeat-y;
+    border: 1px solid #a6a6a6;
+    height: 112px;
+    width: 262px;
+}
+
+.lower-sidebar img {
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+.lower-links {
+    background: #fff;
+    height: 217px;
+    border: 1px solid #c6c7c7;
+}
+
+.lower-links-title {
+    background: url(images/lower-links-title.jpg) repeat-x;
+    height: 35px;
+}
+
+.lower-links-title  p {
+    line-height: 35px;
+    padding-left: 11px;
+    padding-right: 11px;
+    color: #404040;
+}
+
+.lower-venteclub-links {
+    width: 934px;
+    height: 142px;
+    padding: 15px 18px 19px 18px;
+}
+
+.vc-link {
+    float: left;
+    min-width: 113px;
+    min-height: 141px;
+    padding-right: 40px;
+}
+
+.vc-link p {
+    color: #404040;
+    margin-bottom: 3px;
+}
+
+.lower-venteclub-links .vc-link  ul {
+    display: block;
+}
+
+.lower-venteclub-links .vc-link  li {
+    display: block;
+}
+
+.lower-venteclub-links .vc-link li a {
+    text-decoration: none;
+    font-size: 10px;
+    color: #9f9e9e;
+}
+
+/***	Footer	****/
+.footer {
+    padding-top: 27px;
+    padding-right: 41px;
+    padding-left: 41px;
+    padding-bottom: 0px;
+    height: 150px;
+}
+
+.footer-links {
+    padding-bottom: 55px;
+    width: 873px;
+}
+
+.footer img {
+    padding-right: 10px;
+    float: left;
+    display: inline-block;
+}
+
+.footer-copyright {
+    text-align: center;
+    color: #c5c5c5;
+}
+
+.clear, .cleaner {
+    clear: both;
+    height: 0px;
+}
+
+.alert-error, .alert-success, .alert-warning {
+    color: #ff0000;
+    font-size: 12px;
+    padding: 10px;
+}
+
+.alert-success {
+    color: green;
+}
+
+.alert-warning {
+    color: yellow;
+}
+
+.alert-error ul li {
+    list-style: none;
+}

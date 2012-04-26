@@ -1,0 +1,16 @@
+<!--<div class="login_title">Join VenteClub</div>-->
+
+<%= form_for :user do |f| %>
+    <%= f.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
+    <p class="member-access-title">First Name</p>
+    <%= f.text_field(:first_name, :required => true, :class => "input-text") %>
+    <p class="member-access-title">Last Name</p>
+    <%= f.text_field(:last_name, :required => true, :class => "input-text") %>
+    <p class="member-access-title">E-mail</p>
+    <%= f.text_field(:mail, :required => true, :class => "input-text", :type => "email") %>
+    <p class="member-access-title">Password</p>
+    <%= f.password_field(:pass, :required => true, :class => "input-text") %>
+    <p class="member-access-title">Password Confirmation</p>
+    <%= f.password_field(:pass_confirmation, :required => true, :class => "input-text") %>
+    <%= f.submit("Save", :class => "input-member") %>
+<% end %>

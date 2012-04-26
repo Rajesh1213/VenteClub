@@ -1,0 +1,25 @@
+<%= form_for :user do |f| %>
+    <p class="member-access-title">Which category do you expect to shop in most often?</p>
+    <div class="cleaner" style="height: 20px;"></div>
+    <% @top_categories.each { |top_category| %>
+        <div class="cleaner" style="height: 20px;">
+          <%= f.radio_button(:shop_category_id, top_category.id, :required => true) %>
+          <p class="member-access-title" style="margin-left: 25px;; margin-top: -23px;"><%= top_category.name %></p>
+        </div>
+    <% } %>
+    <div class="cleaner" style="height: 20px;"></div>
+    <p class="member-access-title">Where will you typically ship your orders ?</p>
+    <div class="cleaner" style="height: 20px;"></div>
+    <div class="cleaner" style="height: 30px;">
+      <%= f.radio_button(:us_ship, true, :required => true) %>
+      <p class="member-access-title" style="margin-left: 25px;; margin-top: -23px;">U. S. (including apo/fpo and
+        protectorates)</p>
+    </div>
+    <div class="cleaner" style="height: 20px;">
+      <%= f.radio_button(:us_ship, false, :required => true) %>
+      <p class="member-access-title" style="margin-left: 25px;; margin-top: -23px;">Outside U. S.</p>
+    </div>
+    <p class="member-access-title">as a member, you'll receive e-mail announcements for our events. you may unsubscribe
+      at any time and still retain your membership.</p>
+    <%= f.submit("Start Shopping", :class => "input-member") %>
+<% end %>

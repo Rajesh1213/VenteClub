@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  validates :first_name, :presence => true
+  validates :last_name, :presence => true
   validates :mail, :presence => true, :uniqueness => true, :format => {:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i}
   validates :pass, :presence => true, :length => {:minimum => 6}, :confirmation => true
 
