@@ -1,4 +1,5 @@
 $(window).load(function () {
+
     $(".eventProducts").jCarouselLite({
         btnNext:".next",
         btnPrev:".prev",
@@ -9,10 +10,10 @@ $(window).load(function () {
 
     $(".eventBig").hover(
         function () {
-            $(".rotatorWrapper").slideDown("slow");
+            $(".rotatorWrapper").slideDown();
         },
         function () {
-            $(".rotatorWrapper").slideUp("slow");
+            $(".rotatorWrapper").slideUp();
         }
     );
 

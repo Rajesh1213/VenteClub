@@ -17,8 +17,8 @@
 <div class="nav">
   <div class="upper-nav">
     <ul>
-      <li><a href="#">MY VENTECLUB</a></li>
-      <li><a href="#">SHIPPING CALCULATOR</a></li>
+      <li><%= link_to "MY VENTECLUB", :controller => :my, :action => :suite %></li>
+      <li><%= link_to "SHIPPING CALCULATOR", :controller => :shipping_calculator, :action => :index %></li>
       <li><a href="#">HOW IT WORKS</a></li>
     </ul>
   </div>
@@ -26,13 +26,15 @@
   <%= render :partial => "main/top_nav" %>
 </div>
 <div class="main-wrapper">
-
+  <%= render(:partial => "main/flash_messages") %>
+  <%= render :partial => "my/left_sidebar" if request[:controller] == "my" %>
   <%= yield %>
 
   <div class="space"></div>
   <div class="lower-sidebar">
     <%= image_tag "img/lower-sidebar.png" %>
   </div>
+
   <div class="lower-content">
     <div class="lower-logo-vc">
       <%= image_tag "img/vc.png" %>
@@ -49,8 +51,8 @@
       <p>VenteClub on Twitter</p>
       <%= link_to image_tag("img/follow-twitter.png"), "#1" %>
     </div>
-
   </div>
+
   <div class="clear"></div>
   <div class="space"></div>
   <div class="lower-links">
@@ -144,5 +146,7 @@
 </div>
 </div>
 <%= render :partial => "layouts/footer" %>
+<%= javascript_include_tag "main/main" %>
+<%= javascript_include_tag("main/" + request[:controller] + "/" + request[:action]) if @javascript %>
 </body>
 </html>

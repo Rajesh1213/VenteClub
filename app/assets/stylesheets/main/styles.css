@@ -204,67 +204,34 @@ body {
 }
 
 .content-body {
-    margin-top: 19px;
-    border: 1px solid #a6a6a6;
-    padding: 33px 113px 35px 47px;
+    background-color: #F1F1F1;
+    border: 1px solid #A6A6A6;
     display: block;
-    background: url(images/my-account-bg.jpg) repeat-x;
-    height: 328px;
+    margin-top: 20px;
+    padding: 30px 80px;
+}
+
+.dataRow {
+    height: 46px;
+}
+
+.dataRow label {
+    text-align: right;
+    width: 158px;
+    color: #343333;
+    float: left;
+    padding-top: 12px;
+}
+
+.dataRow input {
+    width: 317px;
+    float: right;
+    height: 34px;
 }
 
 .content-text-style {
     font-size: 14px;
     color: #6b6b6b;
-}
-
-.my-account-content1 {
-    float: left;
-    text-align: right;
-    width: 158px;
-    height: 326px;
-}
-
-.my-account-content1 p {
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    padding-top: 5px;
-    padding-bottom: 8px;
-    color: #343333;
-}
-
-.my-account-content2 {
-    float: right;
-    width: 300px;
-    height: 326px;
-}
-
-.my-account-content2 p {
-    display: block;
-    margin-top: 11px;
-    margin-bottom: 5px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    color: #343333;
-}
-
-.my-account-text {
-    width: 317px;
-    height: 34px;
-}
-
-.my-account-radio {
-    text-align: left;
-    color: #343333;
-    padding-top: 7px;
-    padding-bottom: 7px;
-}
-
-.my-account-submit {
-    cursor: pointer;
-    color: #343333;
-    width: 124px;
-    height: 34px;
 }
 
 .my-suite-content1 {
@@ -367,6 +334,7 @@ body {
 
 .space {
     height: 12px;
+    clear: both;
 }
 
 .main-login {
@@ -638,8 +606,8 @@ a.input-member, a.input-newmember {
 
 .alert-error, .alert-success, .alert-warning {
     color: #ff0000;
-    font-size: 12px;
-    padding: 10px;
+    font-size: 14px;
+    padding: 0px 10px 10px;
 }
 
 .alert-success {

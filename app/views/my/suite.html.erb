@@ -1,0 +1,27 @@
+<div class="content">
+  <p class="content-title">My Suite</p>
+  <div class="content-body">
+    <div class="my-suite-content1">
+      <%= image_tag "img/venteclub.png", :class => "venteclub-img" %>
+      <%= image_tag "img/my-suite.png", :class => "my-suite-img" %>
+    </div>
+    <div class="my-suite-content2">
+      <div class="ms-content-col1">
+        <p>NAME</p>
+
+        <p>ADDRESS</p>
+      </div>
+      <div class="ms-content-col2">
+        <p><%= @current_user.full_name %></p>
+
+        <p>VenteClub Suite #<%= @current_user.suite %></p>
+
+        <p>123 NE Street</p>
+
+        <p>New York, NY 00123</p>
+
+        <p>United States</p>
+      </div>
+    </div>
+  </div>
+</div>

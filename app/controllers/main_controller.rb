@@ -1,9 +1,10 @@
 class MainController < ApplicationController
 
   before_filter :authorize_user
-  before_filter :common_data
+  before_filter :menu_data
 
   def index
+    @javascript = true
     unless params[:id]
       @latest_event = Event.last
       @events = @latest_event.top_category.events.all
@@ -11,12 +12,6 @@ class MainController < ApplicationController
       @latest_event = TopCategory.find(params[:id]).events.last || Event.last
       @events = @latest_event.top_category.events.all
     end
-  end
-
-  private
-
-  def common_data
-    @top_categories = TopCategory.all
   end
 
 end

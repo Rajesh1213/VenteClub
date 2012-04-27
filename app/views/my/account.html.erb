@@ -1,0 +1,31 @@
+<div class="content">
+  <p class="content-title">My Account</p>
+
+  <div class="content-body">
+    <%= form_for :user, :html => {:class => "form-horizontal"} do |f| %>
+        <%= f.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
+        <div class="dataRow">
+          <%= f.label(:first_name, "First name:") %>
+          <%= f.text_field(:first_name, :required => true) %>
+        </div>
+        <div class="dataRow">
+          <%= f.label(:last_name, "Last name:") %>
+          <%= f.text_field(:last_name, :required => true) %>
+        </div>
+        <div class="dataRow">
+          <%= f.label(:mail, "E-mail:") %>
+          <%= f.text_field(:mail, :required => true, :type => "email") %>
+        </div>
+        <div class="dataRow">
+          <%= f.label(:pass, "Password:") %>
+          <%= f.password_field(:pass, :required => true) %>
+        </div>
+        <div class="dataRow">
+          <%= f.label(:pass_confirmation, "Password confirmation:") %>
+          <%= f.password_field(:pass_confirmation, :required => true) %>
+        </div>
+        <%= f.submit("Save", :class => "input-member") %>
+    <% end %>
+    <div class="cleaner"></div>
+  </div>
+</div>

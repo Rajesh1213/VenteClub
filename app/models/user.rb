@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
     self.first_name + " " + self.last_name || self.mail
   end
 
+  def suite
+    "1234-" + (self.id + 1000).to_s
+  end
+
   def role
     case self.role_id
       when 1
