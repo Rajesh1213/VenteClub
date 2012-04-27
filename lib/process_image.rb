@@ -18,8 +18,10 @@ class ProcessImage
       begin
         if model_name == "product"
           resize_product_image(new_filename)
-        elsif model_name == "event"
-          resize_event_image(new_filename)
+        elsif model_name == "event_small"
+          resize_event_small_image(new_filename)
+        elsif model_name == "event_big"
+          resize_event_big_image(new_filename)
         end
         del_tmp_image(new_filename)
       rescue => e
@@ -33,12 +35,22 @@ class ProcessImage
 
   private
 
-  def resize_event_image(filename)
+  def resize_event_small_image(filename)
     image = Magick::ImageList.new("#{Rails.root}/public/tmp/#{filename}")
     width = 235
     height = 257
     image = resize_image_manipulations(image, width, height)
     url = "#{Rails.root}/public/tmp/e/#{filename}" + ".jpg"
+    image.write(url) { self.quality = 90 }
+    File.chmod(0664, url)
+  end
+
+  def resize_event_big_image(filename)
+    image = Magick::ImageList.new("#{Rails.root}/public/tmp/#{filename}")
+    width = 972
+    height = 507
+    image = resize_image_manipulations(image, width, height)
+    url = "#{Rails.root}/public/tmp/e_b/#{filename}" + ".jpg"
     image.write(url) { self.quality = 90 }
     File.chmod(0664, url)
   end

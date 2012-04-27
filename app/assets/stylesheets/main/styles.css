@@ -107,19 +107,20 @@ body {
     height: 34px;
 }
 
-.menu  li {
+.menu li {
     display: inline;
     line-height: 34px;
     padding-left: 8px;
     padding-right: 12px;
 }
 
-.menu  li a {
+.menu li a {
     text-decoration: none;
     color: #343333;
+    text-transform: uppercase;
 }
 
-.menu  li a:hover {
+.menu li a:hover {
     text-decoration: none;
     color: #fff;
     height: 140px;
@@ -140,6 +141,36 @@ body {
     background: #f1f1f1;
     font-size: 12px;
     padding: 14px;
+}
+
+.eventBig {
+    text-align: center;
+}
+
+.rotatorWrapper {
+    width: 972px;
+    background: url(../img/login-bg.png);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.slideWrapper {
+    top: 0px;
+    position: relative;
+}
+
+.prev.input-newmember, .next.input-member {
+    width: 30px;
+    padding: 62px 0px;
+}
+
+.eventProducts {
+    position: relative;
+}
+
+.eventProducts img {
+    padding: 0 5px;
 }
 
 .events_wrapper {

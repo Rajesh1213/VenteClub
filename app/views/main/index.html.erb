@@ -1,1 +1,39 @@
-main page
+<div class="eventBig">
+  <%= image_tag "/pictures/e_b/" + @latest_event.big_image.file_name %>
+
+  <div class="slideWrapper">
+    <div class="rotatorWrapper">
+      <button class="prev input-newmember"><<</button>
+      <button class="next input-member">>></button>
+      <div class="eventProducts">
+        <ul>
+          <% @latest_event.products.each { |product| %>
+              <li><%= image_tag "/pictures/s/" + product.images.first.file_name %></li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<% vis_el = @latest_event.products.count
+   vis_el = 7 if vis_el > 7
+%>
+<script type="text/javascript">
+    var vis_el = <%=  vis_el %>;
+</script>
+
+<div class="space"></div>
+<div class="events_wrapper">
+  <% counter = 0 %>
+  <% @events.each { |event| %>
+      <div class="event_image">
+        <%= image_tag "/pictures/e/" + event.small_image.file_name, :class => "vspace" %>
+      </div>
+      <% counter += 1 %>
+      <% if counter%4 == 0 %>
+          <div class="space"></div>
+      <% end %>
+  <% } %>
+</div>
+<div class="space"></div>
+<img src="images/spring-trend.jpg" alt="sports"/>

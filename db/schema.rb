@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120426191109) do
+ActiveRecord::Schema.define(:version => 20120427110948) do
 
   create_table "colors", :force => true do |t|
     t.string   "name"
@@ -32,9 +32,10 @@ ActiveRecord::Schema.define(:version => 20120426191109) do
   create_table "images", :force => true do |t|
     t.integer  "product_id"
     t.string   "file_name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "event_id"
+    t.integer  "event_big_id"
   end
 
   create_table "products", :force => true do |t|

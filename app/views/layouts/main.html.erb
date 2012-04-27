@@ -26,23 +26,8 @@
   <%= render :partial => "main/top_nav" %>
 </div>
 <div class="main-wrapper">
-  <img src="images/akris.jpg" alt="akris"/>
 
-  <div class="space"></div>
-  <div class="events_wrapper">
-    <% counter = 0 %>
-    <% @events.each { |event| %>
-        <div class="event_image">
-          <%= image_tag "/pictures/e/" + event.image.file_name, :class => "vspace" %>
-        </div>
-        <% counter += 1 %>
-        <% if counter%4 == 0 %>
-            <div class="space"></div>
-        <% end %>
-    <% } %>
-  </div>
-  <div class="space"></div>
-  <img src="images/spring-trend.jpg" alt="sports"/>
+  <%= yield %>
 
   <div class="space"></div>
   <div class="lower-sidebar">

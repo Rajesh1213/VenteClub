@@ -21,27 +21,52 @@
     </div>
   </div>
 
-  <%= f.fields_for :image do |image| %>
+  <%= f.fields_for :big_image do |image| %>
+        <div class="control-group">
+          <%= image.label(:file_name, "Big image:", :class => "control-label") %>
+          <div class="controls" style="min-height: 28px;">
+            <%= image.hidden_field(:file_name, :required => true) %>
+            <% if image.object.file_name.nil? %>
+                <div class="admImage" id="admImage_big"></div>
+            <% elsif image.object.id %>
+                <div class="admImage" id="admImage_big">
+                  <%= image_tag "/pictures/e_b/" + image.object.file_name, :alt => "" %>
+                </div>
+            <% else %>
+                <div class="admImage" id="admImage_big">
+                  <%= image_tag "/tmp/e_b/" + image.object.file_name, :alt => "" %>
+                </div>
+            <% end %>
+            <div id="file-uploader_big"></div>
+            <div class="progress" style="width: 280px;display: none;" id="progress_big">
+              <div class="bar" id="bar_big"></div>
+            </div>
+            <div class="btn btn-success" id="browse_big">Browse for a new big image</div>
+          </div>
+        </div>
+    <% end %>
+
+  <%= f.fields_for :small_image do |image| %>
       <div class="control-group">
-        <%= image.label(:file_name, "Image:", :class => "control-label") %>
+        <%= image.label(:file_name, "Small image:", :class => "control-label") %>
         <div class="controls" style="min-height: 28px;">
           <%= image.hidden_field(:file_name, :required => true) %>
           <% if image.object.file_name.nil? %>
-              <div class="admImage"></div>
+              <div class="admImage" id="admImage_small"></div>
           <% elsif image.object.id %>
-              <div class="admImage">
+              <div class="admImage" id="admImage_small">
                 <%= image_tag "/pictures/e/" + image.object.file_name, :alt => "" %>
               </div>
           <% else %>
-              <div class="admImage">
+              <div class="admImage" id="admImage_small">
                 <%= image_tag "/tmp/e/" + image.object.file_name, :alt => "" %>
               </div>
           <% end %>
-          <div class="file-uploader"></div>
-          <div class="progress" style="width: 280px;display: none;">
-            <div class="bar"></div>
+          <div id="file-uploader_small"></div>
+          <div class="progress" style="width: 280px;display: none;" id="progress_small">
+            <div class="bar" id="bar_small"></div>
           </div>
-          <div class="btn btn-success" id="browse">Browse for a new image</div>
+          <div class="btn btn-success" id="browse_small">Browse for a new small image</div>
         </div>
       </div>
   <% end %>

@@ -14,7 +14,7 @@ class Image < ActiveRecord::Base
   end
 
   def event_sizes
-    ['e']
+    ['e', 'e_b']
   end
 
   def all_sizes
@@ -34,7 +34,7 @@ class Image < ActiveRecord::Base
 
   def del_images
     self.all_sizes.each { |size|
-      if File.exist?("#{Rails.root}/public/pictures/#{size + "/" + self.file_name}")
+      if self.file_name && File.exist?("#{Rails.root}/public/pictures/#{size + "/" + self.file_name}")
         File.delete("#{Rails.root}/public/pictures/#{size + "/" + self.file_name}")
       end
     }
