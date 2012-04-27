@@ -49,7 +49,7 @@ body {
 .upper-nav {
     float: left;
     display: block;
-    background: url(images/upper-nav-bg.jpg) no-repeat;
+    background: url(../img/upper-nav-bg.jpg) no-repeat;
     width: 461px;
     height: 29px;
 }
@@ -103,7 +103,7 @@ body {
 
 /***	Navigation 	****/
 .menu {
-    background: url(images/nav-bg.jpg) repeat-x;
+    background-color: #C6C8C7;
     height: 34px;
 }
 
@@ -124,7 +124,7 @@ body {
     color: #fff;
     height: 140px;
     width: 50px;
-    background: url(images/nav-hover-bg.png) no-repeat;
+    background: url(../img/nav-hover-bg.png) no-repeat;
 }
 
 /***	Homepage 	****/
@@ -139,8 +139,21 @@ body {
 .main-wrapper {
     background: #f1f1f1;
     font-size: 12px;
-    min-height: 1000px;
     padding: 14px;
+}
+
+.events_wrapper {
+    margin-left: -5px;
+}
+
+.event_image {
+    display: inline-table;
+    height: 257px;
+    text-align: center;
+    vertical-align: top;
+    width: 235px;
+    background-color: #ffffff;
+    margin-left: 5px;
 }
 
 .content {
@@ -416,13 +429,13 @@ a.input-member, a.input-newmember {
 }
 
 .vspace {
-    padding-left: 5px;
+    /*margin-left: 5px;*/
 }
 
 /***	Sidebar	****/
 .left-sidebar {
     float: left;
-    background: url(images/sidebar-bg.jpg) repeat-y;
+    background-color: #CACACA;
     border: 1px solid #a6a6a6;
     padding: 19px;
     width: 223px;
@@ -501,7 +514,7 @@ a.input-member, a.input-newmember {
 
 .lower-sidebar {
     float: left;
-    background: url(images/sidebar-bg.jpg) repeat-y;
+    background-color: #CACACA;
     border: 1px solid #a6a6a6;
     height: 112px;
     width: 262px;
@@ -519,7 +532,7 @@ a.input-member, a.input-newmember {
 }
 
 .lower-links-title {
-    background: url(images/lower-links-title.jpg) repeat-x;
+    background-color: #C6C8C7;
     height: 35px;
 }
 

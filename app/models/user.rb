@@ -15,8 +15,7 @@ class User < ActiveRecord::Base
   before_update :update_pass
 
   def full_name
-    #self.first_name + " " + self.last_name
-    self.mail
+    self.first_name + " " + self.last_name || self.mail
   end
 
   def role

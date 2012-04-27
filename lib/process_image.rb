@@ -35,8 +35,8 @@ class ProcessImage
 
   def resize_event_image(filename)
     image = Magick::ImageList.new("#{Rails.root}/public/tmp/#{filename}")
-    width = 320
-    height = 240
+    width = 235
+    height = 257
     image = resize_image_manipulations(image, width, height)
     url = "#{Rails.root}/public/tmp/e/#{filename}" + ".jpg"
     image.write(url) { self.quality = 90 }

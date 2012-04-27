@@ -1,0 +1,9 @@
+<div class="menu">
+  <ul>
+    <% @top_categories.each { |top_category| %>
+        <li>
+          <%= link_to top_category.name, :controller => :main, :action => :index, :id => top_category %>
+        </li>
+    <% } %>
+  </ul>
+</div>
