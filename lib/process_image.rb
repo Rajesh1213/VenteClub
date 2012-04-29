@@ -22,6 +22,8 @@ class ProcessImage
           resize_event_small_image(new_filename)
         elsif model_name == "event_big"
           resize_event_big_image(new_filename)
+        elsif model_name == "flat_rate_product"
+          resize_flat_rate_product_image(new_filename)
         end
         del_tmp_image(new_filename)
       rescue => e
@@ -34,6 +36,16 @@ class ProcessImage
   end
 
   private
+
+  def resize_flat_rate_product_image(filename)
+    image = Magick::ImageList.new("#{Rails.root}/public/tmp/#{filename}")
+    width = 100
+    height = 100
+    image = resize_image_manipulations(image, width, height)
+    url = "#{Rails.root}/public/tmp/frp/#{filename}" + ".jpg"
+    image.write(url) { self.quality = 90 }
+    File.chmod(0664, url)
+  end
 
   def resize_event_small_image(filename)
     image = Magick::ImageList.new("#{Rails.root}/public/tmp/#{filename}")

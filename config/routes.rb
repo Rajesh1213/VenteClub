@@ -48,6 +48,9 @@ VenteClub::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
+
+  match 'how_it_works' => 'static#how_it_works'
+
   root :to => 'login#log_in'
 
   # See how all your routes lay out with "rake routes"

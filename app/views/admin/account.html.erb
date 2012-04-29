@@ -4,9 +4,21 @@
     <fieldset>
       <legend></legend>
       <div class="control-group">
+        <%= f.label(:first_name, "First name:", :class => "control-label") %>
+        <div class="controls">
+          <%= f.text_field(:first_name, :required => true, :class => "input-xlarge") %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label(:last_name, "Last name:", :class => "control-label") %>
+        <div class="controls">
+          <%= f.text_field(:last_name, :required => true, :class => "input-xlarge") %>
+        </div>
+      </div>
+      <div class="control-group">
         <%= f.label(:mail, "E-mail:", :class => "control-label") %>
         <div class="controls">
-          <%= f.text_field(:mail, :required => true, :class => "input-xlarge") %>
+          <%= f.text_field(:mail, :required => true, :class => "input-xlarge", :type => "email") %>
         </div>
       </div>
       <div class="control-group">

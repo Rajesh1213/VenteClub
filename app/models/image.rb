@@ -2,6 +2,7 @@ class Image < ActiveRecord::Base
 
   belongs_to :product
   belongs_to :event
+  belongs_to :flat_rate_product
 
   validates :file_name, :presence => true
 
@@ -17,8 +18,12 @@ class Image < ActiveRecord::Base
     ['e', 'e_b']
   end
 
+  def flat_rate_product_sizes
+    ['frp']
+  end
+
   def all_sizes
-    product_sizes + event_sizes
+    product_sizes + event_sizes + flat_rate_product_sizes
   end
 
   private
@@ -30,6 +35,13 @@ class Image < ActiveRecord::Base
         File.delete("#{Rails.root}/public/tmp/#{size + "/" + self.file_name}")
       end
     }
+    if !self.file_name_was.nil? && self.file_name_changed?
+      self.all_sizes.each { |size|
+        if self.file_name && File.exist?("#{Rails.root}/public/pictures/#{size + "/" + self.file_name_was}")
+          File.delete("#{Rails.root}/public/pictures/#{size + "/" + self.file_name_was}")
+        end
+      }
+    end
   end
 
   def del_images

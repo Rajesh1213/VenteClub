@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120427110948) do
+ActiveRecord::Schema.define(:version => 20120428190320) do
 
   create_table "colors", :force => true do |t|
     t.string   "name"
@@ -29,13 +29,29 @@ ActiveRecord::Schema.define(:version => 20120427110948) do
     t.text     "description"
   end
 
+  create_table "flat_rate_products", :force => true do |t|
+    t.integer  "product_type_id"
+    t.string   "name"
+    t.decimal  "weight",          :precision => 15, :scale => 2, :default => 0.0
+    t.decimal  "volume",          :precision => 15, :scale => 2, :default => 0.0
+    t.datetime "created_at",                                                      :null => false
+    t.datetime "updated_at",                                                      :null => false
+  end
+
   create_table "images", :force => true do |t|
     t.integer  "product_id"
     t.string   "file_name"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.integer  "event_id"
     t.integer  "event_big_id"
+    t.integer  "flat_rate_product_id"
+  end
+
+  create_table "product_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "products", :force => true do |t|

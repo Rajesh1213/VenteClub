@@ -1,0 +1,58 @@
+<%= f.error_messages(:class => "alert alert-block alert-error", :header_tag => "h4", :message => nil) %>
+<fieldset>
+  <legend></legend>
+  <div class="control-group">
+    <%= f.label(:product_type_id, "Product type:", :class => "control-label") %>
+    <div class="controls">
+      <%= f.select(:product_type_id, ProductType.all.collect { |product_type| [product_type.name, product_type.id] }, {}, {:required => true, :class => "input-xlarge"}) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label(:name, "Name:", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_field(:name, :required => true, :class => "input-xlarge") %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label(:weight, "Weight:", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_field(:weight, :required => true, :class => "input-xlarge") %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label(:volume, "Volume:", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_field(:volume, :required => true, :class => "input-xlarge") %>
+    </div>
+  </div>
+
+  <%= f.fields_for :image do |image| %>
+      <div class="control-group">
+        <%= image.label(:file_name, "Image:", :class => "control-label") %>
+        <div class="controls" style="min-height: 28px;">
+          <%= image.hidden_field(:file_name, :required => true) %>
+          <% if image.object.file_name.nil? %>
+              <div class="admImage" id="admImage"></div>
+          <% elsif image.object.id %>
+              <div class="admImage" id="admImage">
+                <%= image_tag "/pictures/frp/" + image.object.file_name, :alt => "" %>
+              </div>
+          <% else %>
+              <div class="admImage" id="admImage">
+                <%= image_tag "/tmp/frp/" + image.object.file_name, :alt => "" %>
+              </div>
+          <% end %>
+          <div id="file-uploader"></div>
+          <div class="progress" style="width: 280px;display: none;" id="progress">
+            <div class="bar" id="bar"></div>
+          </div>
+          <div class="btn btn-success" id="browse">Browse for a new image - 100x100</div>
+        </div>
+      </div>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.submit("Save", :class => "btn btn-primary") %>
+    <%= button_tag("Cancel", :type => "button", :class => "btn", :onclick => "window.history.back()") %>
+  </div>
+</fieldset>

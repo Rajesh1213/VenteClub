@@ -1,0 +1,5 @@
+<h2><%= @page_title %></h2>
+
+<%= form_for @flat_rate_product, :as => :flat_rate_product, :url => {:controller => :flat_rate_products, :action => :new, :id => @product_type}, :method => :post, :html => {:class => "form-horizontal"} do |f| %>
+    <%= render :partial => "flat_rate_products/form", :locals => {:f => f} %>
+<% end %>

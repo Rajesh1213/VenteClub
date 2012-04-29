@@ -1,0 +1,2 @@
+module FlatRateProductsHelper
+end

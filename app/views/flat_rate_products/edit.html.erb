@@ -1,0 +1,9 @@
+<h2 style="float: left;"><%= @page_title %></h2>
+<%= link_to ({:controller => :flat_rate_products, :action => :delete, :id => @flat_rate_product}, :method => :post, :confirm => "Are you sure?", :class => "btn btn-danger", :style => "float: right;") do %>
+    <i class="icon-trash icon-white"></i> Delete
+<% end %>
+<div class="cleaner"></div>
+
+<%= form_for @flat_rate_product, :as => :flat_rate_product, :url => {:controller => :flat_rate_products, :action => :edit, :id => @flat_rate_product}, :method => :post, :html => {:class => "form-horizontal"} do |f| %>
+    <%= render :partial => "flat_rate_products/form", :locals => {:f => f} %>
+<% end %>

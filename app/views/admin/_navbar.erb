@@ -40,6 +40,10 @@
                     <%= link_to "Top categories", :controller => :top_categories, :action => :list %>
                   </li>
                   <li class="divider"></li>
+                  <li class="<%= "active" if request[:controller] == "product_types" %>">
+                    <%= link_to "Product types", {:controller => :product_types, :action => :list} %>
+                  </li>
+                  <li class="divider"></li>
                   <li class="<%= "active" if request[:controller] == "admin" && request[:action] == "list" %>">
                     <%= link_to "Admins", {:controller => :admin, :action => :list} %>
                   </li>

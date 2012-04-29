@@ -187,7 +187,7 @@ body {
     margin-left: 5px;
 }
 
-.content {
+.content, .contentFull {
     float: right;
     background: #fff;
     border: 1px solid #a6a6a6;
@@ -211,6 +211,33 @@ body {
     padding: 30px 80px;
 }
 
+.contentFull {
+    float: none;
+    width: auto;
+    min-height: inherit;
+}
+
+.contentFull .dataRow input {
+    float: none;
+    padding-left: 10px;
+    width: 307px;
+}
+
+.contentFull .dataRow label {
+    width: 200px;
+    padding-top: 0px;
+    padding-right: 20px;
+}
+
+.contentFull .dataRow label .text {
+    position: relative;
+    top: -9px;
+}
+
+.contentFull .content-body {
+    padding: 40px;
+}
+
 .dataRow {
     height: 46px;
 }
@@ -223,10 +250,44 @@ body {
     padding-top: 12px;
 }
 
-.dataRow input {
+.dataRow input, .dataRow select {
     width: 317px;
     float: right;
     height: 34px;
+}
+
+.dataRow select {
+    float: none;
+    margin-top: 2px;
+    font-size: 14px;
+    padding: 6px;
+    background: #ffffff;
+}
+
+.productTypeWrapper {
+    background-color: #E4E4E4;
+    border: 1px solid #B8B7B7;
+}
+
+.productFlatWrapper {
+    display: inline-table;
+    font-weight: bold;
+    padding: 10px 33px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 101px;
+}
+
+.productFlatWrapper img {
+    margin-bottom: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+.productFlatWrapper .input-newmember {
+    float: none;
+    font-weight: normal;
+    margin-top: 10px;
 }
 
 .content-text-style {
@@ -400,6 +461,7 @@ a.input-member, a.input-newmember {
     font-size: 11px;
     padding-top: 11px;
     height: 22px;
+    display: block;
 }
 
 .email-wrapper {
