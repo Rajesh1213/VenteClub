@@ -147,6 +147,11 @@ body {
     text-align: center;
 }
 
+.eventBig img {
+    width: 972px;
+    height: 507px;
+}
+
 .rotatorWrapper {
     width: 972px;
     background: url(../img/login-bg.png);
@@ -158,6 +163,16 @@ body {
 .slideWrapper {
     top: 0px;
     position: relative;
+}
+
+.slideWrapper img {
+     width: auto;
+    height: auto;
+}
+
+.event_image img {
+    width: 235px;
+    height: 257px;
 }
 
 .prev.input-newmember, .next.input-member {
@@ -267,6 +282,8 @@ body {
 .productTypeWrapper {
     background-color: #E4E4E4;
     border: 1px solid #B8B7B7;
+    padding: 20px 5px;
+    margin-top: 20px;
 }
 
 .productFlatWrapper {
