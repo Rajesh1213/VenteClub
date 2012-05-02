@@ -4,6 +4,8 @@ class Image < ActiveRecord::Base
   belongs_to :event
   belongs_to :flat_rate_product
 
+  #default_scope :order => "created_at DESC"
+
   validates :file_name, :presence => true
 
   after_create :copy_images
@@ -11,7 +13,7 @@ class Image < ActiveRecord::Base
   after_destroy :del_images
 
   def product_sizes
-    ['s', 'm', 'l']
+    ['s','sm', 'm', 'l']
   end
 
   def event_sizes

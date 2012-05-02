@@ -75,6 +75,9 @@ class ProcessImage
         when 's'
           width = 128
           height = 128
+        when 'sm'
+          width = 200
+          height = 267
         when 'm'
           width = 480
           height = 640

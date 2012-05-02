@@ -26,9 +26,9 @@
 <div class="events_wrapper">
   <% counter = 0 %>
   <% @events.each { |event| %>
-      <div class="event_image">
-        <%= image_tag "/pictures/e/" + event.small_image.file_name, :class => "vspace" %>
-      </div>
+      <%= link_to({:controller => :main, :action => :event, :id => event}, :class => "eventImage") do %>
+          <%= image_tag "/pictures/e/" + event.small_image.file_name, :class => "vspace" %>
+      <% end %>
       <% counter += 1 %>
       <% if counter%4 == 0 %>
           <div class="space"></div>

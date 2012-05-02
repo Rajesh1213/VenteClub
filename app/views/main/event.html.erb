@@ -1,0 +1,30 @@
+<div class="contentFull">
+
+  <div class="eventTop">
+    <%= image_tag "/pictures/e/" + @event.small_image.file_name %>
+    <h1><%= @event.name %></h1>
+
+    <p>
+      <%= @event.description %>
+    </p>
+
+    <div class="endDate">
+      <b>End date: </b><%= @event.end_at %>
+      <br/>
+      <%= link_to "Link to site", "#1" %>
+    </div>
+    <div class="cleaner"></div>
+  </div>
+
+  <div class="content-body" style="padding: 20px;">
+    <% @event.products.each { |product| %>
+        <%= link_to({:controller => :main, :action => :product, :id => product}, :class => "eventProductLink", :alt => product.name, :title => product.name) do %>
+            <%= image_tag "/pictures/sm/" + product.images.first.file_name, :class => "eventProductImage" %>
+            <br/>
+
+            <p><%= product.name %></p>
+        <% end %>
+    <% } %>
+    <div class="cleaner"></div>
+  </div>
+</div>

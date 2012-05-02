@@ -428,6 +428,7 @@ qq.FileUploaderBasic.prototype = {
             return false;
         } else if ((size === 0) && ((uagent.search(deviceAndroid) > -1) || (uagent.search(deviceMobile) > -1))) {
             return true;
+        // end of fix
 
         } else if (size === 0) {
             this._error('emptyError', name);

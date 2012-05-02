@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
   belongs_to :color
   belongs_to :size
   has_many :properties, :dependent => :destroy
-  has_many :images, :dependent => :destroy
+  has_many :images, :dependent => :destroy, :order => "id DESC"
 
   default_scope :order => "name ASC"
 

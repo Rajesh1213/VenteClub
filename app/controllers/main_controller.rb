@@ -14,4 +14,20 @@ class MainController < ApplicationController
     end
   end
 
+  def product
+    if params[:id]
+      @product = Product.find(params[:id])
+    else
+      @product = Product.last
+    end
+  end
+
+  def event
+    if params[:id]
+      @event = Event.find(params[:id])
+    else
+      @event = Event.last
+    end
+  end
+
 end

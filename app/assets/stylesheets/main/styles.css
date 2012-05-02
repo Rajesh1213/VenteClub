@@ -166,11 +166,21 @@ body {
 }
 
 .slideWrapper img {
-     width: auto;
+    width: auto;
     height: auto;
 }
 
-.event_image img {
+.eventImage {
+    display: inline-table;
+    height: 257px;
+    text-align: center;
+    vertical-align: top;
+    width: 235px;
+    background-color: #ffffff;
+    margin-left: 5px;
+}
+
+.eventImage img {
     width: 235px;
     height: 257px;
 }
@@ -190,16 +200,6 @@ body {
 
 .events_wrapper {
     margin-left: -5px;
-}
-
-.event_image {
-    display: inline-table;
-    height: 257px;
-    text-align: center;
-    vertical-align: top;
-    width: 235px;
-    background-color: #ffffff;
-    margin-left: 5px;
 }
 
 .content, .contentFull {
@@ -699,4 +699,51 @@ a.input-member, a.input-newmember {
 
 .alert-error ul li {
     list-style: none;
+}
+
+.eventTop {
+
+}
+
+.eventTop img {
+    float: left;
+    margin-right: 20px;
+}
+
+.eventTop h1 {
+    padding-bottom: 20px;
+}
+
+.eventTop p {
+    font-size: 16px;
+    color: #6B6B6B;
+}
+
+.eventTop .endDate {
+    text-align: right;
+    font-size: 14px;
+}
+
+.endDate a {
+    color: #6B6B6B;
+    margin-right: 605px;
+}
+
+.eventProductImage {
+    width: 200px;
+    height: 267px;
+    padding: 10px;
+}
+
+.eventProductLink {
+    text-decoration: none;
+    float: left;
+}
+
+.eventProductLink p {
+    height: 27px;
+    overflow: hidden;
+    text-align: center;
+    width: 200px;
+    color: #000000;
 }
