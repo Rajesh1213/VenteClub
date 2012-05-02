@@ -747,3 +747,20 @@ a.input-member, a.input-newmember {
     width: 200px;
     color: #000000;
 }
+
+.productPath {
+    padding-bottom: 20px;
+}
+
+.productPath, .productPath a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #6B6B6B;
+}
+
+.productPath a:hover {
+    text-decoration: underline;
+}
+.productName {
+    text-align: center;
+}

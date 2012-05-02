@@ -8,7 +8,7 @@
       <div class="eventProducts">
         <ul>
           <% @latest_event.products.each { |product| %>
-              <li><%= image_tag "/pictures/s/" + product.images.first.file_name %></li>
+              <li><%= link_to(image_tag("/pictures/s/" + product.images.first.file_name), {:controller => :main, :action => :product, :id => product}) %></li>
           <% } %>
         </ul>
       </div>

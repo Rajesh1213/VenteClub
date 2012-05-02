@@ -21,6 +21,18 @@ class Product < ActiveRecord::Base
 
   after_initialize :set_init
 
+  def colors
+    similar_products.collect { |product| product.color }
+  end
+
+  def sizes
+    similar_products.collect { |product| product.size }
+  end
+
+  def similar_products
+    Product.includes(:color, :size).find_all_by_name(self.name)
+  end
+
   private
 
   def set_init

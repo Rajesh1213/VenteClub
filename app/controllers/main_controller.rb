@@ -20,6 +20,8 @@ class MainController < ApplicationController
     else
       @product = Product.last
     end
+    @event = @product.event
+    @top_category = @event.top_category
   end
 
   def event
