@@ -7,6 +7,7 @@ class WorldwideTariff < ActiveRecord::Base
   attr_accessor :arr_data
 
   validates :additional, :numericality => {:greater_than => 0}, :on => :update
+  validates :vat, :numericality => true, :on => :update
   validate :changed_attr, :on => :update
 
   def price_for_weight(weight)
