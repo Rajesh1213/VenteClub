@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120428190320) do
+ActiveRecord::Schema.define(:version => 20120506123935) do
 
   create_table "colors", :force => true do |t|
     t.string   "name"
@@ -177,8 +177,9 @@ ActiveRecord::Schema.define(:version => 20120428190320) do
     t.decimal  "w_29_5",     :precision => 15, :scale => 2, :default => 0.0
     t.decimal  "w_30_0",     :precision => 15, :scale => 2, :default => 0.0
     t.decimal  "additional", :precision => 15, :scale => 2, :default => 0.0
-    t.datetime "created_at",                                                 :null => false
-    t.datetime "updated_at",                                                 :null => false
+    t.datetime "created_at",                                                  :null => false
+    t.datetime "updated_at",                                                  :null => false
+    t.decimal  "vat",        :precision => 15, :scale => 2, :default => 10.0
   end
 
 end

@@ -16,4 +16,17 @@ class ShippingCalculatorController < ApplicationController
     end
   end
 
+  def flat_rate_price
+    if request.post?
+      product_value = params[:product_value].gsub(",", ".").to_f
+      if product_value > 0
+        frp = FlatRateProduct.find(params[:id])
+        frp.user_data = {:product_value => product_value, :worldwide_tariff => WorldwideTariff.find(params[:destination_id])}
+        render :json => frp.total_cost
+      else
+        render :json => {:error => "Incorrect Value"}
+      end
+    end
+  end
+
 end

@@ -1,6 +1,6 @@
 <h2><%= @page_title %></h2>
 
-<%= form_tag({}, :class => "form-horizontal") do %>
+<%= form_tag({}, :class => "form-horizontal", :id => "fmh") do %>
     <legend></legend>
     <div class="control-group">
       <%= label_tag(:event_id, "Event:", :class => "control-label") %>
@@ -15,7 +15,9 @@
       </div>
     </div>
     <div class="form-actions">
-      <%= submit_tag("Save", :class => "btn btn-primary") %>
+      <%= submit_tag("Save", :class => "btn btn-primary", :id => "fmh_submit") %>
       <%= button_tag("Cancel", :type => "button", :class => "btn", :onclick => "window.history.back()") %>
     </div>
 <% end %>
+
+

@@ -33,6 +33,7 @@ class ProductsController < ApplicationController
   end
 
   def from_myhabit
+    @javascript = true
     @page_title = "New product from MyHabit link"
     @event = Event.find(params[:id])
 
@@ -40,11 +41,17 @@ class ProductsController < ApplicationController
       @event = Event.find(params[:event_id])
       @product = Product.new
       Headless.ly do
-        @product = ProductMyHabit.new().product_from_url(params[:url])
+        begin
+          @product = ProductMyHabit.new().product_from_url(params[:url])
+        rescue
+          flash.now[:error] = "Incorrect URL"
+        end
       end
-      @product.event_id = @event.id
-      session[:product] = @product
-      redirect_to :action => :new, :id => @event
+      unless flash[:error]
+        @product.event_id = @event.id
+        session[:product] = @product
+        redirect_to :action => :new, :id => @event
+      end
     end
   end
 

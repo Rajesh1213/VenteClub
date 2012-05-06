@@ -9,7 +9,25 @@ class WorldwideTariff < ActiveRecord::Base
   validates :additional, :numericality => {:greater_than => 0}, :on => :update
   validate :changed_attr, :on => :update
 
+  def price_for_weight(weight)
+    weight = weight.to_f
+    extra_weight = 0.0
+    if weight > 30.0
+      extra_weight = weight - 30.0
+      extra_weight = (extra_weight).ceil / 1
+      weight = 30.0
+    end
+    extra_cost = extra_weight * self.additional
+    weight_column = "w_" + round_weight(weight).to_s.gsub(".", "_")
+    cost = self.send(weight_column)
+    cost + extra_cost
+  end
+
   private
+
+  def round_weight(weight)
+    (weight * (1 / 0.5)).ceil / (1 / 0.5)
+  end
 
   def changed_attr
     self.attributes.each { |name, val|
