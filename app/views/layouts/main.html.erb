@@ -18,7 +18,7 @@
   <div class="upper-nav">
     <ul>
       <li><%= link_to "MY VENTECLUB", :controller => :my, :action => :account %></li>
-      <li style="display: <%= "none" unless session[:order] %>;"><%= link_to "MY SHOPPING CART", {:controller => :my, :action => :shopping_cart}, {:id => "shopping_cart_top"} %></li>
+      <li style="display: <%#= "none" unless session[:order] %>;"><%= link_to "MY SHOPPING CART", {:controller => :my, :action => :shopping_cart}, {:id => "shopping_cart_top"} %></li>
       <li><%= link_to "SHIPPING CALCULATOR", :controller => :shipping_calculator, :action => :index %></li>
       <li><%= link_to "HOW IT WORKS", :controller => :static, :action => :how_it_works %></li>
     </ul>
