@@ -49,9 +49,14 @@ body {
 .upper-nav {
     float: left;
     display: block;
-    background: url(../img/upper-nav-bg.jpg) no-repeat;
-    width: 461px;
     height: 29px;
+    background: url(../img/upper-nav-bg.jpg) no-repeat;
+    background-position: right;
+    padding-right: 25px;
+}
+
+.upper-nav ul {
+    background-color: #F9F9F9;
 }
 
 .upper-nav li {
@@ -149,7 +154,6 @@ body {
 
 .eventBig img {
     width: 972px;
-    height: 507px;
 }
 
 .rotatorWrapper {
@@ -235,7 +239,6 @@ body {
 .contentFull .dataRow input {
     float: none;
     padding-left: 10px;
-    width: 307px;
 }
 
 .contentFull .dataRow label {
@@ -268,15 +271,13 @@ body {
 .dataRow input, .dataRow select {
     width: 317px;
     float: right;
-    height: 34px;
+    padding: 8px;
 }
 
 .dataRow select {
-    float: none;
-    margin-top: 2px;
     font-size: 14px;
-    padding: 6px;
     background: #ffffff;
+    width: 333px;
 }
 
 .productTypeWrapper {

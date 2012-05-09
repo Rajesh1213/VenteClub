@@ -15,14 +15,14 @@
               <%= image_tag "img/prod_dest.png" %>
               <span class="text">SELECT A DESTINATION:</span>
           <% end %>
-          <%= select_tag(:destination_id, options_for_select(WorldwideTariff.all.collect { |wwt| [wwt.country, wwt.id] }), {:required => true}) %>
+          <%= select_tag(:destination_id, options_for_select(WorldwideTariff.all.collect { |wwt| [wwt.country, wwt.id] }), {:required => true, :style => "float:none;"}) %>
         </div>
         <div class="dataRow">
           <%= label_tag(:product_type_id) do %>
               <%= image_tag "img/prod_type.png" %>
               <span class="text">SELECT PRODUCT TYPE:</span>
           <% end %>
-          <%= select_tag(:product_type_id, options_for_select(ProductType.all.collect { |pt| [pt.name, pt.id] }), {:required => true}) %>
+          <%= select_tag(:product_type_id, options_for_select(ProductType.all.collect { |pt| [pt.name, pt.id] }), {:required => true, :style => "float:none;"}) %>
         </div>
         <div class="dataRow">
           <%= label_tag(:product_value) do %>

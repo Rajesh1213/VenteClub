@@ -1,5 +1,7 @@
 class WorldwideTariff < ActiveRecord::Base
 
+  has_many :shipping_addresses
+
   before_create :arr_to_attr
 
   default_scope :order => "country ASC"

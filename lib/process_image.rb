@@ -60,8 +60,8 @@ class ProcessImage
   def resize_event_big_image(filename)
     image = Magick::ImageList.new("#{Rails.root}/public/tmp/#{filename}")
     width = 972
-    height = 507
-    image = resize_image_manipulations(image, width, height)
+    #height = 507
+    image = resize_image_manipulations(image, width)
     url = "#{Rails.root}/public/tmp/e_b/#{filename}" + ".jpg"
     image.write(url) { self.quality = 90 }
     File.chmod(0664, url)
@@ -107,7 +107,7 @@ class ProcessImage
     (0...size).map { charset.to_a[rand(charset.size)] }.join
   end
 
-  def resize_image_manipulations(image, width, height)
+  def resize_image_manipulations(image, width, height=nil)
     image = image
     image.resize_to_fit!(width, height)
     image.new_image(image.first.columns, image.first.rows) { self.background_color = "white" }

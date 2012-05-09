@@ -22,6 +22,7 @@ class MainController < ApplicationController
     end
     @event = @product.event
     @top_category = @event.top_category
+    @javascript = true
   end
 
   def event

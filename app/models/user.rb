@@ -1,11 +1,16 @@
 class User < ActiveRecord::Base
 
+  has_many :shipping_addresses, :dependent => :destroy
+  has_many :orders, :dependent => :destroy
+
   validates :first_name, :presence => true
   validates :last_name, :presence => true
   validates :mail, :presence => true, :uniqueness => true, :format => {:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i}
   validates :pass, :presence => true, :length => {:minimum => 6}, :confirmation => true
 
   default_scope :order => "created_at ASC"
+
+  accepts_nested_attributes_for :shipping_addresses, :allow_destroy => true
 
   attr_accessor :pass_confirmation
 

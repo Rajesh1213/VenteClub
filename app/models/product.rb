@@ -5,6 +5,8 @@ class Product < ActiveRecord::Base
   belongs_to :size
   has_many :properties, :dependent => :destroy
   has_many :images, :dependent => :destroy, :order => "id DESC"
+  has_many :product_orders, :dependent => :destroy
+  has_many :orders, :through => :product_orders
 
   default_scope :order => "name ASC"
 

@@ -13,3 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require main/jcarousellite-1-0-1-pack
+//= require jquery_nested_form
+//= require main/animate_from_to

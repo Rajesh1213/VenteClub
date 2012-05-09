@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120506123935) do
+ActiveRecord::Schema.define(:version => 20120509193645) do
 
   create_table "colors", :force => true do |t|
     t.string   "name"
@@ -48,6 +48,21 @@ ActiveRecord::Schema.define(:version => 20120506123935) do
     t.integer  "flat_rate_product_id"
   end
 
+  create_table "orders", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "status"
+    t.string   "track_code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "product_orders", :force => true do |t|
+    t.integer  "order_id"
+    t.integer  "product_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "product_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -83,6 +98,21 @@ ActiveRecord::Schema.define(:version => 20120506123935) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "shipping_addresses", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "address_line_1"
+    t.string   "address_line_2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "postal_code"
+    t.string   "phone"
+    t.integer  "country_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "sizes", :force => true do |t|
     t.string   "name"

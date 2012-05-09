@@ -17,7 +17,8 @@
 <div class="nav">
   <div class="upper-nav">
     <ul>
-      <li><%= link_to "MY VENTECLUB", :controller => :my, :action => :suite %></li>
+      <li><%= link_to "MY VENTECLUB", :controller => :my, :action => :account %></li>
+      <li style="display: <%= "none" unless session[:order] %>;"><%= link_to "MY SHOPPING CART", {:controller => :my, :action => :shopping_cart}, {:id => "shopping_cart_top"} %></li>
       <li><%= link_to "SHIPPING CALCULATOR", :controller => :shipping_calculator, :action => :index %></li>
       <li><%= link_to "HOW IT WORKS", :controller => :static, :action => :how_it_works %></li>
     </ul>
@@ -32,7 +33,7 @@
 
   <div class="space"></div>
   <div class="lower-sidebar">
-    <%= image_tag "img/lower-sidebar.png" %>
+    <%= link_to((image_tag "img/lower-sidebar.png"), {:controller => :shipping_calculator, :action => :index}) %>
   </div>
 
   <div class="lower-content">
