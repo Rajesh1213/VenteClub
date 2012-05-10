@@ -100,7 +100,7 @@ class ProductMyHabit
   def initial_js(url)
     @browser.goto(url)
     @browser.text_field(:name => 'email').set 'vova4kin@list.ru'
-    @browser.text_field(:name => 'password').set 'vova147258'
+    @browser.text_field(:name => 'password').set '111111'
     @browser.button(:id => "signInSubmit").click
     @browser.div(:id => "altImage0").click
     js_start = @browser.html.index("var payload = {") + 14
