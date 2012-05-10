@@ -20,4 +20,20 @@ $(document).ready(function () {
         });
     });
 
+
+    $('.content-body img').hover(
+        function () {
+            $(this).addimagezoom({
+                zoomrange:[5, 10],
+                magnifiersize:[600, 600],
+                magnifierpos:'right',
+                cursorshade:true,
+                largeimage:$(this).attr("src").replace("pictures/sm", "pictures/l")
+            })
+        },
+        function () {
+            // out
+        }
+    );
+
 });

@@ -57,7 +57,7 @@ class MyController < ApplicationController
   end
 
   def shipment_history
-
+@javascript = true
   end
 
 end

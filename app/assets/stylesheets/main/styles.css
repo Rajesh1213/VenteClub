@@ -158,10 +158,12 @@ body {
 
 .rotatorWrapper {
     width: 972px;
+    height: 128px;
     background: url(../img/login-bg.png);
     position: absolute;
     left: 0;
     bottom: 0;
+    text-align: center;
 }
 
 .slideWrapper {
@@ -191,11 +193,22 @@ body {
 
 .prev.input-newmember, .next.input-member {
     width: 30px;
-    padding: 62px 0px;
+    padding: 60px 0px;
 }
 
 .eventProducts {
     position: relative;
+}
+
+.eventProducts ul {
+    height: 128px;
+    overflow: hidden;
+    width: 0px;
+}
+
+.eventProducts li {
+    float: left;
+    overflow: hidden;
 }
 
 .eventProducts img {
@@ -774,4 +787,13 @@ a.input-member, a.input-newmember {
 
 table.productTypeWrapper {
     width: 100%;
+}
+
+.magnifyarea {
+    /* CSS to add shadow to magnified image. Optional */
+    box-shadow: 5px 5px 7px #818181;
+    -webkit-box-shadow: 5px 5px 7px #818181;
+    -moz-box-shadow: 5px 5px 7px #818181;
+    filter: progid:DXImageTransform.Microsoft.dropShadow(color = #818181, offX = 5, offY = 5, positive = true);
+    background: white;
 }
