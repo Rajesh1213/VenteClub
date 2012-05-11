@@ -1,5 +1,5 @@
 <div class="eventBig">
-  <%= link_to (image_tag "/pictures/e_b/" + @latest_event.big_image.file_name), {:controller => :main, :action => :event, :id => @latest_event} %>
+  <%= link_to (image_tag "/pictures/e_b/" + @latest_event.big_image.file_name, :class => "eventBigImg"), {:controller => :main, :action => :event, :id => @latest_event} %>
 
   <div class="slideWrapper">
     <div class="rotatorWrapper">
@@ -15,6 +15,9 @@
     </div>
   </div>
 </div>
+<div class="eventEnd">
+  EVENT ENDS <%= @latest_event.end_at %>
+</div>
 <% vis_el = @latest_event.products.count
    vis_el = 7 if vis_el > 7
 %>
@@ -23,16 +26,23 @@
 </script>
 
 <div class="space"></div>
-<div class="events_wrapper">
-  <% counter = 0 %>
+<div class="eventsWrapper">
   <% @events.each { |event| %>
-      <%= link_to({:controller => :main, :action => :event, :id => event}, :class => "eventImage") do %>
-          <%= image_tag "/pictures/e/" + event.small_image.file_name, :class => "vspace" %>
-      <% end %>
-      <% counter += 1 %>
-      <% if counter%4 == 0 %>
-          <div class="space"></div>
-      <% end %>
+      <div class="eventPlaceholder">
+        <div class="eventImageWrapper">
+          <%= link_to({:controller => :main, :action => :event, :id => event}, :class => "eventImage") do %>
+              <%= image_tag "/pictures/e/" + event.small_image.file_name, :class => "vspace" %>
+          <% end %>
+        </div>
+        <div class="slideWrapper">
+          <div class="eventInfo">
+            <%= event.name %>
+            <br/>
+            <%= event.end_at %>
+          </div>
+        </div>
+
+      </div>
   <% } %>
 </div>
 <div class="space"></div>

@@ -1,10 +1,12 @@
 $(window).load(function () {
 
-    $(".eventProducts").jCarouselLite({
-        btnNext:".next",
-        btnPrev:".prev",
-        visible: vis_el
-    });
+    if (vis_el > 0) {
+        $(".eventProducts").jCarouselLite({
+            btnNext:".next",
+            btnPrev:".prev",
+            visible:vis_el
+        });
+    }
 
 //    $(".eventProducts").hide("slow");
 
@@ -14,6 +16,15 @@ $(window).load(function () {
         },
         function () {
             $(".rotatorWrapper").slideUp();
+        }
+    );
+
+    $(".eventPlaceholder").hover(
+        function () {
+            $(this).find(".eventInfo").slideDown("fast");
+        },
+        function () {
+            $(".eventInfo").slideUp("fast");
         }
     );
 

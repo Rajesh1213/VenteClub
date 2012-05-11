@@ -152,13 +152,13 @@ body {
     text-align: center;
 }
 
-.eventBig img {
+img.eventBigImg {
     width: 972px;
 }
 
-.rotatorWrapper {
+.rotatorWrapper, .eventInfo {
     width: 972px;
-    height: 128px;
+    height: 134px;
     background: url(../img/login-bg.png);
     position: absolute;
     left: 0;
@@ -166,42 +166,47 @@ body {
     text-align: center;
 }
 
+.eventInfo {
+    color: #FFFFFF;
+    display: none;
+    font-size: 14px;
+    height: 36px;
+    padding: 2px 5px;
+    text-align: left;
+    width: 312px;
+    overflow: hidden;
+    line-height: 18px;
+}
+
 .slideWrapper {
     top: 0px;
     position: relative;
 }
 
-.slideWrapper img {
-    width: auto;
-    height: auto;
-}
-
 .eventImage {
-    display: inline-table;
-    height: 257px;
-    text-align: center;
-    vertical-align: top;
-    width: 235px;
-    background-color: #ffffff;
-    margin-left: 5px;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .eventImage img {
-    width: 235px;
-    height: 257px;
+    max-width: 312px;
+    max-height: 219px;
 }
 
 .prev.input-newmember, .next.input-member {
+    margin: 52px 0;
+    padding: 0 0;
     width: 30px;
-    padding: 60px 0px;
+    height: 30px;
 }
 
 .eventProducts {
     position: relative;
+    padding: 6px 0px;
 }
 
 .eventProducts ul {
-    height: 128px;
+    height: 120px;
     overflow: hidden;
     width: 0px;
 }
@@ -209,14 +214,42 @@ body {
 .eventProducts li {
     float: left;
     overflow: hidden;
+    border: 1px solid #C6C7C7;
+    height: 114px;
+    width: 114px;
+    margin: 4px;
+    line-height: 201px;
+    display: table;
+}
+
+.eventProducts li a {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .eventProducts img {
-    padding: 0 5px;
+    max-width: 114px;
+    max-height: 114px;
 }
 
-.events_wrapper {
-    margin-left: -5px;
+.eventsWrapper {
+    width: 972px;
+}
+
+.eventPlaceholder {
+    border: 1px solid #C6C7C7;
+    float: left;
+    height: 219px;
+    margin: 5px;
+    overflow: hidden;
+    text-align: center;
+    width: 312px;
+}
+
+.eventImageWrapper {
+    display: table;
+    width: 312px;
+    height: 219px;
 }
 
 .content, .contentFull {
@@ -796,4 +829,10 @@ table.productTypeWrapper {
     -moz-box-shadow: 5px 5px 7px #818181;
     filter: progid:DXImageTransform.Microsoft.dropShadow(color = #818181, offX = 5, offY = 5, positive = true);
     background: white;
+}
+
+.eventEnd {
+    color: #B61D22;
+    font-size: 14px;
+    padding: 10px 20px;
 }

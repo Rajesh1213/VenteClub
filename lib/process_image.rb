@@ -49,8 +49,8 @@ class ProcessImage
 
   def resize_event_small_image(filename)
     image = Magick::ImageList.new("#{Rails.root}/public/tmp/#{filename}")
-    width = 235
-    height = 257
+    width = 312
+    height = 219
     image = resize_image_manipulations(image, width, height)
     url = "#{Rails.root}/public/tmp/e/#{filename}" + ".jpg"
     image.write(url) { self.quality = 90 }
@@ -73,8 +73,8 @@ class ProcessImage
       image = Magick::ImageList.new("#{Rails.root}/public/tmp/#{filename}")
       case size
         when 's'
-          width = 128
-          height = 128
+          width = 114
+          height = 114
         when 'sm'
           width = 200
           height = 267

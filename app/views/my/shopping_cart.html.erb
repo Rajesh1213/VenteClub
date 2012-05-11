@@ -12,6 +12,7 @@
             <% i +=1 %>
         <% } %>
         Total: $<span id="total"><%= @order.total_price_human %></span>
+        <%= link_to "CHECKOUT", {:controller => :checkout, :action => :login_confirmation}, :class => "input-member" %>
     <% else %>
         You have no products in your bag!
     <% end %>
