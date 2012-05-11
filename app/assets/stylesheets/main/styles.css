@@ -106,33 +106,6 @@ body {
     color: #000;
 }
 
-/***	Navigation 	****/
-.menu {
-    background-color: #C6C8C7;
-    height: 34px;
-}
-
-.menu li {
-    display: inline;
-    line-height: 34px;
-    padding-left: 8px;
-    padding-right: 12px;
-}
-
-.menu li a {
-    text-decoration: none;
-    color: #343333;
-    text-transform: uppercase;
-}
-
-.menu li a:hover {
-    text-decoration: none;
-    color: #fff;
-    height: 140px;
-    width: 50px;
-    background: url(../img/nav-hover-bg.png) no-repeat;
-}
-
 /***	Homepage 	****/
 .wrapper {
     display: block;
