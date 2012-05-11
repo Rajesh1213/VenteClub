@@ -818,8 +818,38 @@ a.input-member, a.input-newmember {
     padding: 20px;
 }
 
-table.productTypeWrapper {
+.shippingResults {
     width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #D5D5D5;
+    border-collapse: collapse;
+}
+
+table.shippingResults th {
+    background-color: #C5C6C6;
+    border: 1px solid #D5D5D5;
+    padding: 5px 20px;
+    text-align: left;
+    vertical-align: top;
+    color: #000000;
+}
+
+table.shippingResults td {
+    border: 1px solid #D5D5D5;
+    padding: 5px 20px;
+    text-transform: uppercase;
+    vertical-align: top;
+    color: #4D4D4D;
+}
+
+table.shippingResults tr:hover {
+    background-color: #F1F1F1;
+}
+
+table.shippingResults td.currency, table.shippingResults th.currency {
+    color: #000000;
+    padding-left: 50px;
+    width: 70px;
 }
 
 .magnifyarea {
