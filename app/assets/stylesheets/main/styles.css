@@ -214,7 +214,7 @@ img.eventBigImg {
 .eventProducts li {
     float: left;
     overflow: hidden;
-    border: 1px solid #C6C7C7;
+    border: 1px solid #5a5a5a;
     height: 114px;
     width: 114px;
     margin: 4px;
@@ -237,7 +237,7 @@ img.eventBigImg {
 }
 
 .eventPlaceholder {
-    border: 1px solid #C6C7C7;
+    border: 1px solid #DFDFDF;
     float: left;
     height: 219px;
     margin: 5px;
