@@ -12,11 +12,10 @@
 
 <!--<div class="cleaner" style="height: 50px;"></div>-->
 
-
 <ul class="dropdown dropdown-linear dropdown-columnar" id="nav">
 
   <% @top_categories.each { |top_category| %>
-      <li class="topList">
+      <li class="topList<%= " active" if request[:controller] == "main" && ((request[:action] == "index" && params[:id].to_i == top_category.id) || (request[:action] == "event" && top_category.id == @event.top_category.id) || (request[:action] == "product" && top_category.id == @product.event.top_category.id)) %>">
         <%= link_to top_category.name, {:controller => :main, :action => :index, :id => top_category}, :class => "topLink" %>
         <ul>
           <li class="dir">

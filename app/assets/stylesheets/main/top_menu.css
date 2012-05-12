@@ -26,7 +26,6 @@
 
 #nav {
     background-color: #C6C8C7;
-    height: 34px;
     font-size: 12px;
 }
 
@@ -36,6 +35,10 @@
 
 #nav li.topList {
     padding: 9px 0px;
+}
+
+#nav li.topList.active {
+    background-color: #F1F1F1;
 }
 
 #nav li.dir {
