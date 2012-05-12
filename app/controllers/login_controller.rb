@@ -91,7 +91,6 @@ class LoginController < ApplicationController
     if user.role == "admin"
       redirect_to :controller => :admin, :action => :dashboard
     else
-      session[:order] = user.orders.new
       redirect_to :controller => :main, :action => :index
     end
   end

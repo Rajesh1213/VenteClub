@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   def menu_data
     @top_categories = TopCategory.all
+    session[:order] = user.orders.new unless session[:order]
   end
 
   def current_user
