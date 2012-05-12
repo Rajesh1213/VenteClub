@@ -40,13 +40,13 @@ class ProductsController < ApplicationController
     if request.post?
       @event = Event.find(params[:event_id])
       @product = Product.new
-      #Headless.ly do
-      #  begin
+      Headless.ly do
+        begin
           @product = ProductMyHabit.new().product_from_url(params[:url])
-      #  rescue
-      #    flash.now[:error] = "Incorrect URL"
-      #  end
-      #end
+        rescue
+          flash.now[:error] = "Incorrect URL"
+        end
+      end
       unless flash[:error]
         @product.event_id = @event.id
         session[:product] = @product
