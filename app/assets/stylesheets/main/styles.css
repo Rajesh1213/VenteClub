@@ -21,6 +21,7 @@ body {
     background: #fff;
     padding: 10px 0 0;
     height: 122px;
+    position: relative;
 }
 
 .header-link {
@@ -838,4 +839,94 @@ table.shippingResults td.currency, table.shippingResults th.currency {
     color: #B61D22;
     font-size: 14px;
     padding: 10px 20px;
+}
+
+.cartWrapper {
+    position: absolute;
+    right: 0;
+    top: 52px;
+}
+
+.cartTop {
+    background-image: url("cart_icon.png");
+    background-position: left center;
+    background-repeat: no-repeat;
+    float: right;
+    font-size: 14px;
+    height: 33px;
+    padding: 10px;
+    text-align: right;
+    width: 85px;
+}
+
+.cartData {
+    background-color: #C6C7C7;
+    float: left;
+    padding: 10px;
+    position: relative;
+    width: 697px;
+    z-index: 1000;
+}
+
+.cartWrapper > div {
+    display: none;
+}
+
+.cartWrapper > div:first-child {
+    display: block
+}
+
+.cartWrapper:hover > div {
+    display: block
+}
+
+.cartWrapper:hover .cartTop {
+    background-color: #C6C7C7;
+}
+
+.cartData table {
+    vertical-align: middle;
+    text-align: left;
+    border: none;
+    border-collapse: collapse;
+    color: #000000;
+    font-size: 14px;
+}
+
+.cartData table a {
+    color: #000000;
+    padding: 5px;
+}
+
+.cartData table a:hover {
+    color: #ffffff;
+}
+
+.cartData table td.cartImage, .cartData table th {
+    text-align: center;
+}
+
+.cartData table th {
+    font-size: 12px;
+    padding: 5px;
+}
+
+.cartData img {
+    margin: 0px;
+    padding: 5px;
+}
+
+.cartData tbody tr {
+    border-top: 1px solid #C6C7C7;
+}
+
+.cartData tbody tr:hover {
+    border-top: 1px solid #F1F1F1;
+    border-bottom: 1px solid #F1F1F1;
+}
+
+.cartTotal {
+    float: right;
+    font-size: 14px;
+    padding: 12px;
 }
