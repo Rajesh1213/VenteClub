@@ -899,7 +899,7 @@ table.shippingResults td.currency, table.shippingResults th.currency {
 }
 
 .cartData table a:hover {
-    color: #ffffff;
+    /*color: #ffffff;*/
 }
 
 .cartData table td.cartImage, .cartData table th {

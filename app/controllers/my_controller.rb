@@ -13,31 +13,19 @@ class MyController < ApplicationController
     flash.now[:success] = "Account updated" if request.post? && @user.update_attributes(params[:user])
   end
 
-  def shopping_cart
-    @javascript = true
-    @order = session[:order]
-
-  end
-
   def shopping_cart_add
     if request.post?
       product = Product.find(params[:id])
-      if session[:order]
-        products = session[:order].products
-        products << product
-      else
-        products = [product]
-      end
-      session[:order] = @current_user.orders.new(:products => products)
-      render :json => {:success => true}
+      session[:order].products << product unless session[:order].products.include?(product)
+      render :partial => "layouts/shopping_cart"
     end
   end
 
   def shopping_cart_del
     if request.post?
-      session[:order].products.delete_at(params[:id].to_i)
-      #session[:order].delete if session[:order].total_price == 0
-      render :json => {:success => true, :total => session[:order].total_price_human}
+      product = Product.find(params[:id])
+      session[:order].products.delete(product)
+      render :json => {:success => true, :total => session[:order].total_price_human, :cart_items => session[:order].items_human}
     end
   end
 
@@ -57,7 +45,7 @@ class MyController < ApplicationController
   end
 
   def shipment_history
-@javascript = true
+    @javascript = true
   end
 
 end

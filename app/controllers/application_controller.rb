@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
 
   def menu_data
     @top_categories = TopCategory.all
-    session[:order] = User.find(session[:user_id]).orders.new unless session[:order]
   end
 
   def current_user
@@ -20,6 +19,7 @@ class ApplicationController < ActionController::Base
     if @current_user.nil?
       redirect_to :controller => :login, :action => :unauthorized
     end
+    update_cart
   end
 
   def authorize_admin
@@ -37,6 +37,15 @@ class ApplicationController < ActionController::Base
       country = geocoder.data["country_name"]
       city = geocoder.data["city"]
       @current_user.update_attributes(:ip => new_ip, :country => country, :city => city)
+    end
+  end
+
+  def update_cart
+    unless session[:order]
+      session[:order] = @current_user.orders.new
+    else
+      products = Product.find(session[:order].products.collect { |product| product.id })
+      session[:order] = @current_user.orders.new(:products => products)
     end
   end
 

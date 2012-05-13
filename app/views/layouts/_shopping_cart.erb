@@ -1,71 +1,66 @@
-<div class="cartWrapper">
-  <div class="cartTop">
-    CART<br/>
-    <%= pluralize(session[:order].products.size, "item") %>
-  </div>
-  <div class="cleaner"></div>
-  <div class="cartData">
-    <table>
-      <thead>
-      <tr>
-        <th colspan="2">
-          PRODUCT
-        </th>
-        <th style="width: 50px;">
-          ESTIMATED DELIVERY
-        </th>
-        <th style="width: 50px;">
-          QUANTITY
-        </th>
-        <th style="width: 50px;">
-          SUB-TOTAL
-        </th>
-        <th style="width: 50px;">
-          REMOVE
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <% i = 0 %>
-      <% session[:order].products.uniq.each { |product| %>
-          <% product = Product.find(product.id) %>
-          <tr id="item_wrapper_<%= i %>">
-            <td class="cartImage">
-              <%= link_to((image_tag "/pictures/s/" + product.images.first.file_name), {:controller => :main, :action => :product, :id => product}, :class => "", :alt => product.name, :title => product.name) %>
-            </td>
-            <td>
-              <%= link_to product.name, {:controller => :main, :action => :product, :id => product}, :item_number => i %>
-              <br/>
-              Color: <%= product.color.name %>
-              <br/>
-              Size: <%= product.size.name %>
-            </td>
-            <td>
-              4 business days
-            </td>
-            <td>
-              <% if product.amount > 0 %>
-                  <%= select_tag("quantity", options_for_select((1..product.amount).to_a)) %>
-              <% else %>
-                  Sold Out
-              <% end %>
-            </td>
-            <td>
-              <%= number_to_currency(product.price) %>
-            </td>
-            <td>
-              <%= link_to image_tag("main/del_icon.png"), "#1", :class => "del_product", :id => "del_" + i.to_s, :title => "Delete" %>
-            </td>
-            <% i +=1 %>
-      <% } %>
-      </tr>
-      </tbody>
-    </table>
-    <div class="cleaner" style="height: 10px;"></div>
-    <%= link_to "CHECKOUT >>", {:controller => :checkout, :action => :login_confirmation}, :class => "input-member" %>
-    <div class="cartTotal">
-      Total: $<span id="total"><%= session[:order].total_price_human %></span>
-    </div>
-  </div>
-  <div class="cleaner"></div>
+<div class="cartTop">
+  CART<br/>
+  <span id="cart_items"><%= pluralize(session[:order].products.size, "item") %></span>
 </div>
+<div class="cleaner"></div>
+<div class="cartData">
+  <table>
+    <thead>
+    <tr>
+      <th colspan="2">
+        PRODUCT
+      </th>
+      <th style="width: 50px;">
+        ESTIMATED DELIVERY
+      </th>
+      <th style="width: 50px;">
+        QUANTITY
+      </th>
+      <th style="width: 50px;">
+        SUB-TOTAL
+      </th>
+      <th style="width: 50px;">
+        REMOVE
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% session[:order].products.each { |product| %>
+        <tr id="item_wrapper_<%= product.id %>">
+          <td class="cartImage">
+            <%= link_to((image_tag "/pictures/s/" + product.images.first.file_name), {:controller => :main, :action => :product, :id => product}, :class => "", :alt => product.name, :title => product.name) %>
+          </td>
+          <td style="width: 350px;">
+            <%= link_to product.name, {:controller => :main, :action => :product, :id => product} %>
+            <br/>
+            Color: <%= product.color.name %>
+            <br/>
+            Size: <%= product.size.name %>
+          </td>
+          <td>
+            4 business days
+          </td>
+          <td>
+            <% if product.amount > 0 %>
+                <%= select_tag("quantity", options_for_select((1..product.amount).to_a)) %>
+            <% else %>
+                Sold Out
+            <% end %>
+          </td>
+          <td>
+            <%= number_to_currency(product.price) %>
+          </td>
+          <td>
+            <%= link_to image_tag("main/del_icon.png"), "#1", :class => "del_product", :id => "del_" + product.id.to_s, :title => "Delete" %>
+          </td>
+    <% } %>
+    </tr>
+    </tbody>
+  </table>
+  <div class="cleaner" style="height: 10px;"></div>
+  <%= link_to "CHECKOUT >>", {:controller => :checkout, :action => :login_confirmation}, :class => "input-member" %>
+  <div class="cartTotal">
+    Total: $<span id="total"><%= session[:order].total_price_human %></span>
+  </div>
+</div>
+<div class="cleaner"></div>

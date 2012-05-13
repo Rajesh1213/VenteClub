@@ -16,3 +16,4 @@
 //= require jquery_nested_form
 //= require main/animate_from_to
 //= require main/featuredimagezoomer
+//= require main/shopping_cart
