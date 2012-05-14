@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     $('.add_btn').click(function () {
         var id = this.id.split("_")[1];
-        var $img = $(".content-body img").first();
+        var $img = $(".mainImgWrapper img").first();
         $img.animate_from_to('.cartTop', {
             initial_css:{
                 image:$img.attr("src")
@@ -17,14 +17,14 @@ $(document).ready(function () {
     });
 
 
-    $('.content-body img').hover(
+    $('.mainImgWrapper img').hover(
         function () {
             $(this).addimagezoom({
                 zoomrange:[5, 10],
-                magnifiersize:[600, 600],
+                magnifiersize:[300, 450],
                 magnifierpos:'right',
                 cursorshade:true,
-                largeimage:$(this).attr("src").replace("pictures/sm", "pictures/l")
+                largeimage:$(this).attr("src").replace("pictures/m", "pictures/l")
             })
         },
         function () {

@@ -770,6 +770,7 @@ a.input-member, a.input-newmember {
 
 .productPath {
     padding-bottom: 20px;
+    text-align: center;
 }
 
 .productPath, .productPath a {
@@ -782,8 +783,84 @@ a.input-member, a.input-newmember {
     text-decoration: underline;
 }
 
+.altWrapper {
+    float: left;
+    width: 124px;
+}
+
+.altImgWrapper {
+    border: 1px solid #b8b8b8;
+    display: table;
+    float: left;
+    height: 114px;
+    margin: 4px;
+    text-align: center;
+    width: 114px;
+}
+
+.altImgWrapper .tableCell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.mainImgWrapper {
+    float: left;
+    margin: 0px 14px;
+    width: 480px;
+}
+
+.mainImgWrapper img {
+    width: 480px;
+}
+
+.dataWrapper {
+    float: left;
+    width: 300px;
+}
+
 .productName {
     text-align: center;
+    padding-bottom: 20px;
+    font-size: 24px;
+}
+
+.productDesc {
+    font-size: 14px;
+}
+
+.propertiesWrapper {
+    color: #656868;
+    font-size: 14px;
+    padding: 10px 0px;
+}
+
+.propertyRow {
+    padding: 2px 0px;
+}
+
+.propertyName {
+    text-transform: capitalize;
+}
+
+.propertiesWrapper select {
+    min-width: 50px;
+}
+
+.propertiesWrapper .oldPrice {
+    text-decoration: line-through;
+}
+
+.propertiesWrapper .price {
+    color: #000000;
+    font-size: 24px;
+    font-weight: bold;
+    padding-left: 20px;
+}
+
+.propertyColor {
+    font-size: 20px;
+    line-height: 40px;
+    margin-right: 10px;
 }
 
 .content-body h2 {

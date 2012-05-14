@@ -1,33 +1,67 @@
 <div class="contentFull">
   <div class="productPath">
-    <%= link_to @top_category.name, {:controller => :main, :action => :index, :id => @top_category} %>
-    -
     <%= link_to @event.name, {:controller => :main, :action => :event, :id => @event} %>
-    - <b>End Date:</b> <%= @event.end_at %>
+    <span class="eventEnd">EVENT ENDS <%= @event.end_at %></span>
   </div>
-  <h1 class="productName"><%= @product.name %></h1>
 
-  <div class="content-body">
-
-    <%= @product.description %> <br/>
-
-    <% @product.properties.each { |property| %>
-        <%= property.name %><%= " - " + property.value unless property.value.blank? %> <br/>
-    <% } %>
-
-    <% @product.images.each { |image| %>
-        <%= image_tag "/pictures/sm/" +image.file_name %>
-    <% } %>
-
-    <% @product.colors.each { |color| %>
-        <span style="background-color:<%= color.html_val %>;color:<%= color.html_val %>;">__</span><%= color.name %>
-    <% } %>
-    <br/>
-    <%= select_tag "size", options_from_collection_for_select(@product.sizes, "id", "name") %>
-    <br/>
-    <%= number_to_currency @product.price %>
-    <%= link_to "ADD TO BAG", "#1", :id => "product_" + @product.id.to_s, :class => "input-member add_btn" %>
-
-    <div class="cleaner"></div>
+  <div class="altWrapper">
+    <ul>
+      <% @product.images.each { |image| %>
+          <li class="altImgWrapper">
+            <div class="tableCell">
+              <%= image_tag "/pictures/s/" +image.file_name %>
+            </div>
+          </li>
+      <% } %>
+    </ul>
   </div>
+
+  <div class="mainImgWrapper">
+    <%= image_tag "/pictures/m/" + @product.images.first.file_name %>
+  </div>
+
+  <div class="dataWrapper">
+    <h1 class="productName"><%= @product.name %></h1>
+
+    <div class="productDesc">
+      <%= @product.description %>
+    </div>
+
+    <div class="propertiesWrapper">
+      <% @product.properties.each { |property| %>
+          <div class="propertyRow">
+            <span class="propertyName"><%= property.name %></span><%= ": " + property.value unless property.value.blank? %>
+          </div>
+      <% } %>
+    </div>
+
+    <div class="propertiesWrapper">
+      <span class="propertyName">Size: </span>
+      <%= select_tag "size", options_from_collection_for_select(@product.sizes, "id", "name") %>
+      <span class="propertyName" style="color: #ffffff;">____</span>
+      <span class="propertyName">Width: </span>
+      <%= select_tag "size", options_for_select(["placeholder"]) %>
+    </div>
+
+    <div class="propertiesWrapper">
+      <span class="propertyName">Color: </span>
+      <span class="propertyName" style="color: #000000; text-transform: capitalize;"><%= @product.color.name %></span>
+
+      <div>
+        <% @product.colors.each { |color| %>
+            <span style="background-color:<%= color.html_val %>;color:<%= color.html_val %>;" class="propertyColor">__</span>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="propertiesWrapper">
+      <span class="oldPrice"><%= number_to_currency @product.old_price %></span>
+      <span class="price"><%= number_to_currency @product.price %></span>
+      <%= link_to "ADD TO BAG", "#1", :id => "product_" + @product.id.to_s, :class => "input-member add_btn", :style => "margin-top: -4px;" %>
+    </div>
+
+
+  </div>
+
+  <div class="cleaner"></div>
 </div>
