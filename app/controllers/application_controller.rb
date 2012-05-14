@@ -38,9 +38,10 @@ class ApplicationController < ActionController::Base
   end
 
   def read_cart
-    #cookies.permanent[:order] = Marshal::dump(@current_user.orders.new) unless cookies[:order]
     begin
-      @cart_order = Marshal::load(cookies[:order])
+      product_ids = Marshal::load(cookies[:order])
+      cart_products = Product.find(product_ids)
+      @cart_order = @current_user.orders.new(:products => cart_products)
     rescue
       @cart_order = @current_user.orders.new
     end
@@ -48,8 +49,8 @@ class ApplicationController < ActionController::Base
 
   def write_cart
     if @current_user && @current_user.role == "user" && @cart_order
-      products = Product.find(@cart_order.products.collect { |product| product.id })
-      cookies.permanent[:order] = Marshal::dump(@current_user.orders.new(:products => products))
+      products = @cart_order.products.collect { |product| product.id }
+      cookies.permanent[:order] = Marshal::dump(products)
     end
   end
 
