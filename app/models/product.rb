@@ -17,6 +17,7 @@ class Product < ActiveRecord::Base
   validates :description, :presence => true
   validates :amount, :numericality => true
   validates :price, :numericality => true
+  validates :old_price, :numericality => true
 
   accepts_nested_attributes_for :images, :allow_destroy => true
   accepts_nested_attributes_for :properties, :allow_destroy => true

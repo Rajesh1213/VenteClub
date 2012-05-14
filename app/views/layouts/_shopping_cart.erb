@@ -1,6 +1,6 @@
 <div class="cartTop">
   CART<br/>
-  <span id="cart_items"><%= pluralize(session[:order].products.size, "item") %></span>
+  <span id="cart_items"><%= pluralize(@cart_order.products.size, "item") %></span>
 </div>
 <div class="cleaner"></div>
 <div class="cartData">
@@ -25,7 +25,7 @@
     </tr>
     </thead>
     <tbody>
-    <% session[:order].products.each { |product| %>
+    <% @cart_order.products.each { |product| %>
         <tr id="item_wrapper_<%= product.id %>">
           <td class="cartImage">
             <%= link_to((image_tag "/pictures/s/" + product.images.first.file_name), {:controller => :main, :action => :product, :id => product}, :class => "", :alt => product.name, :title => product.name) %>
@@ -60,7 +60,7 @@
   <div class="cleaner" style="height: 10px;"></div>
   <%= link_to "CHECKOUT >>", {:controller => :checkout, :action => :login_confirmation}, :class => "input-member" %>
   <div class="cartTotal">
-    Total: $<span id="total"><%= session[:order].total_price_human %></span>
+    Total: $<span id="total"><%= @cart_order.total_price_human %></span>
   </div>
 </div>
 <div class="cleaner"></div>

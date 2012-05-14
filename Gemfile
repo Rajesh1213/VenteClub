@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.3'
 gem 'mysql'
 gem 'json'
 
@@ -16,19 +16,15 @@ gem 'jquery-rails'
 gem 'mail'
 gem 'execjs'
 gem 'therubyracer'
+gem 'libv8'
 gem 'dynamic_form'
 gem 'rmagick'
 gem 'mechanize'
 gem 'whenever', :require => false
 gem 'geocoder'
 gem 'nested_form', :git => "git://github.com/ryanb/nested_form.git"
-
 gem 'headless'
-gem 'watir-webdriver', '0.5.5'
-
-#gem 'multi_json'
-#gem 'selenium-webdriver', '3.0.4'
-
+gem 'watir-webdriver', '0.5.7'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

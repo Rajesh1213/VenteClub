@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120509193645) do
+ActiveRecord::Schema.define(:version => 20120514110652) do
 
   create_table "colors", :force => true do |t|
     t.string   "name"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20120509193645) do
     t.decimal  "price",       :precision => 15, :scale => 2, :default => 0.0
     t.datetime "created_at",                                                  :null => false
     t.datetime "updated_at",                                                  :null => false
+    t.decimal  "old_price",   :precision => 15, :scale => 2, :default => 0.0
   end
 
   create_table "properties", :force => true do |t|

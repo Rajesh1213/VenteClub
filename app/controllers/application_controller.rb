@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  after_filter :write_cart
+
   private
 
   def menu_data
@@ -9,17 +11,12 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    if session[:user_id]
-      @current_user = User.find(session[:user_id])
-    end
+    @current_user = User.find(session[:user_id]) if session[:user_id]
   end
 
   def authorize_user
     current_user
-    if @current_user.nil?
-      redirect_to :controller => :login, :action => :unauthorized
-    end
-    update_cart
+    redirect_to :controller => :login, :action => :unauthorized if @current_user.nil?
   end
 
   def authorize_admin
@@ -40,12 +37,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def update_cart
-    unless session[:order]
-      session[:order] = @current_user.orders.new
-    else
-      products = Product.find(session[:order].products.collect { |product| product.id })
-      session[:order] = @current_user.orders.new(:products => products)
+  def read_cart
+    #cookies.permanent[:order] = Marshal::dump(@current_user.orders.new) unless cookies[:order]
+    begin
+      @cart_order = Marshal::load(cookies[:order])
+    rescue
+      @cart_order = @current_user.orders.new
+    end
+  end
+
+  def write_cart
+    if @current_user && @current_user.role == "user" && @cart_order
+      products = Product.find(@cart_order.products.collect { |product| product.id })
+      cookies.permanent[:order] = Marshal::dump(@current_user.orders.new(:products => products))
     end
   end
 
