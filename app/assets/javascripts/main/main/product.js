@@ -67,7 +67,8 @@ $(document).ready(function () {
             }
         }
     );
-    $('#product_size option:disabled').tooltip({placement:"right", title:"size not available for selected color"});
+
+    $('#product_size').tooltip({title:"Disabled options are not available for selected color"});
 
 });
 
@@ -86,7 +87,7 @@ function updateData() {
 
 function updateButtons(data) {
     $(".input-member").hide();
-    if (data != "") {
+    if ((data != "") && sizeSelected()) {
         $('.to_bag').attr("id", "to_bag_" + data.product.id);
         $('.to_preorder').attr("id", "to_preorder_" + data.product.id);
         if (data.product.sold_out == true) {
@@ -115,7 +116,7 @@ function updateSizes(data) {
     $.each(data.product.available_sizes, function (index, size) {
         $('#product_size option[value="' + size.id + '"]').removeAttr("disabled");
     });
-    $('#product_size option:disabled').tooltip({placement:"right", title:"size not available for selected color"});
+//    $('#product_size option:disabled').tooltip({placement:"right", title:"size not available for selected color"});
 }
 
 function updateAltWrapper(data) {
