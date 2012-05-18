@@ -17,3 +17,4 @@
 //= require main/animate_from_to
 //= require main/featuredimagezoomer
 //= require main/shopping_cart
+//= require admin/bootstrap

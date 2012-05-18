@@ -9,7 +9,7 @@
       <% @product.images.each { |image| %>
           <li class="altImgWrapper">
             <div class="tableCell">
-              <%= image_tag "/pictures/s/" +image.file_name %>
+              <%= image_tag "/pictures/s/" +image.file_name, :alt => "" %>
             </div>
           </li>
       <% } %>
@@ -21,7 +21,7 @@
   </div>
 
   <div class="dataWrapper">
-    <h1 class="productName"><%= @product.name %></h1>
+    <h1 class="productName" id="product_<%= @product.id %>"><%= @product.name %></h1>
 
     <div class="productDesc">
       <%= @product.description %>
@@ -37,19 +37,24 @@
 
     <div class="propertiesWrapper">
       <span class="propertyName">Size: </span>
-      <%= select_tag "size", options_from_collection_for_select(@product.sizes, "id", "name") %>
-      <span class="propertyName" style="color: #ffffff;">____</span>
+      <select id="product_size">
+        <option value="-1">All sizes</option>
+        <% @product.sizes.each { |size| %>
+            <option value="<%= size.id %>"<%= ' disabled="disabled"' unless @product.available_sizes.include?(size) %>><%= size.name %></option>
+        <% } %>
+      </select>
+      <span class="propertyName" style="color: #ffffff;">__</span>
       <span class="propertyName">Width: </span>
-      <%= select_tag "size", options_for_select(["placeholder"]) %>
+      <%= select_tag "product_width", options_for_select(["placeholder"]) %>
     </div>
 
     <div class="propertiesWrapper">
       <span class="propertyName">Color: </span>
-      <span class="propertyName" style="color: #000000; text-transform: capitalize;"><%= @product.color.name %></span>
+      <span class="propertyName" style="color: #000000; text-transform: capitalize;" id="color_name"><%= @product.color.name %></span>
 
       <div>
         <% @product.colors.each { |color| %>
-            <span style="background-color:<%= color.html_val %>;color:<%= color.html_val %>;" class="propertyColor">__</span>
+            <div style="background-color:<%= color.html_val %>;color:<%= color.html_val %>;" class="propertyColor<%= " selected" if @product.color == color %>" id="product_color_<%= color.id %>" colorName="<%= color.name %>">__</div>
         <% } %>
       </div>
     </div>
@@ -57,9 +62,9 @@
     <div class="propertiesWrapper">
       <span class="oldPrice"><%= number_to_currency @product.old_price %></span>
       <span class="price"><%= number_to_currency @product.price %></span>
-      <%= link_to "ADD TO BAG", "#1", :id => "product_" + @product.id.to_s, :class => "input-member add_btn", :style => "margin-top: -4px;" %>
+      <%= link_to "ADD TO BAG", "#1", :class => "input-member to_bag", :style => "margin-top: -4px; display: none;", :id => "to_bag_" + @product.id.to_s %>
+      <%= link_to "PREORDER", "#1", :class => "input-member to_preorder", :style => "margin-top: -4px; display: none;", :id => "to_preorder_" + @product.id.to_s %>
     </div>
-
 
   </div>
 

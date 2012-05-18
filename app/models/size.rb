@@ -6,4 +6,11 @@ class Size < ActiveRecord::Base
 
   validates :name, :presence => true, :uniqueness => true
 
+  def as_json(options = {})
+    {
+        :id => self.id,
+        :name => self.name
+    }
+  end
+
 end

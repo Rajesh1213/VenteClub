@@ -4,7 +4,7 @@ class Image < ActiveRecord::Base
   belongs_to :event
   belongs_to :flat_rate_product
 
-  #default_scope :order => "created_at DESC"
+  default_scope :order => "created_at DESC"
 
   validates :file_name, :presence => true
 
@@ -13,7 +13,7 @@ class Image < ActiveRecord::Base
   after_destroy :del_images
 
   def product_sizes
-    ['s','sm', 'm', 'l']
+    ['s', 'sm', 'm', 'l']
   end
 
   def event_sizes
@@ -26,6 +26,13 @@ class Image < ActiveRecord::Base
 
   def all_sizes
     product_sizes + event_sizes + flat_rate_product_sizes
+  end
+
+  def as_json(options = {})
+    {
+        :id => self.id,
+        :file_name => self.file_name
+    }
   end
 
   private

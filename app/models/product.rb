@@ -24,16 +24,43 @@ class Product < ActiveRecord::Base
 
   after_initialize :set_init
 
+  def similar_products
+    Product.includes(:color, :size).find_all_by_name(self.name)
+  end
+
   def colors
-    similar_products.collect { |product| product.color }
+    similar_products.collect { |product| product.color }.uniq.sort { |x, y| x.name <=> y.name }
+  end
+
+  def available_colors
+    similar_products.collect { |product| product.color if product.size == self.size }.compact.uniq.sort { |x, y| x.name <=> y.name }
   end
 
   def sizes
-    similar_products.collect { |product| product.size }
+    similar_products.collect { |product| product.size }.uniq.sort { |x, y| x.name <=> y.name }
   end
 
-  def similar_products
-    Product.includes(:color, :size).find_all_by_name(self.name)
+  def available_sizes
+    similar_products.collect { |product| product.size if product.color == self.color }.compact.uniq.sort { |x, y| x.name <=> y.name }
+  end
+
+  def sold_out?
+    self.amount <= 0
+  end
+
+  def as_json(options = {})
+    {
+        :id => self.id,
+        :name => self.name,
+        :price => number_to_currency(self.price),
+        :old_price => number_to_currency(self.old_price),
+        :sold_out => self.sold_out?,
+        :images => self.images,
+        :sizes => self.sizes,
+        :available_sizes => self.available_sizes,
+        :colors => self.colors,
+        :available_colors => self.available_colors
+    }
   end
 
   private
@@ -41,6 +68,17 @@ class Product < ActiveRecord::Base
   def set_init
     self.size_id = Size.first.id unless self.size_id
     self.color_id = Color.first.id unless self.color_id
+  end
+
+  private
+
+  def number_to_currency(number)
+    Helper.instance.number_to_currency(number, :unit => "")
+  end
+
+  class Helper
+    include Singleton
+    include ActionView::Helpers::NumberHelper
   end
 
 end
