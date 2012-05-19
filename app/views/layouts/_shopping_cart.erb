@@ -42,7 +42,10 @@
           </td>
           <td>
             <% if !product.sold_out? %>
-                <%= select_tag("quantity", options_for_select((1..product.amount).to_a)) %>
+                <% quantity = product.amount
+                   quantity = 2 if product.amount > 2
+                %>
+                <%= select_tag("quantity_" + product.id.to_s, options_for_select((1..quantity).to_a), :class => "quantitySelect") %>
             <% else %>
                 Sold Out
             <% end %>

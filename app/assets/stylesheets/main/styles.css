@@ -11,7 +11,7 @@ img {
 }
 
 body {
-    font-family: Arial, Helvetica, Garuda, sans-serif;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 11px;
     width: 1000px;
 }
@@ -960,23 +960,24 @@ table.shippingResults td.currency, table.shippingResults th.currency {
     position: relative;
     width: 697px;
     z-index: 1000;
-}
-
-.cartWrapper > div {
     display: none;
 }
 
-.cartWrapper > div:first-child {
-    display: block
-}
+/*.cartWrapper > div {*/
+/*display: none;*/
+/*}*/
 
-.cartWrapper:hover > div {
-    display: block
-}
+/*.cartWrapper > div:first-child {*/
+/*display: block*/
+/*}*/
 
-.cartWrapper:hover .cartTop {
-    background-color: #C6C7C7;
-}
+/*.cartWrapper:hover > div {*/
+/*display: block*/
+/*}*/
+
+/*.cartWrapper:hover .cartTop {*/
+/*background-color: #C6C7C7;*/
+/*}*/
 
 .cartData table {
     vertical-align: middle;
@@ -990,10 +991,6 @@ table.shippingResults td.currency, table.shippingResults th.currency {
 .cartData table a {
     color: #000000;
     padding: 5px;
-}
-
-.cartData table a:hover {
-    /*color: #ffffff;*/
 }
 
 .cartData table td.cartImage, .cartData table th {
@@ -1024,6 +1021,8 @@ table.shippingResults td.currency, table.shippingResults th.currency {
     font-size: 14px;
     padding: 12px;
 }
+
+/*bootstrap*/
 
 .tooltip {
     position: absolute;
