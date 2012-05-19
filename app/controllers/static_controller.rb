@@ -7,7 +7,18 @@ class StaticController < ApplicationController
   layout "main"
 
   def how_it_works
+  end
 
+  def terms_of_service
+  end
+
+  def privacy_notice
+  end
+
+  def security_notice
+  end
+
+  def terms_of_use
   end
 
 end

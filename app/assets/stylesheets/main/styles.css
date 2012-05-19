@@ -327,6 +327,38 @@ img.eventBigImg {
     margin-top: 10px;
 }
 
+.staticContent, .staticContent a {
+    font-size: 12px;
+    color: #6b6b6b;
+    text-align: justify;
+}
+
+.staticContent a:hover {
+    color: #343333;
+}
+
+.staticContent p {
+    padding: 12px 0px;
+}
+
+.staticContent h2 {
+    padding: 12px 0px;
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #343333;
+}
+
+.staticContent ul li {
+    margin-left: 30px;
+    list-style-type: disc;
+}
+
+.staticContent ol li {
+    margin-left: 30px;
+    list-style-type: decimal;
+    padding: 6px 0px;
+}
+
 .content-text-style {
     font-size: 14px;
     color: #6b6b6b;
@@ -624,8 +656,7 @@ a.input-member, a.input-newmember {
 }
 
 .lower-links {
-    background: #fff;
-    height: 217px;
+    background-color: #ffffff;
     border: 1px solid #c6c7c7;
 }
 
@@ -642,16 +673,14 @@ a.input-member, a.input-newmember {
 }
 
 .lower-venteclub-links {
-    width: 934px;
-    height: 142px;
-    padding: 15px 18px 19px 18px;
+    padding: 14px;
 }
 
 .vc-link {
     float: left;
-    min-width: 113px;
-    min-height: 141px;
+    width: 116px;
     padding-right: 40px;
+    min-height: 40px;
 }
 
 .vc-link p {
@@ -671,6 +700,7 @@ a.input-member, a.input-newmember {
     text-decoration: none;
     font-size: 10px;
     color: #9f9e9e;
+    text-transform: uppercase;
 }
 
 /***	Footer	****/

@@ -50,6 +50,10 @@ VenteClub::Application.routes.draw do
   # just remember to delete public/index.html.
 
   match 'how_it_works' => 'static#how_it_works'
+  match 'terms_of_service' => 'static#terms_of_service'
+  match 'privacy_notice' => 'static#privacy_notice'
+  match 'security_notice' => 'static#security_notice'
+  match 'terms_of_use' => 'static#terms_of_use'
 
   root :to => 'login#log_in'
 

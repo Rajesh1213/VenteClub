@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -58,95 +58,7 @@
 
   <div class="clear"></div>
   <div class="space"></div>
-  <div class="lower-links">
-    <div class="lower-links-title">
-      <p>MORE VENTECLUB LINKS</p>
-    </div>
-    <div class="lower-venteclub-links">
-      <div class="vc-link">
-        <p>DESIGNERS</p>
-        <ul>
-          <li><a href="#">C. LOUBOUTIN</a></li>
-          <li><a href="#">PRADA</a></li>
-          <li><a href="#">COLE HAAN</a></li>
-          <li><a href="#">GUCCI</a></li>
-          <li><a href="#">MICHAEL KORS</a></li>
-          <li><a href="#">MARC JACOBS</a></li>
-          <li><a href="#">FENDI</a></li>
-          <li><a href="#">BCBGMAXAZRAI</a></li>
-          <li><a href="#">STUART WIETZMAN</a></li>
-        </ul>
-      </div>
-      <div class="vc-link">
-        <p>DEPARTMENTS</p>
-        <ul>
-          <li><a href="#">WOMEN</a></li>
-          <li><a href="#">SHOES</a></li>
-          <li><a href="#">ACCESSORIES</a></li>
-          <li><a href="#">KIDS</a></li>
-          <li><a href="#">HOME</a></li>
-          <li><a href="#">MEN</a></li>
-          <li><a href="#">ELECTRONICS</a></li>
-          <li><a href="#">TRENDS</a></li>
-          <li><a href="#">SALES</a></li>
-        </ul>
-      </div>
-      <div class="vc-link">
-        <p>SHOP WOMEN</p>
-        <ul>
-          <li><a href="#">ACCESSORIES</a></li>
-          <li><a href="#">CASHMERE</a></li>
-          <li><a href="#">COATS</a></li>
-          <li><a href="#">DRESSES</a></li>
-          <li><a href="#">HANDBAGS</a></li>
-          <li><a href="#">JEANS</a></li>
-          <li><a href="#">SHOES</a></li>
-          <li><a href="#">SWEATERS</a></li>
-          <li><a href="#">TOP & TEES</a></li>
-        </ul>
-      </div>
-      <div class="vc-link">
-        <p>SHOP MEN</p>
-        <ul>
-          <li><a href="#">CASUAL SHIRTS</a></li>
-          <li><a href="#">COATS</a></li>
-          <li><a href="#">JEANS</a></li>
-          <li><a href="#">SHOES</a></li>
-          <li><a href="#">SUITS</a></li>
-          <li><a href="#">SWEATERS</a></li>
-          <li><a href="#">ACCESSORIES</a></li>
-          <li><a href="#">ELECTRONICS</a></li>
-          <li><a href="#">SPORTSs</a></li>
-        </ul>
-      </div>
-      <div class="vc-link">
-        <p>SKYPEX</p>
-        <ul>
-          <li><a href="#">MY ACCOUNT</a></li>
-          <li><a href="#">SHIP STATUS</a></li>
-          <li><a href="#">HOW IT WORKS</a></li>
-          <li><a href="#">AFFILIATE PROGRAM</a></li>
-          <li><a href="#">SECURITY</a></li>
-          <li><a href="#">TERMS OF SERVICE</a></li>
-          <li><a href="#">PRIVACY POLICY</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">CONTACT US</a></li>
-        </ul>
-      </div>
-      <div class="vc-link">
-        <p>CONNECT</p>
-        <ul>
-          <li><a href="#">LIKE US ON FACEBOOK</a></li>
-          <li><a href="#">FOLLOW US ON TWITTER</a></li>
-          <li><a href="#">EMAIL US</a></li>
-          <li><a href="#">CALL US</a></li>
-          <li><a href="#">POST US</a></li>
-          <li><a href="#">SUPPORT</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
+  <%= render :partial => "layouts/lower_links" %>
 </div>
 <%= render :partial => "layouts/footer" %>
 <%= javascript_include_tag "main/main" %>
