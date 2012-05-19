@@ -190,7 +190,7 @@ img.eventBigImg {
     overflow: hidden;
     border: 1px solid #5a5a5a;
     height: 114px;
-    width: 114px;
+    width: 85px;
     margin: 4px;
     line-height: 201px;
     display: table;
@@ -202,7 +202,7 @@ img.eventBigImg {
 }
 
 .eventProducts img {
-    max-width: 114px;
+    max-width: 85px;
     max-height: 114px;
 }
 
