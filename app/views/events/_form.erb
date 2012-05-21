@@ -15,6 +15,12 @@
     </div>
   </div>
   <div class="control-group">
+    <%= f.label(:original_url, "Original URL:", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_field(:original_url, :class => "input-xlarge") %>
+    </div>
+  </div>
+  <div class="control-group">
     <%= f.label(:description, "Description:", :class => "control-label") %>
     <div class="controls">
       <%= f.text_area(:description, :required => true, :class => "input-xlarge", :rows => 3) %>
@@ -22,29 +28,29 @@
   </div>
 
   <%= f.fields_for :big_image do |image| %>
-        <div class="control-group">
-          <%= image.label(:file_name, "Big image:", :class => "control-label") %>
-          <div class="controls" style="min-height: 28px;">
-            <%= image.hidden_field(:file_name, :required => true) %>
-            <% if image.object.file_name.nil? %>
-                <div class="admImage" id="admImage_big"></div>
-            <% elsif image.object.id %>
-                <div class="admImage" id="admImage_big">
-                  <%= image_tag "/pictures/e_b/" + image.object.file_name, :alt => "" %>
-                </div>
-            <% else %>
-                <div class="admImage" id="admImage_big">
-                  <%= image_tag "/tmp/e_b/" + image.object.file_name, :alt => "" %>
-                </div>
-            <% end %>
-            <div id="file-uploader_big"></div>
-            <div class="progress" style="width: 280px;display: none;" id="progress_big">
-              <div class="bar" id="bar_big"></div>
-            </div>
-            <div class="btn btn-success" id="browse_big">Browse for a new big image - 972x507</div>
+      <div class="control-group">
+        <%= image.label(:file_name, "Big image:", :class => "control-label") %>
+        <div class="controls" style="min-height: 28px;">
+          <%= image.hidden_field(:file_name, :required => true) %>
+          <% if image.object.file_name.nil? %>
+              <div class="admImage" id="admImage_big"></div>
+          <% elsif image.object.id %>
+              <div class="admImage" id="admImage_big">
+                <%= image_tag "/pictures/e_b/" + image.object.file_name, :alt => "" %>
+              </div>
+          <% else %>
+              <div class="admImage" id="admImage_big">
+                <%= image_tag "/tmp/e_b/" + image.object.file_name, :alt => "" %>
+              </div>
+          <% end %>
+          <div id="file-uploader_big"></div>
+          <div class="progress" style="width: 280px;display: none;" id="progress_big">
+            <div class="bar" id="bar_big"></div>
           </div>
+          <div class="btn btn-success" id="browse_big">Browse for a new big image - 972x507</div>
         </div>
-    <% end %>
+      </div>
+  <% end %>
 
   <%= f.fields_for :small_image do |image| %>
       <div class="control-group">

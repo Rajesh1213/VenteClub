@@ -240,7 +240,7 @@ img.eventBigImg {
 }
 
 .content-title {
-    font-family: 'Arial Black';
+    font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 30px;
     color: #343333;
 }
@@ -578,7 +578,7 @@ a.input-member, a.input-newmember {
 .title {
     color: #979797;
     text-align: left;
-    font-family: 'Arial Black';
+    font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 24px;
     font-weight: bold;
     border-bottom: 2px solid #a6a6a6;

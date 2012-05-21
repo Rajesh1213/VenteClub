@@ -9,15 +9,15 @@ class ProductMyHabit
   end
 
   def product_from_url(url)
-    js = initial_js(url)
-    js_product_url = js_product_url(js, url)
-    if js_product_url
-      FileManipulation.to_file("#{Rails.root}/public/tmp/mh_data", js)
-    else
-      js = FileManipulation.from_file("#{Rails.root}/public/tmp/mh_data")
-      js_product_url = js_product_url(js, url)
-    end
-    product_hash = product_hash_from_url(js_product_url)
+    js_url = initial_js_url(url)
+    #js_product_url = js_product_url(js, url)
+    #if js_product_url
+    #  FileManipulation.to_file("#{Rails.root}/public/tmp/mh_data", js)
+    #else
+    #  js = FileManipulation.from_file("#{Rails.root}/public/tmp/mh_data")
+    #  js_product_url = js_product_url(js, url)
+    #end
+    product_hash = product_hash_from_url(js_url)
     params = params_from_hash(product_hash, product_cAsin(url))
     Product.new(params)
   end
@@ -26,6 +26,7 @@ class ProductMyHabit
 
   def params_from_hash(product_hash, cAsin)
     result = Hash.new
+    process_sizes(product_hash)
     result["name"] = product_hash["detailJSON"]["short_title"]
     result["description"] = product_hash["productDescription"]["shortProdDesc"]
     result["price"] = product_hash["detailJSON"]["ourPrice"]["amount"]
@@ -94,6 +95,13 @@ class ProductMyHabit
     color
   end
 
+  def process_sizes(product_hash)
+    product_hash["detailJSON"]["variationMatrix"]["dimensionMatrix"][1]["values"].each { |size_data|
+      size_name = size_data["displayText"]
+      Size.create(:name => size_name) unless Size.find_by_name(size_name)
+    }
+  end
+
   def product_hash_from_url(url)
     file = get_file(url)
     js_start = file.index('{"detailJSON":{"')
@@ -116,17 +124,22 @@ class ProductMyHabit
     sale["asins"][product_id]["url"] if sale["asins"]
   end
 
-  def initial_js(url)
+  def initial_js_url(url)
     @browser.goto(url)
     @browser.text_field(:name => 'email').set 'vova4kin@list.ru'
     @browser.text_field(:name => 'password').set '111111'
     @browser.button(:id => "signInSubmit").click
     #@browser.div(:id => "altImage0").click
-    js_start = @browser.html.index("var payload = {") + 14
-    js_end = @browser.html.index('QueryLogUtils.recordTime("gw_ld");') - 3
-    js = @browser.html[js_start..js_end]
+    @browser.execute_script('$.ajax({url:"/request/getPrivateSale", dataType:"json", data:{sale:"' + sale_id(url) + '", preview:"0"}, success:function (m) {$("#pdHeader").text(JSON.stringify(m));}, beforeSend:authorizeRequest});')
+    #js_start = @browser.html.index("var payload = {") + 14
+    sleep 3
+    sale_text = @browser.execute_script('return $("#pdHeader").text();')
+    #js_end = @browser.html.index('QueryLogUtils.recordTime("gw_ld");') - 3
+    #js = @browser.html[js_start..js_end]
+    sale = ActiveSupport::JSON.decode(sale_text)
+    js_url = sale["sales"][0]["prefix"] + sale["sales"][0]["asins"][product_id(url)]["url"]
     @browser.close
-    js
+    js_url
   end
 
   def product_cAsin(url)
