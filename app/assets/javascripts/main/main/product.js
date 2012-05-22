@@ -45,12 +45,14 @@ $(document).ready(function () {
             $('#color_name').text(color_name);
             $('.propertyColor').removeClass("selected");
             $(this).addClass("selected");
+            $('#last_clicked').val("color");
             updateData();
         }
     });
 
     $('#product_size').change(function () {
         if (sizeSelected()) {
+            $('#last_clicked').val("size");
             updateData();
         } else {
             $('.propertyColor').removeClass("disabled");
@@ -76,7 +78,8 @@ function updateData() {
     var product_id = $(".to_bag").attr("id").split("_")[2];
     var color_id = $('.propertyColor.selected').attr("id").split("_")[2];
     var size_id = $('#product_size').val();
-    $.post("/my/update_data/?format=json", {authenticity_token:$('meta[name=csrf-token]').attr("content"), product_id:product_id, color_id:color_id, size_id:size_id},
+    var last_clicked = $('#last_clicked').val();
+    $.post("/my/update_data/?format=json", {authenticity_token:$('meta[name=csrf-token]').attr("content"), product_id:product_id, color_id:color_id, size_id:size_id, last_clicked:last_clicked},
         function (data) {
             updateAltWrapper(data);
             updateSizes(data);

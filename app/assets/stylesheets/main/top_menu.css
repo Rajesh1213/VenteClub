@@ -33,6 +33,7 @@
     display: block;
     padding: 5px;
     text-decoration: none;
+    line-height: 16px;
 }
 
 #nav a:hover {

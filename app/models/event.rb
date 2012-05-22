@@ -4,6 +4,8 @@ class Event < ActiveRecord::Base
   has_many :products, :dependent => :destroy
   has_one :small_image, :class_name => 'Image', :foreign_key => :event_id, :dependent => :destroy
   has_one :big_image, :class_name => 'Image', :foreign_key => :event_big_id, :dependent => :destroy
+  has_many :sizes, :through => :products, :uniq => true
+  has_many :colors, :through => :products, :uniq => true
 
   default_scope :order => "end_at ASC"
 
@@ -31,6 +33,16 @@ class Event < ActiveRecord::Base
     find(:all, :conditions => ["end_at >= ? AND end_at <= ?", Date.today, Date.today + 2.days])
   end
 
+  def products_for_page
+    result = []
+    product_names = self.products.collect { |product| product.name }.uniq
+    product_names.each { |product_name|
+      first_prod = self.products.where(:name => product_name).first
+      colors = first_prod.available_colors.collect { |color| color.id }
+      result << self.products.where(:name => product_name).where(:color_id => colors).where(:size_id => first_prod.size.id)
+    }
+    result.flatten
+  end
 
   private
 

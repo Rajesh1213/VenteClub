@@ -41,13 +41,13 @@ class MyController < ApplicationController
       size = Size.find(params[:size_id]) if params[:size_id] != "-1"
       product = Product.find(params[:product_id])
       similar_products = product.similar_products
-      if product.color == color
-        #p "size clicked"
+      if params[:last_clicked] == "size"
+        p "size clicked"
         similar_products.each { |similar_product|
           product = similar_product if similar_product.size == size
         }
       else
-        #p "color clicked"
+        p "color clicked"
         similar_products.each { |similar_product|
           product = similar_product if similar_product.color == color
         }

@@ -60,6 +60,7 @@
     </div>
 
     <div class="propertiesWrapper">
+      <%= hidden_field_tag "last_clicked" %>
       <span class="oldPrice"><%= number_to_currency @product.old_price %></span>
       <span class="price"><%= number_to_currency @product.price %></span>
       <%= link_to "ADD TO BAG", "#1", :class => "input-member to_bag", :style => "margin-top: -4px; display: none;", :id => "to_bag_" + @product.id.to_s %>

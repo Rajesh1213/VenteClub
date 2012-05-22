@@ -21,4 +21,7 @@ class StaticController < ApplicationController
   def terms_of_use
   end
 
+  def return_and_refund_policy
+  end
+
 end

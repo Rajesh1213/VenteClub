@@ -27,6 +27,7 @@ class MainController < ApplicationController
   end
 
   def event
+    @javascript = true
     if params[:id]
       @event = Event.find(params[:id])
     else

@@ -16,6 +16,10 @@ body {
     width: 1000px;
 }
 
+a {
+    line-height: 0px;
+}
+
 /***	Header	****/
 .header {
     background: #fff;
@@ -124,19 +128,24 @@ body {
 
 .eventBig {
     text-align: center;
+    line-height: 0px;
 }
 
 img.eventBigImg {
     width: 972px;
 }
 
-.rotatorWrapper, .eventInfo {
-    width: 972px;
-    height: 132px;
+.rotatorWrapper, .eventInfo, .productInfo {
     background: url(../img/login-bg.png);
     position: absolute;
     left: 0;
     bottom: 0;
+    overflow: hidden;
+}
+
+.rotatorWrapper {
+    width: 972px;
+    height: 130px;
     text-align: center;
 }
 
@@ -148,23 +157,37 @@ img.eventBigImg {
     padding: 2px 5px;
     text-align: left;
     width: 312px;
-    overflow: hidden;
     line-height: 18px;
 }
 
+.productInfo {
+    color: #FFFFFF;
+    display: none;
+    font-size: 14px;
+    padding: 5px;
+    text-align: left;
+    width: 223px;
+}
+
 .slideWrapper {
-    top: -2px;
+    top: 0px;
     position: relative;
 }
 
-.eventImage {
+.eventImage, .productImage {
     display: table-cell;
     vertical-align: middle;
+    line-height: 0px;
 }
 
 .eventImage img {
     max-width: 312px;
     max-height: 219px;
+}
+
+.productImage img {
+    max-width: 233px;
+    max-height: 312px;
 }
 
 .prev.input-newmember, .next.input-member {
@@ -177,11 +200,9 @@ img.eventBigImg {
 .eventProducts {
     position: relative;
     padding: 3px 0px;
-    height: 126px;
 }
 
 .eventProducts ul {
-    height: 126px;
     overflow: hidden;
     width: 0px;
 }
@@ -213,7 +234,7 @@ img.eventBigImg {
     width: 972px;
 }
 
-.eventPlaceholder {
+.eventPlaceholder, .productPlaceholder {
     border: 1px solid #DFDFDF;
     float: left;
     height: 219px;
@@ -221,6 +242,17 @@ img.eventBigImg {
     overflow: hidden;
     text-align: center;
     width: 312px;
+}
+
+.productPlaceholder {
+    width: 233px;
+    height: 312px;
+}
+
+.productImageWrapper {
+    display: table;
+    width: 233px;
+    height: 312px;
 }
 
 .eventImageWrapper {
@@ -561,10 +593,6 @@ a.input-member, a.input-newmember {
     line-height: 3em;
 }
 
-.vspace {
-    /*margin-left: 5px;*/
-}
-
 /***	Sidebar	****/
 .left-sidebar {
     float: left;
@@ -758,9 +786,20 @@ a.input-member, a.input-newmember {
 
 }
 
-.eventTop img {
+.eventTop .eventImgWrapper {
     float: left;
     margin-right: 20px;
+    min-height: 145px;
+    text-align: center;
+    width: 312px;
+}
+
+.eventTop .sizeFilter {
+    color: #000000;
+    float: right;
+    font-size: 14px;
+    text-align: right;
+    width: 600px;
 }
 
 .eventTop h1 {
@@ -768,24 +807,26 @@ a.input-member, a.input-newmember {
 }
 
 .eventTop p {
-    font-size: 16px;
+    font-size: 14px;
     color: #6B6B6B;
 }
 
 .eventTop .endDate {
-    text-align: right;
+    float: right;
     font-size: 14px;
+    padding: 10px 0px;
+    text-align: left;
+    width: 600px;
 }
 
 .endDate a {
-    color: #6B6B6B;
-    margin-right: 605px;
+    color: #000000;
 }
 
-.eventProductImage {
-    width: 200px;
-    height: 267px;
-    padding: 10px;
+.productsWrapper {
+    margin-left: -4px;
+    margin-top: 10px;
+    width: 980px;
 }
 
 .eventProductLink {
@@ -983,7 +1024,7 @@ table.shippingResults td.currency, table.shippingResults th.currency {
     height: 33px;
     padding: 10px;
     text-align: right;
-    width: 85px;
+    width: 90px;
 }
 
 .cartData {

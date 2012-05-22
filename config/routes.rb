@@ -54,6 +54,7 @@ VenteClub::Application.routes.draw do
   match 'privacy_notice' => 'static#privacy_notice'
   match 'security_notice' => 'static#security_notice'
   match 'terms_of_use' => 'static#terms_of_use'
+  match 'return_and_refund_policy' => 'static#return_and_refund_policy'
 
   root :to => 'login#log_in'
 

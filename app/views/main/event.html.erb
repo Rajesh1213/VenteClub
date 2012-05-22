@@ -1,7 +1,9 @@
 <div class="contentFull">
 
   <div class="eventTop">
-    <%= image_tag "/pictures/e/" + @event.small_image.file_name %>
+    <div class="eventImgWrapper">
+      <%= image_tag "/pictures/e/" + @event.small_image.file_name %>
+    </div>
     <h1><%= @event.name %></h1>
 
     <p>
@@ -13,18 +15,33 @@
       <br/>
       <%= link_to "Link to site", "#1" %>
     </div>
+    <div class="sizeFilter">
+      Select your size:
+      <%= select_tag("size_filter", options_from_collection_for_select(@event.sizes, "id", "name")) %>
+    </div>
     <div class="cleaner"></div>
   </div>
+</div>
 
-  <div class="content-body" style="padding: 20px;">
-    <% @event.products.each { |product| %>
-        <%= link_to({:controller => :main, :action => :product, :id => product}, :class => "eventProductLink", :alt => product.name, :title => product.name) do %>
-            <%= image_tag "/pictures/sm/" + product.images.first.file_name, :class => "eventProductImage" %>
+<div class="productsWrapper">
+  <% @event.products_for_page.each { |product| %>
+
+
+      <div class="productPlaceholder">
+        <div class="productImageWrapper">
+          <%= link_to({:controller => :main, :action => :product, :id => product}, :class => "productImage") do %>
+              <%= image_tag "/pictures/sm/" + product.images.first.file_name %>
+          <% end %>
+        </div>
+        <div class="slideWrapper">
+          <div class="productInfo">
+            <%= product.name %>
             <br/>
+            <%= product.color.name %>
+          </div>
+        </div>
+      </div>
 
-            <p><%= product.name %></p>
-        <% end %>
-    <% } %>
-    <div class="cleaner"></div>
-  </div>
+  <% } %>
+  <div class="cleaner"></div>
 </div>
