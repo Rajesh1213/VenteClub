@@ -40,7 +40,7 @@ class MyController < ApplicationController
       color = Color.find(params[:color_id])
       size = Size.find(params[:size_id]) if params[:size_id] != "-1"
       product = Product.find(params[:product_id])
-      similar_products = product.similar_products
+      similar_products = product.event_similar_products
       if params[:last_clicked] == "size"
         p "size clicked"
         similar_products.each { |similar_product|
@@ -69,6 +69,18 @@ class MyController < ApplicationController
       product = Product.find(params[:id])
       @cart_order.products.delete(product)
       render :json => {:success => true, :total => @cart_order.total_price_human, :cart_items => @cart_order.items_human}
+    end
+  end
+
+  def check_sold_out
+    if request.post?
+      size = Size.find(params[:size_id])
+      products = Product.find(params[:products])
+      result = []
+      products.each { |product|
+        result << Product.where(:event_id => product.event_id).where(:size_id => size.id).where(:color_id => product.color_id).find_by_name(product.name).sold_out?
+      }
+      render :json => result
     end
   end
 

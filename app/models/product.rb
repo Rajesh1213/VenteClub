@@ -24,24 +24,24 @@ class Product < ActiveRecord::Base
 
   after_initialize :set_init
 
-  def similar_products
-    Product.includes(:color, :size).find_all_by_name(self.name)
+  def event_similar_products
+    Product.includes(:color, :size).where(:event_id => self.event_id).find_all_by_name(self.name)
   end
 
   def colors
-    similar_products.collect { |product| product.color }.uniq.sort { |x, y| x.name <=> y.name }
+    event_similar_products.collect { |product| product.color }.uniq.sort { |x, y| x.name <=> y.name }
   end
 
   def available_colors
-    similar_products.collect { |product| product.color if product.size == self.size }.compact.uniq.sort { |x, y| x.name <=> y.name }
+    event_similar_products.collect { |product| product.color if product.size == self.size }.compact.uniq.sort { |x, y| x.name <=> y.name }
   end
 
   def sizes
-    similar_products.collect { |product| product.size }.uniq.sort { |x, y| x.name <=> y.name }
+    event_similar_products.collect { |product| product.size }.uniq.sort { |x, y| x.name <=> y.name }
   end
 
   def available_sizes
-    similar_products.collect { |product| product.size if product.color == self.color }.compact.uniq.sort { |x, y| x.name <=> y.name }
+    event_similar_products.collect { |product| product.size if product.color == self.color }.compact.uniq.sort { |x, y| x.name <=> y.name }
   end
 
   def sold_out?

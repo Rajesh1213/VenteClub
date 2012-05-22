@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
 
   belongs_to :top_category
-  has_many :products, :dependent => :destroy
+  has_many :products, :dependent => :destroy, :include => [:size, :color]
   has_one :small_image, :class_name => 'Image', :foreign_key => :event_id, :dependent => :destroy
   has_one :big_image, :class_name => 'Image', :foreign_key => :event_big_id, :dependent => :destroy
   has_many :sizes, :through => :products, :uniq => true
@@ -34,14 +34,25 @@ class Event < ActiveRecord::Base
   end
 
   def products_for_page
-    result = []
-    product_names = self.products.collect { |product| product.name }.uniq
-    product_names.each { |product_name|
-      first_prod = self.products.where(:name => product_name).first
-      colors = first_prod.available_colors.collect { |color| color.id }
-      result << self.products.where(:name => product_name).where(:color_id => colors).where(:size_id => first_prod.size.id)
+    result = self.products
+    helper = result
+    result.each { |product1|
+      helper.each { |product2|
+        if product1.name == product2.name && product1.color.id == product2.color.id && product1.size.id != product2.size.id
+          result = result - [product1]
+          helper = helper - [product1]
+        end
+      }
     }
-    result.flatten
+    result
+  end
+
+  def product_sold_out?(product)
+    result = true
+    product.event_similar_products.each { |similar_product|
+      result = false if !similar_product.sold_out?
+    }
+    result
   end
 
   private

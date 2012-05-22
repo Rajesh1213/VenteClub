@@ -13,11 +13,16 @@
     <div class="endDate">
       <b>End date: </b><%= @event.end_at %>
       <br/>
-      <%= link_to "Link to site", "#1" %>
+      <%= link_to @event.original_url, "http://" + @event.original_url, :target => '_blank' unless @event.original_url.blank? %>
     </div>
     <div class="sizeFilter">
       Select your size:
-      <%= select_tag("size_filter", options_from_collection_for_select(@event.sizes, "id", "name")) %>
+      <select name="size_filter" id="size_filter">
+        <option value="-1">All Sizes</option>
+        <% @event.sizes.each { |size| %>
+            <option value="<%= size.id %>"><%= size.name %></option>
+        <% } %>
+      </select>
     </div>
     <div class="cleaner"></div>
   </div>
@@ -26,12 +31,18 @@
 <div class="productsWrapper">
   <% @event.products_for_page.each { |product| %>
 
-
-      <div class="productPlaceholder">
+      <div class="productPlaceholder" id="product_<%= product.id %>" available_sizes="<%= product.available_sizes.collect { |size| size.id }.join("_") %>" sold_out="<%= "true" if @event.product_sold_out?(product) %>">
         <div class="productImageWrapper">
           <%= link_to({:controller => :main, :action => :product, :id => product}, :class => "productImage") do %>
               <%= image_tag "/pictures/sm/" + product.images.first.file_name %>
           <% end %>
+          <div class="productPrice">
+            <span class="ourPrice"><%= number_to_currency product.price %></span><br/>
+            <span class="oldPrice"><%= number_to_currency product.old_price %></span>
+          </div>
+          <div class="soldOut" id="sold_out_<%= product.id %>">
+            SOLD OUT
+          </div>
         </div>
         <div class="slideWrapper">
           <div class="productInfo">

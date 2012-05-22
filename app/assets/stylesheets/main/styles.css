@@ -190,6 +190,33 @@ img.eventBigImg {
     max-height: 312px;
 }
 
+.productPrice {
+    margin-left: -83px;
+    position: absolute;
+    text-align: right;
+    width: 80px;
+}
+
+.productPrice .oldPrice {
+    color: #6B6B6B;
+    font-size: 12px;
+    text-decoration: line-through;
+}
+
+.productPrice .ourPrice {
+    color: #000000;
+    font-size: 16px;
+}
+
+.soldOut {
+    background: url(../img/login-bg.png);
+    color: #FFFFFF;
+    display: none;
+    margin-left: -233px;
+    padding: 3px;
+    position: absolute;
+}
+
 .prev.input-newmember, .next.input-member {
     margin: 51px 0;
     padding: 0 0;
@@ -555,6 +582,7 @@ img.eventBigImg {
     text-transform: uppercase;
     text-align: center;
     text-decoration: none;
+    line-height: 12px;
 }
 
 .input-newmember {
