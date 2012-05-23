@@ -41,17 +41,13 @@ class MyController < ApplicationController
       size = Size.find(params[:size_id]) if params[:size_id] != "-1"
       product = Product.find(params[:product_id])
       similar_products = product.event_similar_products
-      if params[:last_clicked] == "size"
-        p "size clicked"
-        similar_products.each { |similar_product|
-          product = similar_product if similar_product.size == size
-        }
-      else
-        p "color clicked"
-        similar_products.each { |similar_product|
+      similar_products.each { |similar_product|
+        if size
+          product = similar_product if similar_product.size == size && similar_product.color == color
+        else
           product = similar_product if similar_product.color == color
-        }
-      end
+        end
+      }
       render :json => {:product => product}
     end
   end

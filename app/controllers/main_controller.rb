@@ -16,6 +16,7 @@ class MainController < ApplicationController
   end
 
   def product
+    @javascript = true
     if params[:id]
       @product = Product.find(params[:id])
     else
@@ -23,7 +24,6 @@ class MainController < ApplicationController
     end
     @event = @product.event
     @top_category = @event.top_category
-    @javascript = true
   end
 
   def event

@@ -90,13 +90,15 @@ function updateData() {
 
 function updateButtons(data) {
     $(".input-member").hide();
-    if ((data != "") && sizeSelected()) {
+    if (data != "") {
         $('.to_bag').attr("id", "to_bag_" + data.product.id);
         $('.to_preorder').attr("id", "to_preorder_" + data.product.id);
-        if (data.product.sold_out == true) {
-            $('.to_preorder').show();
-        } else {
-            $('.to_bag').show();
+        if (sizeSelected()) {
+            if (data.product.sold_out == true) {
+                $('.to_preorder').show();
+            } else {
+                $('.to_bag').show();
+            }
         }
     }
 }
