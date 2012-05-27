@@ -27,7 +27,11 @@ class ProductsController < ApplicationController
       @event = @product.event
       if @product.save
         flash[:success] = "Product: #{@product.name} created"
-        redirect_to :action => :list
+        if params[:commit] == "Save"
+          redirect_to :action => :list
+        else
+          @product = @event.products.new
+        end
       end
     end
   end

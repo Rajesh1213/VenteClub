@@ -111,6 +111,9 @@
 
   <div class="form-actions">
     <%= product.submit("Save", :class => "btn btn-primary") %>
+    <% if request[:action] == "new" %>
+        <%= product.submit("Save and Continue", :class => "btn btn-primary") %>
+    <% end %>
     <%= button_tag("Cancel", :type => "button", :class => "btn", :onclick => "window.history.back()") %>
   </div>
 </fieldset>
