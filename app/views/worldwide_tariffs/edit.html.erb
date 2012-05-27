@@ -1,4 +1,8 @@
-<h2><%= @page_title %></h2>
+<h2 style="float: left;"><%= @page_title %></h2>
+<%= link_to ({:controller => :worldwide_tariffs, :action => :delete, :id => @tariff}, :method => :post, :confirm => "Country will be deleted from shipping destinations. Are you sure?", :class => "btn btn-danger", :style => "float: right;") do %>
+    <i class="icon-trash icon-white"></i> Delete
+<% end %>
+<div class="cleaner"></div>
 
 <%= form_for :tariff, :html => {:class => "form-horizontal"} do |f| %>
     <%= f.error_messages(:class => "alert alert-block alert-error", :header_tag => "h4", :message => nil) %>

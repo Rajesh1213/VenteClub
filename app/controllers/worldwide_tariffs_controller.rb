@@ -19,4 +19,13 @@ class WorldwideTariffsController < ApplicationController
     end
   end
 
+  def delete
+    tariff = WorldwideTariff.find(params[:id])
+    tc = tariff.clone
+    if request.post? && tariff.destroy
+      flash[:warning] = "Country: #{tc.country} was deleted"
+      redirect_to :action => :list
+    end
+  end
+
 end

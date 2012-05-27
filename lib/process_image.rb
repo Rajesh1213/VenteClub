@@ -77,13 +77,13 @@ class ProcessImage
           height = 114
         when 'sm'
           width = 233
-          height = 500
+          height = 312
         when 'm'
-          width = 500
-          height = 1000
+          width = 468
+          height = 1500
         when 'l'
           width = 1600
-          height = 3200
+          height = 3500
       end
       image = resize_image_manipulations(image, width, height)
       url = "#{Rails.root}/public/tmp/#{size + "/" + filename}" + ".jpg"

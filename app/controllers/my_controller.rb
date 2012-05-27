@@ -64,7 +64,7 @@ class MyController < ApplicationController
     if request.post?
       product = Product.find(params[:id])
       @cart_order.products.delete(product)
-      render :json => {:success => true, :total => @cart_order.total_price_human, :cart_items => @cart_order.items_human}
+      render :json => {:success => true, :total => @cart_order.total_price_human, :cart_items => @cart_order.items_human, :items_count => @cart_order.products.size}
     end
   end
 

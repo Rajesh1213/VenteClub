@@ -12,4 +12,12 @@ class ShippingAddress < ActiveRecord::Base
   validates :phone, :presence => true
   validates :country_id, :presence => true
 
+  def full_name
+    self.first_name + " " + self.last_name
+  end
+
+  def address_line_3
+    self.city + ", " + self.state + " " + self.postal_code
+  end
+
 end

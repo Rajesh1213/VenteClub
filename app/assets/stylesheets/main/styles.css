@@ -591,7 +591,7 @@ img.eventBigImg {
 
 a.input-member, a.input-newmember {
     font-size: 11px;
-    padding-top: 11px;
+    padding-top: 8px;
     height: 22px;
     display: block;
 }
@@ -903,16 +903,23 @@ a.input-member, a.input-newmember {
 .altImgWrapper .tableCell {
     display: table-cell;
     vertical-align: middle;
+    line-height: 0px;
 }
 
 .mainImgWrapper {
+    background-image: url("../img/spinningred.gif");
+    background-position: center center;
+    background-repeat: no-repeat;
     float: left;
-    margin: 0px 14px;
-    width: 480px;
+    margin: 0px 20px 0px 16px;
+    min-height: 250px;
+    text-align: center;
+    vertical-align: middle;
+    width: 468px;
 }
 
 .mainImgWrapper img {
-    width: 480px;
+    width: 468px;
 }
 
 .dataWrapper {
@@ -1210,4 +1217,63 @@ table.shippingResults td.currency, table.shippingResults th.currency {
     position: absolute;
     width: 0;
     height: 0;
+}
+
+.checkoutWrapper {
+    border: 14px solid #F1F1F1;
+    border-top: none;
+    display: block;
+}
+
+.checkoutHeader {
+    background-color: #F1F1F1;
+    color: #656868;
+    font-size: 20px;
+    padding: 7px;
+    text-transform: uppercase;
+}
+
+.checkoutContent {
+    padding: 7px;
+    width: 958px;
+}
+
+.checkoutContent .column {
+    float: left;
+    width: 479px;
+}
+
+.checkoutContent h1 {
+    color: #000000;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.shippingAddressWrapper {
+    padding: 5px;
+}
+
+.shippingAddressWrapper .addressContent {
+    float: right;
+    font-size: 12px;
+    text-align: left;
+    width: 340px;
+}
+
+.checkoutContent .content-body {
+    margin-top: 0;
+    padding: 10px 10px 5px 0px;
+    width: 465px;
+}
+
+.checkoutContent .content-body .dataRow label {
+    width: 100px;
+}
+
+.dataRow .field_with_errors input {
+    border: 1px solid #ff0000;
+}
+
+.shippingAddressWrapper .addressContent a {
+    color: #656868;
 }

@@ -1,5 +1,5 @@
 <p class="member-access-title">LOGIN CONFIRMATION</p>
-<%= form_tag(:controller => :login, :action => :log_in) do %>
+<%= form_tag do %>
     <%= text_field_tag "mail", "", :required => true, :class => "input-text", :type => "email" %>
     <%= password_field_tag "pass", "", :required => true, :class => "input-text" %>
     <%= submit_tag "SIGN-IN", :class => "input-member" %>

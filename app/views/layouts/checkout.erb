@@ -10,14 +10,12 @@
 <div class="header">
   <%= link_to (image_tag "img/logo.png"), :root %>
 </div>
-<div class="wrapper">
-  <div class="main-login" style="<%= @action_style if @action_style %>">
-    <div class="member-access">
-      <%= render(:partial => "main/flash_messages") %>
-      <%= yield %>
-    </div>
-  </div>
+<div class="checkoutWrapper">
+  <%= render(:partial => "main/flash_messages") %>
+  <%= yield %>
 </div>
 <%= render :partial => "layouts/footer" %>
+<%= javascript_include_tag "main/main" %>
+<%= javascript_include_tag("main/" + request[:controller] + "/" + request[:action]) if @javascript %>
 </body>
 </html>

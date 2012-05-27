@@ -53,6 +53,10 @@ $(document).ready(function () {
                     $("#item_wrapper_" + id).hide();
                     $("#total").html(data.total);
                     $("#cart_items").html(data.cart_items);
+                    if (data.items_count == 0) {
+                        $(".cartData").remove();
+                        $(".cartTop").css("background-color", "#ffffff");
+                    }
                 } else {
                     alert(data);
                 }
