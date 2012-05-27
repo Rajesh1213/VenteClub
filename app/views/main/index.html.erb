@@ -16,7 +16,7 @@
   </div>
 </div>
 <div class="eventEnd">
-  EVENT ENDS <%= @latest_event.end_at %>
+  Event Ends <%= event_date(@latest_event.end_at) %>
 </div>
 <% vis_el = products_for_page.count
    vis_el = 9 if vis_el > 9

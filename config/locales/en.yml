@@ -15,4 +15,5 @@ en:
 
   time:
     formats:
+      default:  "%a %B %d at %I %p EST"
       datetime: "%m-%d-%Y %H:%M"

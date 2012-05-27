@@ -1,7 +1,7 @@
 <div class="contentFull">
   <div class="productPath">
     <%= link_to @event.name, {:controller => :main, :action => :event, :id => @event} %>
-    <span class="eventEnd">EVENT ENDS <%= @event.end_at %></span>
+    <span class="eventEnd">Event Ends <%= event_date(@event.end_at) %></span>
   </div>
 
   <div class="altWrapper">

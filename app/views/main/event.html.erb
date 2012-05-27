@@ -11,7 +11,7 @@
     </p>
 
     <div class="endDate">
-      <b>End date: </b><%= @event.end_at %>
+      <b>Event Ends </b><%= event_date(@event.end_at) %>
       <br/>
       <%= link_to @event.original_url, "http://" + @event.original_url, :target => '_blank' unless @event.original_url.blank? %>
     </div>
