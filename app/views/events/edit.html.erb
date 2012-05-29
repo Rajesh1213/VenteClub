@@ -1,5 +1,5 @@
 <h2 style="float: left;"><%= @page_title %></h2>
-<%= link_to ({:controller => :events, :action => :delete, :id => @event}, :method => :post, :confirm => "All products will be deleted as well. Are you sure?", :class => "btn btn-danger", :style => "float: right;") do %>
+<%= link_to({:controller => :events, :action => :delete, :id => @event}, :method => :post, :confirm => "All products will be deleted as well. Are you sure?", :class => "btn btn-danger", :style => "float: right;") do %>
     <i class="icon-trash icon-white"></i> Delete
 <% end %>
 <div class="cleaner"></div>

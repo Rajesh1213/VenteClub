@@ -19,7 +19,7 @@
           <% end %>
         </th>
       </tr>
-      <% top_category.events.each { |event| %>
+      <% top_category.events.send(params[:state].to_s).each { |event| %>
           <tr>
             <td><%= link_to event.name, :controller => :events, :action => :edit, :id => event %></td>
             <td><%= l event.start_at.to_time, :format => :datetime %></td>

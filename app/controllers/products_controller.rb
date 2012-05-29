@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
       if @product.save
         flash[:success] = "Product: #{@product.name} created"
         if params[:commit] == "Save"
-          redirect_to :action => :list
+          redirect_to :action => :list, :state => @event.state
         else
           @product = @event.products.new
         end
@@ -66,7 +66,7 @@ class ProductsController < ApplicationController
     @event = @product.event
     if request.post? && @product.update_attributes(params[:product])
       flash[:success] = "Product: #{@product.name} updated"
-      redirect_to :action => :list
+      redirect_to :action => :list, :state => @event.state
     end
   end
 
@@ -83,7 +83,7 @@ class ProductsController < ApplicationController
     pc = product.clone
     if request.post? && product.destroy
       flash[:warning] = "Product: #{pc.name} was deleted"
-      redirect_to :action => :list
+      redirect_to :action => :list, :state => pc.event.state
     end
   end
 

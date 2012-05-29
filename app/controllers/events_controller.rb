@@ -20,7 +20,7 @@ class EventsController < ApplicationController
       @event = @top_category.events.new(params[:event])
       if @event.save
         flash[:success] = "Event: #{@event.name} created"
-        redirect_to :action => :list
+        redirect_to :action => :list, :state => @event.state
       end
     end
   end
@@ -32,7 +32,7 @@ class EventsController < ApplicationController
     convert_to_datetime
     if request.post? && @event.update_attributes(params[:event])
       flash[:success] = "Event #{@event.name} updated"
-      redirect_to :action => :list
+      redirect_to :action => :list, :state => @event.state
     end
   end
 
@@ -41,7 +41,7 @@ class EventsController < ApplicationController
     ec = event.clone
     if request.post? && event.destroy
       flash[:warning] = "Event: #{ec.name} deleted"
-      redirect_to :action => :list
+      redirect_to :action => :list, :state => ec.state
     end
   end
 

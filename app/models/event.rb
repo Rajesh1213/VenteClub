@@ -9,12 +9,9 @@ class Event < ActiveRecord::Base
 
   default_scope :order => "end_at ASC"
 
-  scope :past, where("end_at < ?", Date.today)
-
-  #find(:all, :conditions => ["published_at <= ?", Time.now], :include => :comments)
-  #scope :today, find(:all, :conditions => ["start_at <= ? AND end_at > ?", Date.today, Date.today + 2.days])
-  #scope :ending_soon, where("start_at <= ? AND end_at <= ?", [Date.today, Date.today + 2.days])
-  scope :upcoming, where("start_at > ?", Date.today)
+  scope :upcoming, where("start_at > ?", DateTime.now)
+  scope :current, where("start_at <= ? AND end_at >= ?", DateTime.now, DateTime.now)
+  scope :past, where("end_at < ?", DateTime.now)
 
   validates :top_category_id, :numericality => true
   validates :name, :presence => true, :uniqueness => true
@@ -53,6 +50,13 @@ class Event < ActiveRecord::Base
       result = false if !similar_product.sold_out?
     }
     result
+  end
+
+  def state
+    state = "upcoming" if Event.upcoming.include?(self)
+    state = "current" if Event.current.include?(self)
+    state = "past" if Event.past.include?(self)
+    state
   end
 
   private

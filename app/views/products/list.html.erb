@@ -15,7 +15,7 @@
       <tr>
         <th colspan="6" style="background-color: #D9EDF7; text-align: center;"><%= top_category.name %></th>
       </tr>
-      <% top_category.events.each { |event| %>
+      <% top_category.events.send(params[:state].to_s).each { |event| %>
           <tr style="background-color: #F5F5F5;">
             <th><%= event.name %></th>
             <th colspan="4"></th>

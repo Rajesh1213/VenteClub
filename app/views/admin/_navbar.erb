@@ -13,11 +13,39 @@
               <li class="<%= "active" if request[:action] == "dashboard" %>">
                 <%= link_to "Dashboard", :controller => :admin, :action => :dashboard %>
               </li>
-              <li class="<%= "active" if request[:controller] == "products" %>">
-                <%= link_to "Products", :controller => :products, :action => :list %>
+              <li class="dropdown<%= " active" if request[:controller] == "products" %>">
+                <a href="#1" class="dropdown-toggle" data-toggle="dropdown">
+                  Products
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="<%= "active" if request[:controller] == "products" && params[:state] == "upcoming" %>">
+                    <%= link_to "Upcoming", :controller => :products, :action => :list, :state => "upcoming" %>
+                  </li>
+                  <li class="<%= "active" if request[:controller] == "products" && params[:state] == "current" %>">
+                    <%= link_to "Current", :controller => :products, :action => :list, :state => "current" %>
+                  </li>
+                  <li class="<%= "active" if request[:controller] == "products" && params[:state] == "past" %>">
+                    <%= link_to "Past", :controller => :products, :action => :list, :state => "past" %>
+                  </li>
+                </ul>
               </li>
-              <li class="<%= "active" if request[:controller] == "events" %>">
-                <%= link_to "Events", :controller => :events, :action => :list %>
+              <li class="dropdown<%= " active" if request[:controller] == "events" %>">
+                <a href="#1" class="dropdown-toggle" data-toggle="dropdown">
+                  Events
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="<%= "active" if request[:controller] == "events" && params[:state] == "upcoming" %>">
+                    <%= link_to "Upcoming", :controller => :events, :action => :list, :state => "upcoming" %>
+                  </li>
+                  <li class="<%= "active" if request[:controller] == "events" && params[:state] == "current" %>">
+                    <%= link_to "Current", :controller => :events, :action => :list, :state => "current" %>
+                  </li>
+                  <li class="<%= "active" if request[:controller] == "events" && params[:state] == "past" %>">
+                    <%= link_to "Past", :controller => :events, :action => :list, :state => "past" %>
+                  </li>
+                </ul>
               </li>
             </ul>
             <ul class="nav pull-right">
