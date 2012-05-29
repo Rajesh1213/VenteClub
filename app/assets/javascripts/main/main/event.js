@@ -41,7 +41,7 @@ function markSoldOut() {
         $(this).find(".soldOut").hide();
         products.push($(this).attr("id").split("_")[1]);
     });
-    $.post("/my/check_sold_out", {authenticity_token:$('meta[name=csrf-token]').attr("content"), products:products, size_id:size_id}, function (data) {
+    $.post("/ajax/check_sold_out", {authenticity_token:$('meta[name=csrf-token]').attr("content"), products:products, size_id:size_id}, function (data) {
         visible_products.each(function (i) {
             if (data[i]) {
                 $(this).find(".soldOut").show();

@@ -1,6 +1,6 @@
 class MainController < ApplicationController
 
-  before_filter :authorize_user
+  before_filter :current_user
   before_filter :read_cart
   before_filter :menu_data
 

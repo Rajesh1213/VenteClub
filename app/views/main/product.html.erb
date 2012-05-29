@@ -1,3 +1,10 @@
+<script type="text/javascript">
+    <% if @current_user %>
+    var logged_in = true;
+    <% else %>
+    var logged_in = false;
+    <% end %>
+</script>
 <div class="contentFull">
   <div class="productPath">
     <%= link_to @event.name, {:controller => :main, :action => :event, :id => @event} %>
@@ -43,11 +50,6 @@
             <option value="<%= size.id %>"<%= ' disabled="disabled"' unless @product.available_sizes.include?(size) %>><%= size.name %></option>
         <% } %>
       </select>
-    </div>
-
-    <div class="propertiesWrapper">
-      <span class="propertyName">Width: </span>
-      <%= select_tag "product_width", options_for_select(["placeholder"]) %>
     </div>
 
     <div class="propertiesWrapper">

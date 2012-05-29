@@ -30,9 +30,11 @@ class LoginController < ApplicationController
   end
 
   def unauthorized
+    original_uri = session[:original_uri]
     reset_session
+    session[:original_uri] = original_uri
     flash[:error] = "Only authorized users can access this page"
-    redirect_to :root
+    redirect_to :controller => :login, :action => :log_in
   end
 
   def forgot_pass
@@ -91,7 +93,11 @@ class LoginController < ApplicationController
     if user.role == "admin"
       redirect_to :controller => :admin, :action => :dashboard
     else
-      redirect_to :controller => :main, :action => :index
+      original_uri = session[:original_uri]
+      p original_uri
+      session.delete("original_uri")
+      p original_uri
+      redirect_to(original_uri || {:controller => :main, :action => :index})
     end
   end
 

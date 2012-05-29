@@ -16,7 +16,10 @@ class ApplicationController < ActionController::Base
 
   def authorize_user
     current_user
-    redirect_to :controller => :login, :action => :unauthorized if @current_user.nil?
+    if @current_user.nil?
+      session[:original_uri] = request.fullpath
+      redirect_to :controller => :login, :action => :unauthorized
+    end
   end
 
   def authorize_admin
@@ -38,12 +41,14 @@ class ApplicationController < ActionController::Base
   end
 
   def read_cart
-    begin
-      product_ids = Marshal::load(cookies[:order])
-      cart_products = Product.find(product_ids)
-      @cart_order = @current_user.orders.new(:products => cart_products)
-    rescue
-      @cart_order = @current_user.orders.new
+    if @current_user
+      begin
+        product_ids = Marshal::load(cookies[:order])
+        cart_products = Product.find(product_ids)
+        @cart_order = @current_user.orders.new(:products => cart_products)
+      rescue
+        @cart_order = @current_user.orders.new
+      end
     end
   end
 

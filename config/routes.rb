@@ -56,7 +56,7 @@ VenteClub::Application.routes.draw do
   match 'terms_of_use' => 'static#terms_of_use'
   match 'return_and_refund_policy' => 'static#return_and_refund_policy'
 
-  root :to => 'login#log_in'
+  root :to => 'main#index'
 
   # See how all your routes lay out with "rake routes"
 

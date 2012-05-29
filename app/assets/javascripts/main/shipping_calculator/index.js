@@ -9,7 +9,7 @@ $(document).ready(function () {
 
     $("a.input-newmember").live("click", function () {
         var id = $(this).attr("id").split("_")[1];
-        $.post("/shipping_calculator/flat_rate_price/?format=json&id=" + id, $("#data_form").serialize(),
+        $.post("/ajax/flat_rate_price/?format=json&id=" + id, $("#data_form").serialize(),
             function (data) {
                 if (data.value) {
                     $("#e_value").html(data.value);
@@ -31,7 +31,7 @@ $(document).ready(function () {
 });
 
 function update_data() {
-    $.post("/shipping_calculator/flat_rate_products/?format=json", $("#data_form").serialize(),
+    $.post("/ajax/flat_rate_products/?format=json", $("#data_form").serialize(),
         function (data) {
             var html = "";
             $.each(data.product_type.flat_rate_products, function (index, flat_rate_product) {

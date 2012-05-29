@@ -2,21 +2,25 @@ $(document).ready(function () {
 
     $('.to_bag').click(function () {
         if (sizeSelected()) {
-            var id = $(".to_bag").attr("id").split("_")[2];
-            var $img = $(".mainImgWrapper img").first();
-            $img.animate_from_to('.cartTop', {
-                initial_css:{
-                    image:$img.attr("src")
-                },
-                callback:function () {
-                    $.post("/my/shopping_cart_add/", {authenticity_token:$('meta[name=csrf-token]').attr("content"), id:id},
-                        function (data) {
-                            $(".cartWrapper").html(data);
-                        });
-                }
-            });
+            if (logged_in) {
+                var id = $(".to_bag").attr("id").split("_")[2];
+                var $img = $(".mainImgWrapper img").first();
+                $img.animate_from_to('.cartTop', {
+                    initial_css:{
+                        image:$img.attr("src")
+                    },
+                    callback:function () {
+                        $.post("/ajax/shopping_cart_add/", {authenticity_token:$('meta[name=csrf-token]').attr("content"), id:id},
+                            function (data) {
+                                $(".cartWrapper").html(data);
+                            });
+                    }
+                });
+            } else {
+                alert("Please Sign In");
+            }
         } else {
-            alert("Please select Size")
+            alert("Please select Size");
         }
     });
 
@@ -79,7 +83,7 @@ function updateData() {
     var color_id = $('.propertyColor.selected').attr("id").split("_")[2];
     var size_id = $('#product_size').val();
     var last_clicked = $('#last_clicked').val();
-    $.post("/my/update_data/?format=json", {authenticity_token:$('meta[name=csrf-token]').attr("content"), product_id:product_id, color_id:color_id, size_id:size_id, last_clicked:last_clicked},
+    $.post("/ajax/update_data/?format=json", {authenticity_token:$('meta[name=csrf-token]').attr("content"), product_id:product_id, color_id:color_id, size_id:size_id, last_clicked:last_clicked},
         function (data) {
             updateAltWrapper(data);
             updateSizes(data);
@@ -138,7 +142,7 @@ function updateAltWrapper(data) {
 function addZoom(el) {
     el.addimagezoom({
         zoomrange:[5, 10],
-        magnifiersize:[300, 450],
+        magnifiersize:[320, 450],
         magnifierpos:'right',
         cursorshade:true,
         largeimage:el.attr("src").replace("pictures/m", "pictures/l")

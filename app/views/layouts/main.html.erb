@@ -8,14 +8,24 @@
 </head>
 <body>
 <div class="header">
-  <div class="header-link">
-    <p class="welcome-msg">WELCOME <%= @current_user.full_name %>
-      - <%= link_to "SIGN OUT", :controller => :login, :action => :log_out %></p>
-  </div>
-  <%= link_to (image_tag "img/logo.png"), :root %>
-  <div class="cartWrapper">
-    <%= render :partial => "layouts/shopping_cart" %>
-  </div>
+  <% if @current_user %>
+      <div class="header-link">
+        <p class="welcome-msg">
+          WELCOME <%= @current_user.full_name %> - <%= link_to "SIGN OUT", :controller => :login, :action => :log_out %>
+        </p>
+      </div>
+      <%= link_to (image_tag "img/logo.png"), :root %>
+      <div class="cartWrapper">
+        <%= render :partial => "layouts/shopping_cart" %>
+      </div>
+  <% else %>
+      <div class="header-link">
+        <p class="welcome-msg">
+          <%= link_to "SIGN IN", :controller => :login, :action => :log_in %>
+        </p>
+      </div>
+      <%= link_to (image_tag "img/logo.png"), :root %>
+  <% end %>
 </div>
 <div class="nav">
   <div class="upper-nav">
