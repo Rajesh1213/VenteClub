@@ -22,7 +22,12 @@
   <div class="control-group">
     <%= product.label(:color_id, "Color:", :class => "control-label") %>
     <div class="controls">
-      <%= product.select(:color_id, Color.all.collect { |color| [color.name, color.id] }, {}, {:required => true, :class => "input-xlarge"}) %>
+      <%#= product.select(:color_id, Color.all.collect { |color| [color.name, color.id] }, {}, {:required => true, :class => "input-xlarge"}) %>
+      <select required="required" name="product[color_id]" id="product_color_id" class="input-xlarge">
+        <% Color.all.each { |color| %>
+            <option value="<%= color.id %>" style="background-color: <%= color.html_val %>;" <%= 'selected="selected"' if product.object.color_id == color.id %>><%= color.name %></option>
+        <% } %>
+      </select>
     </div>
   </div>
   <div class="control-group">
