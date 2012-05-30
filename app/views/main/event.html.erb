@@ -20,7 +20,9 @@
       <select name="size_filter" id="size_filter">
         <option value="-1">All Sizes</option>
         <% @event.sizes.each { |size| %>
-            <option value="<%= size.id %>"><%= size.name %></option>
+            <% if size.name != "-no size-" %>
+                <option value="<%= size.id %>"><%= size.name %></option>
+            <% end %>
         <% } %>
       </select>
     </div>
@@ -47,8 +49,10 @@
         <div class="slideWrapper">
           <div class="productInfo">
             <%= product.name %>
-            <br/>
-            <%= product.color.name %>
+            <% if product.has_color? %>
+                <br/>
+                <%= product.color.name %>
+            <% end %>
           </div>
         </div>
       </div>

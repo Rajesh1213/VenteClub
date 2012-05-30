@@ -33,10 +33,14 @@
               </td>
               <td style="width: 350px;">
                 <%= link_to product.name, {:controller => :main, :action => :product, :id => product} %>
-                <br/>
-                Color: <%= product.color.name %>
-                <br/>
-                Size: <%= product.size.name %>
+                <% if product.has_color? %>
+                    <br/>
+                    Color: <%= product.color.name %>
+                <% end %>
+                <% if product.has_size? %>
+                    <br/>
+                    Size: <%= product.size.name %>
+                <% end %>
               </td>
               <td>
                 4 business days

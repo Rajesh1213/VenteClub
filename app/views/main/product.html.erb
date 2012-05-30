@@ -42,33 +42,43 @@
       <% } %>
     </div>
 
-    <div class="propertiesWrapper">
-      <span class="propertyName" style="margin-left: 12px;">Size: </span>
-      <select id="product_size">
-        <option value="-1">All sizes</option>
-        <% @product.sizes.each { |size| %>
-            <option value="<%= size.id %>"<%= ' disabled="disabled"' unless @product.available_sizes.include?(size) %>><%= size.name %></option>
-        <% } %>
-      </select>
-    </div>
+    <% if @product.has_size? %>
+        <div class="propertiesWrapper">
+          <span class="propertyName" style="margin-left: 12px;">Size: </span>
+          <select id="product_size">
+            <option value="-1">All sizes</option>
+            <% @product.sizes.each { |size| %>
+                <option value="<%= size.id %>"<%= ' disabled="disabled"' unless @product.available_sizes.include?(size) %>><%= size.name %></option>
+            <% } %>
+          </select>
+        </div>
+    <% else %>
+        <%= hidden_field_tag("product_size", Size.find_by_name("-no size-").id) %>
+    <% end %>
 
-    <div class="propertiesWrapper">
-      <span class="propertyName" style="margin-left: 4px;">Color: </span>
-      <span class="propertyName" style="color: #000000; text-transform: capitalize;" id="color_name"><%= @product.color.name %></span>
+    <% if @product.has_color? %>
+        <div class="propertiesWrapper">
+          <span class="propertyName" style="margin-left: 4px;">Color: </span>
+          <span class="propertyName" style="color: #000000; text-transform: capitalize;" id="color_name"><%= @product.color.name %></span>
 
-      <div>
-        <% @product.colors.each { |color| %>
-            <div style="background-color:<%= color.html_val %>;color:<%= color.html_val %>;" class="propertyColor<%= " selected" if @product.color == color %>" id="product_color_<%= color.id %>" colorName="<%= color.name %>">__</div>
-        <% } %>
-      </div>
-    </div>
+          <div>
+            <% @product.colors.each { |color| %>
+                <div style="background-color:<%= color.html_val %>;color:<%= color.html_val %>;" class="propertyColor<%= " selected" if @product.color == color %>" id="product_color_<%= color.id %>" colorName="<%= color.name %>">__</div>
+            <% } %>
+          </div>
+        </div>
+    <% else
+         color = Color.find_by_name("-no color-")
+    %>
+        <div style="display: none;" class="propertyColor selected" id="product_color_<%= color.id %>" colorName="<%= color.name %>"></div>
+    <% end %>
 
     <div class="propertiesWrapper">
       <%= hidden_field_tag "last_clicked" %>
       <span class="oldPrice"><%= number_to_currency @product.old_price %></span>
       <span class="price"><%= number_to_currency @product.price %></span>
-      <%= link_to "ADD TO BAG", "#1", :class => "input-member to_bag", :style => "margin-top: -4px; display: none;", :id => "to_bag_" + @product.id.to_s %>
-      <%= link_to "PREORDER", "#1", :class => "input-member to_preorder", :style => "margin-top: -4px; display: none;", :id => "to_preorder_" + @product.id.to_s %>
+      <%= link_to "ADD TO BAG", "#1", :class => "input-member to_bag", :style => "margin-top: -4px;" + ("display: none;" if @product.has_size? && @product.has_color? || @product.sold_out?).to_s, :id => "to_bag_" + @product.id.to_s %>
+      <%= link_to "PREORDER", "#1", :class => "input-member to_preorder", :style => "margin-top: -4px;" + ("display: none;" if @product.has_size? && @product.has_color? || !@product.sold_out?).to_s, :id => "to_preorder_" + @product.id.to_s %>
     </div>
 
   </div>

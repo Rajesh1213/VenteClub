@@ -94,9 +94,7 @@ class LoginController < ApplicationController
       redirect_to :controller => :admin, :action => :dashboard
     else
       original_uri = session[:original_uri]
-      p original_uri
       session.delete("original_uri")
-      p original_uri
       redirect_to(original_uri || {:controller => :main, :action => :index})
     end
   end

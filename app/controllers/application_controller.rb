@@ -11,7 +11,10 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user = User.find(session[:user_id]) if session[:user_id]
+    if session[:user_id]
+      @current_user = User.find(session[:user_id])
+      @current_user = nil if @current_user.role == "admin"
+    end
   end
 
   def authorize_user
@@ -23,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_admin
-    current_user
+    @current_user = User.find(session[:user_id]) if session[:user_id]
     if @current_user.nil? || @current_user.role != "admin"
       redirect_to :controller => :login, :action => :unauthorized
     end

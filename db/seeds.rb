@@ -16,9 +16,11 @@ TopCategory.create(:name => "TEENS", :sorting => 3)
 TopCategory.create(:name => "HOME", :sorting => 2)
 TopCategory.create(:name => "GADGETS", :sorting => 1)
 
+Color.create(:name => "-no color-", :html_val => "#fffffe")
 Color.create(:name => "White", :html_val => "#ffffff")
 Color.create(:name => "Black", :html_val => "#000000")
 
+Size.create(:name => "-no size-")
 Size.create(:name => "1")
 Size.create(:name => "2")
 Size.create(:name => "3")

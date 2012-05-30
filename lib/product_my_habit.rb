@@ -8,7 +8,7 @@ class ProductMyHabit
     @browser = Watir::Browser.new :firefox
   end
 
-  def product_from_url(url)
+  def products_from_url(url, event_id)
     js_url = initial_js_url(url)
     #js_product_url = js_product_url(js, url)
     #if js_product_url
@@ -18,15 +18,28 @@ class ProductMyHabit
     #  js_product_url = js_product_url(js, url)
     #end
     product_hash = product_hash_from_url(js_url)
-    params = params_from_hash(product_hash, product_cAsin(url))
-    Product.new(params)
+    sizes = process_sizes(product_hash)
+    params = params_from_hash(product_hash, product_cAsin(url), event_id)
+    product = Product.new(params)
+    i = 0
+    sizes.each { |size|
+      if i == 0
+        product.size = size
+        product.save
+      else
+        new_product = product.duplicate
+        new_product.size = size
+        new_product.save
+      end
+      i+= 1
+    }
+    product
   end
 
   private
 
-  def params_from_hash(product_hash, cAsin)
+  def params_from_hash(product_hash, cAsin, event_id)
     result = Hash.new
-    process_sizes(product_hash)
     result["name"] = product_hash["detailJSON"]["short_title"]
     result["description"] = product_hash["productDescription"]["shortProdDesc"]
     result["price"] = product_hash["detailJSON"]["ourPrice"]["amount"]
@@ -34,6 +47,7 @@ class ProductMyHabit
     result["properties"] = process_properties(product_hash)
     result["images"] = process_images(product_hash, cAsin)
     result["color_id"] = process_color(product_hash, cAsin)
+    result["event_id"] = event_id
     result
   end
 
@@ -46,7 +60,7 @@ class ProductMyHabit
       mh_property.gsub!("&#39;", "'")
       splitted = mh_property.split(": ")
       property_name = splitted[0]
-      property_value = splitted[1..splitted.size-1]
+      property_value = splitted[1..splitted.size-1].join(": ")
       result << Property.new(:name => property_name, :value => property_value)
     }
     result
@@ -55,16 +69,20 @@ class ProductMyHabit
   def process_images(product_hash, cAsin)
     images = []
     required_asin = {}
-    product_hash["detailJSON"]["asins"].each { |asin|
-      required_asin = asin if asin["asin"] == cAsin
-    }
+    if product_hash["detailJSON"]["asins"].size > 0
+      product_hash["detailJSON"]["asins"].each { |asin|
+        required_asin = asin if asin["asin"] == cAsin
+      }
+    else
+      required_asin = product_hash["detailJSON"]["main"]
+    end
     images_arr = required_asin["altviews"]
     images_arr.each { |img_hash|
       img = get_file(img_hash["zoomImage"])
       filename = ProcessImage.new.do_it(img, "product") + ".jpg"
       images << Image.new(:file_name => filename)
     }
-    images
+    images.reverse!
   end
 
   def process_color(product_hash, cAsin)
@@ -72,18 +90,20 @@ class ProductMyHabit
     product_hash["detailJSON"]["asins"].each { |asin|
       required_asin = asin if asin["asin"] == cAsin
     }
-    color_id = 1
-    html_val = html_color(product_hash, required_asin)
-    color = Color.find_by_html_val(html_val)
-    if color
-      color_id = color.id
-    else
-      color_name = "unknown"
-      product_hash["detailJSON"]["variationMatrix"]["dimensionMatrix"][0]["values"].each { |color_data|
-        color_name = color_data["displayText"] if color_data["imageURL"] == required_asin["swatchImage"]
-      }
-      new_color = Color.create(:name => color_name, :html_val => html_val)
-      color_id = new_color.id
+    color_id = Color.find_by_name("-no color-").id
+    if required_asin != {}
+      html_val = html_color(product_hash, required_asin)
+      color = Color.find_by_html_val(html_val)
+      if color
+        color_id = color.id
+      else
+        color_name = "unknown"
+        product_hash["detailJSON"]["variationMatrix"]["dimensionMatrix"][0]["values"].each { |color_data|
+          color_name = color_data["displayText"] if color_data["imageURL"] == required_asin["swatchImage"]
+        }
+        new_color = Color.create(:name => color_name, :html_val => html_val)
+        color_id = new_color.id
+      end
     end
     color_id
   end
@@ -96,10 +116,18 @@ class ProductMyHabit
   end
 
   def process_sizes(product_hash)
-    product_hash["detailJSON"]["variationMatrix"]["dimensionMatrix"][1]["values"].each { |size_data|
-      size_name = size_data["displayText"]
-      Size.create(:name => size_name) unless Size.find_by_name(size_name)
-    }
+    sizes = []
+    if product_hash["detailJSON"]["variationMatrix"]["dimensionMatrix"].size > 0
+      product_hash["detailJSON"]["variationMatrix"]["dimensionMatrix"][1]["values"].each { |size_data|
+        size_name = size_data["displayText"]
+        size = Size.find_by_name(size_name)
+        unless size
+          size = Size.create(:name => size_name)
+        end
+        sizes << size
+      }
+    end
+    sizes
   end
 
   def product_hash_from_url(url)

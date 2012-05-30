@@ -48,6 +48,14 @@ class Product < ActiveRecord::Base
     self.amount <= 0
   end
 
+  def has_size?
+    !(self.sizes.size == 1 && self.sizes[0].name == "-no size-")
+  end
+
+  def has_color?
+    !(self.colors.size == 1 && self.colors[0].name == "-no color-")
+  end
+
   def as_json(options = {})
     {
         :id => self.id,
@@ -63,11 +71,32 @@ class Product < ActiveRecord::Base
     }
   end
 
+  def duplicate
+    properties = []
+    self.properties.each { |property|
+      properties << Property.new(:name => property.name, :value => property.value)
+    }
+    images = []
+    self.images.each { |image|
+      new_filename = generate_file_name
+      image.product_sizes.each { |size|
+        if File.exist?("#{Rails.root}/public/pictures/#{size + "/" + image.file_name}")
+          File.copy("#{Rails.root}/public/pictures/#{size + "/" + image.file_name}", "#{Rails.root}/public/tmp/#{size + "/" + new_filename}")
+        end
+      }
+      images << Image.new(:file_name => new_filename)
+    }
+    Product.new(
+        :event => self.event, :color => self.color, :size => self.size, :name => self.name, :description => self.description,
+        :price => self.price, :old_price => self.old_price, :properties => properties, :images => images
+    )
+  end
+
   private
 
   def set_init
-    self.size_id = Size.first.id unless self.size_id
-    self.color_id = Color.first.id unless self.color_id
+    self.size_id = Size.find_by_name("-no size-") unless self.size_id
+    self.color_id = Color.find_by_name("-no color-") unless self.color_id
   end
 
   private
@@ -79,6 +108,11 @@ class Product < ActiveRecord::Base
   class Helper
     include Singleton
     include ActionView::Helpers::NumberHelper
+  end
+
+  def generate_file_name(size = 20)
+    charset = %w{0 1 2 3 4 5 6 7 8 9 A B C D E F G H i J K L M N P S Q R T V W X Y Z q w e r t y u i o p a s d f g h j k l z x c v b n m}
+    (0...size).map { charset.to_a[rand(charset.size)] }.join + ".jpg"
   end
 
 end
