@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
 
     if request.post?
       @event = Event.find(params[:event_id])
-      #@product = Product.new
+      product = Product.new
       Headless.ly do
         begin
           product = ProductMyHabit.new().products_from_url(params[:url], @event.id)
@@ -52,8 +52,6 @@ class ProductsController < ApplicationController
         end
       end
       unless flash[:error]
-        #@product.event_id = @event.id
-        #session[:product] = @product
         redirect_to :action => :edit, :id => product
       end
     end
