@@ -77,6 +77,8 @@
       <%= hidden_field_tag "last_clicked" %>
       <span class="oldPrice"><%= number_to_currency @product.old_price %></span>
       <span class="price"><%= number_to_currency @product.price %></span>
+    </div>
+    <div class="propertiesWrapper">
       <%= link_to "ADD TO BAG", "#1", :class => "input-member to_bag", :style => "margin-top: -4px;" + ("display: none;" if @product.has_size? && @product.has_color? || @product.sold_out?).to_s, :id => "to_bag_" + @product.id.to_s %>
       <%= link_to "PREORDER", "#1", :class => "input-member to_preorder", :style => "margin-top: -4px;" + ("display: none;" if @product.has_size? && @product.has_color? || !@product.sold_out?).to_s, :id => "to_preorder_" + @product.id.to_s %>
     </div>

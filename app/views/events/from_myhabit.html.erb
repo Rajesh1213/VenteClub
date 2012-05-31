@@ -3,9 +3,9 @@
 <%= form_tag({}, :class => "form-horizontal", :id => "fmh") do %>
     <legend></legend>
     <div class="control-group">
-      <%= label_tag(:event_id, "Event:", :class => "control-label") %>
+      <%= label_tag(:top_category_id, "Top category:", :class => "control-label") %>
       <div class="controls">
-        <%= select_tag(:event_id, options_for_select(@event.top_category.events.collect { |event| [event.name, event.id] }, @event.id), {:required => true, :class => "input-xlarge"}) %>
+        <%= select_tag(:top_category_id, options_for_select(@top_categories.collect { |top_category| [top_category.name, top_category.id] }, @top_category.id), {:required => true, :class => "input-xlarge"}) %>
       </div>
     </div>
     <div class="control-group">

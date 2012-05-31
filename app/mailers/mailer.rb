@@ -20,4 +20,16 @@ class Mailer < ActionMailer::Base
     mail(:to => user.mail, :subject => "VenteClub - New Password")
   end
 
+  def event_ready(user, event)
+    @event = event
+    if @event
+      @event_result = "success"
+      mail(:to => user.mail, :subject => "Event #{event.name} ready")
+    else
+      @event = Event.new
+      @event_result = "fail"
+      mail(:to => user.mail, :subject => "Unsuccessful Event processing")
+    end
+  end
+
 end

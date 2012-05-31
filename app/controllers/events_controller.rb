@@ -25,6 +25,17 @@ class EventsController < ApplicationController
     end
   end
 
+  def from_myhabit
+    @page_title = "New event from MyHabit URL"
+    @top_category = TopCategory.find(params[:id])
+    @top_categories = TopCategory.all
+    if request.post?
+      call_rake :process_event, :url => params[:url], :top_category_id => params[:top_category_id].to_i, :user_id => @current_user.id
+      flash[:warning] = "Event processing started in background. You will be noticed via email when done or if error happens. Please DO NOT use auto products/events processing till that time."
+      redirect_to :action => :list, :state => "current"
+    end
+  end
+
   def edit
     @page_title = "Edit event"
     @javascript = true
@@ -39,9 +50,10 @@ class EventsController < ApplicationController
   def delete
     event = Event.find(params[:id])
     ec = event.clone
+    state = event.state
     if request.post? && event.destroy
       flash[:warning] = "Event: #{ec.name} deleted"
-      redirect_to :action => :list, :state => ec.state
+      redirect_to :action => :list, :state => state
     end
   end
 

@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  require "product_my_habit"
+  #require "my_habit"
 
   before_filter :authorize_admin
 
@@ -38,15 +38,14 @@ class ProductsController < ApplicationController
 
   def from_myhabit
     @javascript = true
-    @page_title = "New product from MyHabit link"
+    @page_title = "New product from MyHabit URL"
     @event = Event.find(params[:id])
-
     if request.post?
       @event = Event.find(params[:event_id])
       product = Product.new
       Headless.ly do
         begin
-          product = ProductMyHabit.new().products_from_url(params[:url], @event.id)
+          product = MyHabit.new().product_from_url(params[:url], @event)
         rescue
           flash.now[:error] = "Incorrect URL"
         end
