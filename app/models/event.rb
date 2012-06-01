@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
   has_many :sizes, :through => :products, :uniq => true
   has_many :colors, :through => :products, :uniq => true
 
-  default_scope :order => "end_at ASC"
+  default_scope :order => "id DESC"
 
   scope :upcoming, where("start_at > ?", DateTime.now)
   scope :current, where("start_at <= ? AND end_at >= ?", DateTime.now, DateTime.now)
