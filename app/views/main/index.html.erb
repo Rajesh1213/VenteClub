@@ -1,5 +1,5 @@
 <div class="eventBig">
-  <%= link_to (image_tag "/pictures/e_b/" + @latest_event.big_image.file_name, :class => "eventBigImg"), {:controller => :main, :action => :event, :id => @latest_event} %>
+  <%= link_to (image_tag "/pictures/e_b/" + @latest_event.big_image.file_name, :class => "eventBigImg", :alt => @latest_event.name), {:controller => :main, :action => :event, :id => @latest_event} %>
   <% products_for_page = @latest_event.products_for_page %>
   <div class="slideWrapper">
     <div class="rotatorWrapper">
@@ -8,7 +8,7 @@
       <div class="eventProducts">
         <ul>
           <% products_for_page.each { |product| %>
-              <li><%= link_to(image_tag("/pictures/s/" + product.images.first.file_name), {:controller => :main, :action => :product, :id => product}) %></li>
+              <li><%= link_to(image_tag("/pictures/s/" + product.images.first.file_name, :alt => product.name), {:controller => :main, :action => :product, :id => product}) %></li>
           <% } %>
         </ul>
       </div>
@@ -31,7 +31,7 @@
       <div class="eventPlaceholder">
         <div class="eventImageWrapper">
           <%= link_to({:controller => :main, :action => :event, :id => event}, :class => "eventImage") do %>
-              <%= image_tag "/pictures/e/" + event.small_image.file_name %>
+              <%= image_tag "/pictures/e/" + event.small_image.file_name, :alt => event.name %>
           <% end %>
         </div>
         <div class="slideWrapper">

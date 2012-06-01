@@ -39,13 +39,13 @@
   <div class="control-group">
     <%= product.label(:price, "Price:", :class => "control-label") %>
     <div class="controls">
-      <%= product.text_field(:price, :required => true, :class => "input-xlarge", :value => number_to_currency(@product.price, :unit => "")) %>
+      <%= product.text_field(:price, :required => true, :class => "input-xlarge") %>
     </div>
   </div>
   <div class="control-group">
     <%= product.label(:old_price, "Old Price:", :class => "control-label") %>
     <div class="controls">
-      <%= product.text_field(:old_price, :required => true, :class => "input-xlarge", :value => number_to_currency(@product.old_price, :unit => "")) %>
+      <%= product.text_field(:old_price, :required => true, :class => "input-xlarge") %>
     </div>
   </div>
   <div class="control-group">

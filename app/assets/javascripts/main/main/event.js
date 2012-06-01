@@ -5,10 +5,13 @@ $(document).ready(function () {
     $(".productPlaceholder").hover(
         function () {
             $(this).find(".productInfo").slideDown("fast");
+            changeImage($(this).find("img"));
         },
         function () {
-            $(".productInfo").slideUp("fast");
-
+            $(this).find(".productInfo").slideUp("fast");
+            var img = $(this).find("img");
+            img.stopTime();
+            img.attr("src", "/pictures/sm/" + img.attr("views").split("|")[0]);
         }
     );
 
@@ -32,6 +35,24 @@ $(document).ready(function () {
     });
 
 });
+
+function changeImage(img) {
+    var views = img.attr("views").split("|");
+    var path = "/pictures/sm/";
+    var correct = 0;
+    if (views.length > 1) {
+        $('<img src="' + path + views[1] + '"/>');
+    }
+    img.everyTime(1000, function (i) {
+        if (i == views.length + correct) {
+            correct += views.length;
+        }
+        img.attr("src", path + views[i - correct]);
+        if (i + 1 < views.length) {
+            $('<img src="' + path + views[i + 1 - correct] + '"/>');
+        }
+    });
+}
 
 function markSoldOut() {
     var size_id = $('#size_filter').val();

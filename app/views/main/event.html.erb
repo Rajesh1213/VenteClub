@@ -2,7 +2,7 @@
 
   <div class="eventTop">
     <div class="eventImgWrapper">
-      <%= image_tag "/pictures/e/" + @event.small_image.file_name %>
+      <%= image_tag "/pictures/e/" + @event.small_image.file_name, :alt => @event.name %>
     </div>
     <h1><%= @event.name %></h1>
 
@@ -36,7 +36,7 @@
       <div class="productPlaceholder" id="product_<%= product.id %>" available_sizes="<%= product.available_sizes.collect { |size| size.id }.join("_") %>" sold_out="<%= "true" if @event.product_sold_out?(product) %>">
         <div class="productImageWrapper">
           <%= link_to({:controller => :main, :action => :product, :id => product}, :class => "productImage") do %>
-              <%= image_tag "/pictures/sm/" + product.images.first.file_name %>
+              <%= image_tag "/pictures/sm/" + product.images.first.file_name, :alt => product.name, :views => product.images.collect { |image| image.file_name }.join("|") %>
           <% end %>
           <div class="productPrice">
             <span class="ourPrice"><%= number_to_currency product.price %></span><br/>

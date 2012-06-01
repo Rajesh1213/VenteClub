@@ -18,11 +18,13 @@ class Product < ActiveRecord::Base
   validates :amount, :numericality => true
   validates :price, :numericality => true
   validates :old_price, :numericality => true
+  validate :check_images, :if => "self.images.size == 0"
 
   accepts_nested_attributes_for :images, :allow_destroy => true
   accepts_nested_attributes_for :properties, :allow_destroy => true
 
   after_initialize :set_init
+
 
   def event_similar_products
     Product.includes(:color, :size).where(:event_id => self.event_id).find_all_by_name(self.name)
@@ -99,7 +101,9 @@ class Product < ActiveRecord::Base
     self.color_id = Color.find_by_name("-no color-") unless self.color_id
   end
 
-  private
+  def check_images
+    self.errors.add(:images, "product need to have atleast one image")
+  end
 
   def number_to_currency(number)
     Helper.instance.number_to_currency(number, :unit => "")
