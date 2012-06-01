@@ -7,12 +7,12 @@ class MainController < ApplicationController
   def index
     @javascript = true
     unless params[:id]
-      @latest_event = Event.first
-      @events = @latest_event.top_category.events.all
+      @latest_event = Event.current.first
     else
-      @latest_event = TopCategory.find(params[:id]).events.first || Event.first
-      @events = @latest_event.top_category.events.all
+      @latest_event = TopCategory.find(params[:id]).events.current.first || Event.first
     end
+    @events = @latest_event.top_category.events.current.all
+    @upcoming_events = @latest_event.top_category.events.upcoming.all
   end
 
   def product
@@ -31,7 +31,7 @@ class MainController < ApplicationController
     if params[:id]
       @event = Event.find(params[:id])
     else
-      @event = Event.last
+      @event = Event.current.first
     end
   end
 

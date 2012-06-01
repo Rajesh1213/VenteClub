@@ -43,7 +43,7 @@ function changeImage(img) {
     if (views.length > 1) {
         $('<img src="' + path + views[1] + '"/>');
     }
-    img.everyTime(1000, function (i) {
+    img.everyTime(1200, function (i) {
         if (i == views.length + correct) {
             correct += views.length;
         }

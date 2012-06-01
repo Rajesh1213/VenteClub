@@ -126,6 +126,11 @@ a {
     padding: 14px;
 }
 
+.main-wrapper h1.eventStatus {
+    font-weight: normal;
+    margin-left: 10px;
+}
+
 .eventBig {
     text-align: center;
     line-height: 0px;
