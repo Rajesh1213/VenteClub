@@ -911,15 +911,14 @@ a.input-member, a.input-newmember {
 }
 
 .mainImgWrapper {
-    background-image: url("../img/spinningred.gif");
-    background-position: center center;
-    background-repeat: no-repeat;
+    background-color: #ffffff;
     float: left;
     margin: 0px 20px 0px 16px;
     min-height: 250px;
     text-align: center;
     vertical-align: middle;
     width: 468px;
+    border: none;
 }
 
 .mainImgWrapper img {

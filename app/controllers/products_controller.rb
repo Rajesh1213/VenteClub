@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
 
   def list
     @page_title = "Products list"
+    @javascript = true
     @top_categories = TopCategory.all
   end
 
@@ -67,20 +68,21 @@ class ProductsController < ApplicationController
     end
   end
 
-  def copy
-    @page_title = "New product"
-    product = Product.find(params[:id])
-    @product = product.clone
-    @event = @product.event
-    render :action => :new
-  end
-
   def delete
     product = Product.find(params[:id])
     pc = product.clone
     if request.post? && product.destroy
       flash[:warning] = "Product: #{pc.name} was deleted"
       redirect_to :action => :list, :state => pc.event.state
+    end
+  end
+
+  def del_selected_products
+    if request.post? && params[:products]
+      Product.find(params[:products]).each { |product| product.destroy }
+      render :text => "ok"
+    else
+      render :text => "No products selected"
     end
   end
 

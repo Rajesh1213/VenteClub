@@ -1,65 +1,81 @@
 <h2><%= @page_title %></h2>
 
-<table class="table table-condensed">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Color</th>
-    <th>Size</th>
-    <th>Amount</th>
-    <th>Price</th>
-  </tr>
-  </thead>
-  <tbody>
+<div id="whole_table" class="accordion">
   <% @top_categories.each { |top_category| %>
-      <tr>
-        <th colspan="6" style="background-color: #D9EDF7; text-align: center;"><%= top_category.name %></th>
-      </tr>
-      <% top_category.events.send(params[:state].to_s).each { |event| %>
-          <tr style="background-color: #F5F5F5;">
-            <th><%= event.name %></th>
-            <th colspan="4"></th>
-            <th style="font-weight: normal;">
-              <div class="btn-group pull-right">
-                <%= link_to({:controller => :products, :action => :new, :id => event}, :class => "btn btn-success") do %>
-                    <i class="icon-plus-sign icon-white"></i> New Product
-                <% end %>
-                <a href="#1" data-toggle="dropdown" class="btn btn-success dropdown-toggle"><span class="caret"></span></a>
-                <ul class="dropdown-menu pull-right">
-                  <li>
-                    <%= link_to "From MyHabit", :controller => :products, :action => :from_myhabit, :id => event %>
-                  </li>
-                </ul>
-              </div>
-            </th>
-          </tr>
-          <% event.products.each { |product| %>
-              <tr>
-                <td>
-                  <%= link_to product.name, :controller => :products, :action => :edit, :id => product %>
-                </td>
-                <td>
-                  <%= link_to :controller => :colors, :action => :edit, :id => product.color do %>
-                      <span class="badge" style="background-color: <%= product.color.html_val %>;"></span>
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to product.size.name, :controller => :sizes, :action => :edit, :id => product.size %>
-                </td>
-                <td>
-                  <%= product.amount %>
-                </td>
-                <td>
-                  <%= number_to_currency product.price %>
-                </td>
-                <td>
-                  <%#= link_to ({:controller => :products, :action => :copy, :id => product}, :class => "btn btn-info", :style => "float: right;") do %>
-                  <!--<i class="icon-tags icon-white"></i> Copy-->
-                  <%# end %>
-                </td>
-              </tr>
-          <% } %>
-      <% } %>
+      <div class="accordion-group">
+        <div class="accordion-heading" style="background-color: #D9EDF7;">
+          <a href="#top_cat_<%= top_category.id %>" data-parent="#whole_table" data-toggle="collapse" class="accordion-toggle">
+            <%= top_category.name %>
+          </a>
+        </div>
+        <div class="accordion-body collapse" id="top_cat_<%= top_category.id %>">
+          <div class="accordion-inner" id="top_cat_inner_<%= top_category.id %>">
+            <% top_category.events.send(params[:state].to_s).each { |event| %>
+                <div class="accordion-group">
+                  <div class="accordion-heading" style="background-color: #F5F5F5;">
+                    <a href="#event_cat_<%= event.id %>" data-parent="#top_cat_inner_<%= top_category.id %>" data-toggle="collapse" class="accordion-toggle">
+                      <%= event.name %>
+                    </a>
+
+                    <div class="btn-group pull-right" style="margin-top: -31px;margin-right: 3px;">
+                      <%= link_to({:controller => :products, :action => :new, :id => event}, :class => "btn btn-success") do %>
+                          <i class="icon-plus-sign icon-white"></i> New Product
+                      <% end %>
+                      <a href="#1" data-toggle="dropdown" class="btn btn-success dropdown-toggle"><span class="caret"></span></a>
+                      <ul class="dropdown-menu pull-right">
+                        <li>
+                          <%= link_to "From MyHabit", :controller => :products, :action => :from_myhabit, :id => event %>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="cleaner"></div>
+                  </div>
+                  <div class="accordion-body collapse" id="event_cat_<%= event.id %>">
+                    <div class="accordion-inner" id="event_inner_<%= event.id %>">
+                      <table class="table table-condensed">
+                        <thead>
+                        <tr>
+                          <th><%= check_box_tag("invert_selection_" + event.id.to_s, "", false, {:title => "Invert selection", :class => "invertSelection"}) %></th>
+                          <th><%= link_to("Delete selected products", "#1", {:class => "btn btn-danger btn-mini deleteSelected", :id => "delete_selected_" + event.id.to_s, :style => "font-weight: normal;"}) %></th>
+                          <th>Color</th>
+                          <th>Size</th>
+                          <th>Amount</th>
+                          <th>Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% event.products.each { |product| %>
+                            <tr id="product_row_<%= product.id %>">
+                              <td>
+                                <%= check_box_tag("product_" + product.id.to_s) %>
+                              </td>
+                              <td>
+                                <%= link_to product.name, :controller => :products, :action => :edit, :id => product %>
+                              </td>
+                              <td>
+                                <%= link_to :controller => :colors, :action => :edit, :id => product.color do %>
+                                    <span class="badge" style="background-color: <%= product.color.html_val %>;"></span>
+                                <% end %>
+                              </td>
+                              <td>
+                                <%= link_to product.size.name, :controller => :sizes, :action => :edit, :id => product.size %>
+                              </td>
+                              <td>
+                                <%= product.amount %>
+                              </td>
+                              <td>
+                                <%= number_to_currency product.price %>
+                              </td>
+                            </tr>
+                        <% } %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
   <% } %>
-  </tbody>
-</table>
+</div>

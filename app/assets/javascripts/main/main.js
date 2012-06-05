@@ -18,3 +18,4 @@
 //= require main/featuredimagezoomer
 //= require main/shopping_cart
 //= require main/jquery-timers
+//= require admin/bootstrap
