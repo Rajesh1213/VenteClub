@@ -4,6 +4,8 @@ class MainController < ApplicationController
   before_filter :read_cart
   before_filter :menu_data
 
+  caches_action :index, :event, :layout => false
+
   def index
     @javascript = true
     unless params[:id]
@@ -16,6 +18,7 @@ class MainController < ApplicationController
   end
 
   def product
+    expire_action :action => :event, :id => 29
     @javascript = true
     if params[:id]
       @product = Product.find(params[:id])
@@ -28,11 +31,6 @@ class MainController < ApplicationController
 
   def event
     @javascript = true
-    if params[:id]
-      @event = Event.find(params[:id])
-    else
-      @event = Event.current.first
-    end
   end
 
 end

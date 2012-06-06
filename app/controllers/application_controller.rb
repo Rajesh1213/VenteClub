@@ -8,6 +8,14 @@ class ApplicationController < ActionController::Base
 
   def menu_data
     @top_categories = TopCategory.all
+    if request[:action] == "event"
+      if params[:id]
+        @event = Event.find(params[:id])
+      else
+        @event = Event.current.first
+      end
+      @javascript = true
+    end
   end
 
   def current_user
