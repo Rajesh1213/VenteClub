@@ -4,6 +4,8 @@ class Size < ActiveRecord::Base
 
   default_scope :order => "name ASC"
 
+  after_update :update_products
+
   validates :name, :presence => true, :uniqueness => true
 
   def as_json(options = {})
@@ -11,6 +13,12 @@ class Size < ActiveRecord::Base
         :id => self.id,
         :name => self.name
     }
+  end
+
+  private
+
+  def update_products
+    self.products.each { |product| product.touch }
   end
 
 end

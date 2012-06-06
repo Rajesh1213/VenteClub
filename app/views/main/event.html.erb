@@ -1,62 +1,64 @@
-<div class="contentFull">
+<%= cache @event do %>
+    <div class="contentFull">
 
-  <div class="eventTop">
-    <div class="eventImgWrapper">
-      <%= image_tag "/pictures/e/" + @event.small_image.file_name, :alt => @event.name %>
-    </div>
-    <h1><%= @event.name %></h1>
-
-    <p>
-      <%= @event.description %>
-    </p>
-
-    <div class="endDate">
-      <b>Event Ends </b><%= event_date(@event.end_at) %>
-      <br/>
-      <%= link_to @event.original_url, @event.original_url, :target => '_blank' unless @event.original_url.blank? %>
-    </div>
-    <div class="sizeFilter">
-      Select your size:
-      <select name="size_filter" id="size_filter">
-        <option value="-1">All Sizes</option>
-        <% @event.sizes.each { |size| %>
-            <% if size.name != "-no size-" %>
-                <option value="<%= size.id %>"><%= size.name %></option>
-            <% end %>
-        <% } %>
-      </select>
-    </div>
-    <div class="cleaner"></div>
-  </div>
-</div>
-
-<div class="productsWrapper">
-  <% @event.products_for_page.each { |product| %>
-
-      <div class="productPlaceholder" id="product_<%= product.id %>" available_sizes="<%= product.available_sizes.collect { |size| size.id }.join("_") %>" sold_out="<%= "true" if @event.product_sold_out?(product) %>">
-        <div class="productImageWrapper">
-          <%= link_to({:controller => :main, :action => :product, :id => product}, :class => "productImage") do %>
-              <%= image_tag "/pictures/sm/" + product.images.first.file_name, :alt => product.name, :views => product.images.collect { |image| image.file_name }.join("|") %>
-          <% end %>
-          <div class="productPrice">
-            <span class="ourPrice"><%= number_to_currency product.price %></span><br/>
-            <span class="oldPrice"><%= number_to_currency product.old_price %></span>
-          </div>
-          <div class="soldOut" id="sold_out_<%= product.id %>">
-            SOLD OUT
-          </div>
+      <div class="eventTop">
+        <div class="eventImgWrapper">
+          <%= image_tag "/pictures/e/" + @event.small_image.file_name, :alt => @event.name %>
         </div>
-        <div class="slideWrapper">
-          <div class="productInfo">
-            <%= product.name %>
-            <% if product.has_color? %>
-                <br/>
-                <%= product.color.name %>
-            <% end %>
-          </div>
+        <h1><%= @event.name %></h1>
+
+        <p>
+          <%= @event.description %>
+        </p>
+
+        <div class="endDate">
+          <b>Event Ends </b><%= event_date(@event.end_at) %>
+          <br/>
+          <%= link_to @event.original_url, @event.original_url, :target => '_blank' unless @event.original_url.blank? %>
         </div>
+        <div class="sizeFilter">
+          Select your size:
+          <select name="size_filter" id="size_filter">
+            <option value="-1">All Sizes</option>
+            <% @event.sizes.each { |size| %>
+                <% if size.name != "-no size-" %>
+                    <option value="<%= size.id %>"><%= size.name %></option>
+                <% end %>
+            <% } %>
+          </select>
+        </div>
+        <div class="cleaner"></div>
       </div>
+    </div>
 
-  <% } %>
-  <div class="cleaner"></div>
-</div>
+    <div class="productsWrapper">
+      <% @event.products_for_page.each { |product| %>
+
+          <div class="productPlaceholder" id="product_<%= product.id %>" available_sizes="<%= product.available_sizes.collect { |size| size.id }.join("_") %>" sold_out="<%= "true" if @event.product_sold_out?(product) %>">
+            <div class="productImageWrapper">
+              <%= link_to({:controller => :main, :action => :product, :id => product}, :class => "productImage") do %>
+                  <%= image_tag "/pictures/sm/" + product.images.first.file_name, :alt => product.name, :views => product.images.collect { |image| image.file_name }.join("|") %>
+              <% end %>
+              <div class="productPrice">
+                <span class="ourPrice"><%= number_to_currency product.price %></span><br/>
+                <span class="oldPrice"><%= number_to_currency product.old_price %></span>
+              </div>
+              <div class="soldOut" id="sold_out_<%= product.id %>">
+                SOLD OUT
+              </div>
+            </div>
+            <div class="slideWrapper">
+              <div class="productInfo">
+                <%= product.name %>
+                <% if product.has_color? %>
+                    <br/>
+                    <%= product.color.name %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+      <% } %>
+      <div class="cleaner"></div>
+    </div>
+<% end %>

@@ -1,7 +1,7 @@
 class Image < ActiveRecord::Base
 
-  belongs_to :product
-  belongs_to :event
+  belongs_to :product, :touch => true
+  belongs_to :event, :touch => true
   belongs_to :flat_rate_product
 
   default_scope :order => "created_at DESC"

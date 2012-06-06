@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
 
-  belongs_to :top_category
+  belongs_to :top_category, :touch => true
   has_many :products, :dependent => :destroy, :include => [:size, :color]
   has_one :small_image, :class_name => 'Image', :foreign_key => :event_id, :dependent => :destroy
   has_one :big_image, :class_name => 'Image', :foreign_key => :event_big_id, :dependent => :destroy

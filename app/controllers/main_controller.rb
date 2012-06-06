@@ -4,8 +4,6 @@ class MainController < ApplicationController
   before_filter :read_cart
   before_filter :menu_data
 
-  caches_action :index, :event, :layout => false
-
   def index
     @javascript = true
     unless params[:id]
@@ -13,12 +11,19 @@ class MainController < ApplicationController
     else
       @latest_event = TopCategory.find(params[:id]).events.current.first || Event.first
     end
-    @events = @latest_event.top_category.events.current.all
-    @upcoming_events = @latest_event.top_category.events.upcoming.all
+    @top_category = @latest_event.top_category
+  end
+
+  def event
+    @javascript = true
+    if params[:id]
+      @event = Event.find(params[:id])
+    else
+      @event = Event.current.first
+    end
   end
 
   def product
-    expire_action :action => :event, :id => 29
     @javascript = true
     if params[:id]
       @product = Product.find(params[:id])
@@ -27,10 +32,6 @@ class MainController < ApplicationController
     end
     @event = @product.event
     @top_category = @event.top_category
-  end
-
-  def event
-    @javascript = true
   end
 
 end

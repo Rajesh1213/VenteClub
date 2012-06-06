@@ -1,6 +1,6 @@
 class Property < ActiveRecord::Base
 
-  belongs_to :product
+  belongs_to :product, :touch => true
 
   default_scope :order => "name ASC"
 

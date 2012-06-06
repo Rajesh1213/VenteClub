@@ -1,6 +1,6 @@
 class Product < ActiveRecord::Base
 
-  belongs_to :event
+  belongs_to :event, :touch => true
   belongs_to :color
   belongs_to :size
   has_many :properties, :dependent => :destroy
@@ -24,6 +24,9 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :properties, :allow_destroy => true
 
   after_initialize :set_init
+  after_create :update_event
+  after_update :update_event
+  before_destroy :update_event
 
 
   def event_similar_products
@@ -95,6 +98,10 @@ class Product < ActiveRecord::Base
   end
 
   private
+
+  def update_event
+    self.event.update_attribute(:updated_at, DateTime.now)
+  end
 
   def set_init
     self.size_id = Size.find_by_name("-no size-") unless self.size_id
