@@ -49,9 +49,7 @@ VenteClub::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
 
-  match '/:id' => 'main#index'
-  match 'event/:id' => 'main#event'
-  match 'product/:id' => 'main#product'
+  root :to => 'main#index'
 
   match 'how_it_works' => 'static#how_it_works'
   match 'terms_of_service' => 'static#terms_of_service'
@@ -59,8 +57,11 @@ VenteClub::Application.routes.draw do
   match 'security_notice' => 'static#security_notice'
   match 'terms_of_use' => 'static#terms_of_use'
   match 'return_and_refund_policy' => 'static#return_and_refund_policy'
+  match 'shipping_calculator' => 'shipping_calculator#index'
 
-  root :to => 'main#index'
+  match '/:id' => 'main#index'
+  match 'event/:id' => 'main#event'
+  match 'product/:id' => 'main#product'
 
   # See how all your routes lay out with "rake routes"
 
