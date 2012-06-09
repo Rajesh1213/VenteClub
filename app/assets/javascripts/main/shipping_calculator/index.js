@@ -39,8 +39,9 @@ function update_data() {
                 html += '<img src="' + flat_rate_product.url + '">';
                 html += flat_rate_product.name;
                 html += '<a href="#1" class="input-newmember" id="calc_' + flat_rate_product.id + '">CALCULATE</a>';
-                html += '</div>'
+                html += '</div>';
             });
+            html += '<div class="cleaner"></div>';
             $("div.productTypeWrapper").html(html);
         });
 }

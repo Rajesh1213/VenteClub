@@ -354,16 +354,22 @@ img.eventBigImg {
     padding-top: 12px;
 }
 
-.dataRow input, .dataRow select {
+.dataRow input {
     width: 317px;
     float: right;
     padding: 8px;
+    font-size: 14px;
 }
 
 .dataRow select {
     font-size: 14px;
     background: #ffffff;
-    width: 333px;
+    width: 335px;
+    padding: 8px;
+    float: right;
+    border: none;
+    -webkit-appearance: none;
+    border-radius: 0;
 }
 
 .productTypeWrapper {
@@ -373,7 +379,7 @@ img.eventBigImg {
 }
 
 .productFlatWrapper {
-    display: inline-table;
+    float: left;
     font-weight: bold;
     padding: 10px 33px;
     text-align: center;

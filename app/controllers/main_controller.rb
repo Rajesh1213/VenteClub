@@ -7,7 +7,7 @@ class MainController < ApplicationController
   def index
     @javascript = true
     unless params[:id]
-      @latest_event = Event.current.first
+      @latest_event = Event.current.first || Event.first
     else
       @latest_event = TopCategory.find(params[:id]).events.current.first || Event.first
     end
