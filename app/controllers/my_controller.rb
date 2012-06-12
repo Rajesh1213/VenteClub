@@ -14,6 +14,10 @@ class MyController < ApplicationController
     flash.now[:success] = "Account updated" if request.post? && @user.update_attributes(params[:user])
   end
 
+  def orders
+
+  end
+
   def addresses
     @user = @current_user.clone
     @javascript = true
