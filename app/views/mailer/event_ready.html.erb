@@ -6,7 +6,10 @@
 <body>
 <p>
   Event: <%= @event.name %><br/>
-  Processing result: <b><%= @event_result %></b>
+  Processing result: <b><%= @event_result %></b><br/>
+  <% if @error %>
+      <%= @error.inspect %>
+  <% end %>
 </p>
 </body>
 </html>

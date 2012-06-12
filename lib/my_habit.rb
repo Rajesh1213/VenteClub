@@ -58,12 +58,10 @@ class MyHabit
       if i == 0
         product.size = size
         product.save
-        p product.errors.inspect
       else
         new_product = product.duplicate
         new_product.size = size
         new_product.save
-        p new_product.errors.inspect
       end
       i+= 1
     }

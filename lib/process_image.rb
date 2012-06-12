@@ -6,7 +6,7 @@ class ProcessImage
     img = Magick::Image::read_inline(Base64.b64encode(image || self.data)).first
     one_pix_img = img.scale(1, 1)
     pix = one_pix_img.pixel_color(0, 0)
-    one_pix_img.to_color(pix)
+    pix.to_color(Magick::AllCompliance, false, 8, true)
   end
 
   def do_it(image, model_name)
