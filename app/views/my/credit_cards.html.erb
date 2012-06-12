@@ -3,33 +3,39 @@
 
   <div class="content-body">
 
-    <%= nested_form_for @user, :as => :user, :url => {:controller => :my, :action => :credit_cards}, :method => :post, :html => {:class => "form-horizontal", :id => "addr_form"} do |user| %>
-        <%= user.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
+    <% unless @current_user.credit_cards.size == 0 %>
 
-        <%= user.fields_for :credit_cards do |credit_card| %>
-            <%#= credit_card.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
-            <div class="dataRow">
-              <%= credit_card.label(:card_type, "Card type:") %>
-              <%= credit_card.select :card_type, options_for_select(["American Express", "Diners Club", "Discover", "JCB", "MasterCard", "Visa"], credit_card.object.card_type) %>
-            </div>
-            <div class="dataRow">
-              <%= credit_card.label(:card_number, "Card number:") %>
-              <%= credit_card.text_field(:card_number, :required => true) %>
-            </div>
-            <div class="dataRow">
-              <%= credit_card.label(:cardholder_name, "Cardholder name:") %>
-              <%= credit_card.text_field(:cardholder_name, :required => true) %>
-            </div>
-            <div class="dataRow">
-              <%= credit_card.label(:expiration_month, "Expiration date:") %>
-              <%= credit_card.select(:expiration_month, options_for_select(1..12, credit_card.object.expiration_month), {}, {:style => "width:50px;float:left;margin-left:12px;", :required => true}) %>
-              <%= credit_card.select(:expiration_year, options_for_select(Date.today.year..Date.today.year + 10, credit_card.object.expiration_year), {}, {:style => "width:75px;float:left;margin-left:20px", :required => true}) %>
-            </div>
-            <%= credit_card.link_to_remove("Delete", :class => "input-member delete") %>
-            <div class="cleaner" style="height: 20px;"></div>
+        <%= nested_form_for @user, :as => :user, :url => {:controller => :my, :action => :credit_cards}, :method => :post, :html => {:class => "form-horizontal", :id => "addr_form"} do |user| %>
+            <%= user.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
+            <%= user.fields_for :credit_cards do |credit_card| %>
+                <%#= credit_card.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
+                <div class="dataRow">
+                  <%= credit_card.label(:card_type, "Card type:") %>
+                  <%= credit_card.select :card_type, options_for_select(["American Express", "Diners Club", "Discover", "JCB", "MasterCard", "Visa"], credit_card.object.card_type) %>
+                </div>
+                <div class="dataRow">
+                  <%= credit_card.label(:card_number, "Card number:") %>
+                  <%= credit_card.text_field(:card_number, :required => true) %>
+                </div>
+                <div class="dataRow">
+                  <%= credit_card.label(:cardholder_name, "Cardholder name:") %>
+                  <%= credit_card.text_field(:cardholder_name, :required => true) %>
+                </div>
+                <div class="dataRow">
+                  <%= credit_card.label(:expiration_month, "Expiration date:") %>
+                  <%= credit_card.select(:expiration_month, options_for_select(1..12, credit_card.object.expiration_month), {}, {:style => "width:50px;float:left;margin-left:12px;", :required => true}) %>
+                  <%= credit_card.select(:expiration_year, options_for_select(Date.today.year..Date.today.year + 10, credit_card.object.expiration_year), {}, {:style => "width:75px;float:left;margin-left:20px", :required => true}) %>
+                </div>
+                <%= credit_card.link_to_remove("Delete", :class => "input-member delete") %>
+                <div class="cleaner" style="height: 20px;"></div>
+            <% end %>
+            <%= user.submit("Save changes", :class => "input-member", :id => "save_btn") %>
         <% end %>
-        <%= user.submit("Save changes", :class => "input-member", :id => "save_btn") %>
 
+    <% else %>
+        <div class="dataRow">
+          No credit cards associated with your account
+        </div>
     <% end %>
     <div class="cleaner"></div>
   </div>
