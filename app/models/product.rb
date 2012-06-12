@@ -14,7 +14,6 @@ class Product < ActiveRecord::Base
   validates :color_id, :numericality => true
   validates :size_id, :numericality => true
   validates :name, :presence => true
-  validates :description, :presence => true
   validates :amount, :numericality => true
   validates :price, :numericality => true
   validates :old_price, :numericality => true
