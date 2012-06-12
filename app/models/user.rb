@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   has_many :shipping_addresses, :dependent => :destroy
   has_many :orders, :dependent => :destroy
+  has_many :credit_cards, :dependent => :destroy
 
   validates :first_name, :presence => true
   validates :last_name, :presence => true
@@ -11,6 +12,7 @@ class User < ActiveRecord::Base
   default_scope :order => "created_at ASC"
 
   accepts_nested_attributes_for :shipping_addresses, :allow_destroy => true
+  accepts_nested_attributes_for :credit_cards, :allow_destroy => true
 
   attr_accessor :pass_confirmation
 

@@ -8,21 +8,26 @@
     </h1>
 
     <div class="content-body" style="float: left;">
-      <%= form_tag @credit_card, :method => :post, :html => {:class => "form-horizontal"} do %>
+      <%= form_for :credit_card, :as => @credit_card, :url => {}, :method => :post, :html => {:class => "form-horizontal"} do |f| %>
+          <%= f.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
           <div class="dataRow">
-            <%= label_tag(:cardholder_name, "Cardholder name:") %>
-            <%= text_field_tag(:cardholder_name, "", :required => true) %>
+            <%= f.label(:card_type, "Card type:") %>
+            <%= f.select :card_type, options_for_select(["American Express", "Diners Club", "Discover", "JCB", "MasterCard", "Visa"]) %>
           </div>
           <div class="dataRow">
-            <%= label_tag(:card_number, "Card number:") %>
-            <%= text_field_tag(:card_number, "", :required => true) %>
+            <%= f.label(:card_number, "Card number:") %>
+            <%= f.text_field(:card_number, :required => true) %>
           </div>
           <div class="dataRow">
-            <%= label_tag(:expiration_month, "Expiration date:") %>
-            <%= select_tag(:expiration_month, options_for_select(1..12, 1), :style => "width:50px;float:left;margin-left:32px;", :required => true) %>
-            <%= select_tag(:expiration_year, options_for_select(Date.today.year..Date.today.year + 10, Date.today.year), :style => "width:75px;float:left;margin-left:20px", :required => true) %>
+            <%= f.label(:cardholder_name, "Cardholder name:") %>
+            <%= f.text_field(:cardholder_name, :required => true) %>
           </div>
-          <%= submit_tag("Continue Checkout >>", :class => "input-member", :style => "width: 150px;") %>
+          <div class="dataRow">
+            <%= f.label(:expiration_month, "Expiration date:") %>
+            <%= f.select(:expiration_month, options_for_select(1..12, 1), {}, {:style => "width:50px;float:left;margin-left:32px;", :required => true}) %>
+            <%= f.select(:expiration_year, options_for_select(Date.today.year..Date.today.year + 10, Date.today.year), {}, {:style => "width:75px;float:left;margin-left:20px", :required => true}) %>
+          </div>
+          <%= f.submit("Continue Checkout >>", :class => "input-member", :style => "width: 150px;") %>
           <div class="cleaner"></div>
       <% end %>
     </div>

@@ -34,7 +34,18 @@ class CheckoutController < ApplicationController
   end
 
   def payment_method
-
+    @credit_card = @current_user.credit_cards.new(params[:credit_card])
+    if request.post?
+      exist_card = @current_user.credit_cards.find_by_card_type_and_card_number_and_expiration_month_and_expiration_year(@credit_card.card_type, @credit_card.card_number, @credit_card.expiration_month, @credit_card.expiration_year)
+      if exist_card
+        @credit_card = exist_card
+        flash.now[:success] = "Credit card exist"
+      else
+        if @credit_card.save
+          flash.now[:success] = "Credit card saved"
+        end
+      end
+    end
   end
 
   private

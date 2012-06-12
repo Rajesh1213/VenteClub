@@ -29,6 +29,11 @@ class MyController < ApplicationController
     end
   end
 
+  def credit_cards
+    @user = @current_user
+    flash.now[:success] = "Credit cards updated" if request.post? && @user.update_attributes(params[:user])
+  end
+
   def email_settings
 
   end

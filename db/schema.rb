@@ -10,13 +10,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120521094449) do
+ActiveRecord::Schema.define(:version => 20120612193559) do
 
   create_table "colors", :force => true do |t|
     t.string   "name"
     t.string   "html_val",   :default => "#ffffff"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
+  end
+
+  create_table "credit_cards", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "card_type"
+    t.string   "card_number"
+    t.string   "cardholder_name"
+    t.integer  "expiration_month", :default => 1
+    t.integer  "expiration_year"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "events", :force => true do |t|

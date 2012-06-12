@@ -7,8 +7,10 @@
       <%= select_tag :period_selector, options_for_select([["Open and recently shipped orders", "RECENT"], ["Orders placed in the past 6 months", "SIX_MONTHS"], ["All orders", "ALL"]]) %>
     </div>
     <div class="dataRow">
-      No orders or transactions<br/>
-      To view orders from a different time period, use the drop-down menu above<br/>
+      No orders or transactions
+      <div class="dataRow">
+        <%= label_tag :desc, "To view orders from a different time period, use the drop-down menu above", :style => "width:auto;" %>
+      </div>
     </div>
     <div class="cleaner"></div>
   </div>

@@ -10,8 +10,8 @@
 <div class="header">
   <%= link_to (image_tag "img/logo.png"), :root %>
 </div>
+<%= render(:partial => "main/flash_messages") %>
 <div class="checkoutWrapper">
-  <%= render(:partial => "main/flash_messages") %>
   <%= yield %>
 </div>
 <%= render :partial => "layouts/footer" %>
