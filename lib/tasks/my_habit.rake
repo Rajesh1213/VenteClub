@@ -8,7 +8,8 @@ task :process_event => :environment do
       top_category = TopCategory.find(ENV["TOP_CATEGORY_ID"])
       event = MyHabit.new().event_from_url(ENV["URL"], top_category)
       Mailer.event_ready(user, event).deliver
-    rescue
+    rescue Exception => e
+      p e.inspect
       Mailer.event_ready(user, nil).deliver
     end
   end
