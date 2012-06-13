@@ -6,23 +6,23 @@
 #   cities = City.create([{ :name => 'Chicago' }. { :name => 'Copenhagen' }]])
 #   Mayor.create(:name => 'Emanuel'. :city => cities.first])
 
-#user = User.new(:mail => "vova4kin@list.ru", :pass => "111111", :first_name => "Volodymyr", :last_name => "Petlovy")
-#user.role_id = 2
-#user.save
-#
-##user = User.new(:mail => "info@skypexamericas.com", :pass => "111111", :first_name => "Eli", :last_name => "Khabbaz")
-##user.role_id = 2
-##user.save
-#
-#TopCategory.create(:name => "WOMEN", :sorting => 5)
-#TopCategory.create(:name => "MEN", :sorting => 4)
-#TopCategory.create(:name => "TEENS", :sorting => 3)
-#TopCategory.create(:name => "HOME", :sorting => 2)
-#TopCategory.create(:name => "GADGETS", :sorting => 1)
-#
-#Color.create(:name => "-no color-", :html_val => "#fffffe")
-#
-#Size.create(:name => "-no size-")
+user = User.new(:mail => "vova4kin@list.ru", :pass => "111111", :first_name => "Volodymyr", :last_name => "Petlovy")
+user.role_id = 2
+user.save
+
+user = User.new(:mail => "info@skypexamericas.com", :pass => "111111", :first_name => "Eli", :last_name => "Khabbaz")
+user.role_id = 2
+user.save
+
+TopCategory.create(:name => "WOMEN", :sorting => 5)
+TopCategory.create(:name => "MEN", :sorting => 4)
+TopCategory.create(:name => "TEENS", :sorting => 3)
+TopCategory.create(:name => "HOME", :sorting => 2)
+TopCategory.create(:name => "GADGETS", :sorting => 1)
+
+Color.create(:name => "-no color-", :html_val => "#fffffe")
+
+Size.create(:name => "-no size-")
 
 WorldwideTariff.create(:arr_data => ["Bahrain", "12", "16", "18", "21", "23", "26", "28", "30", "33", "35", "38", "40", "42", "45", "47", "50", "52", "54", "58", "60", "63", "65", "68", "70", "72", "75", "77", "80", "82", "84", "87", "89", "92", "94", "96", "100", "101", "105", "107", "110", "112", "114", "117", "119", "122", "124", "126", "129", "131", "134", "136", "138", "141", "143", "147", "149", "152", "154", "156", "159", "10"])
 WorldwideTariff.create(:arr_data => ["Cyprus", "12", "20", "27", "33", "40", "47", "54", "60", "68", "75", "82", "88", "95", "102", "110", "116", "123", "130", "137", "143", "150", "158", "165", "171", "178", "185", "192", "198", "206", "213", "220", "226", "233", "240", "248", "255", "261", "268", "275", "282", "288", "296", "303", "310", "316", "323", "330", "338", "344", "351", "358", "365", "371", "378", "386", "393", "399", "406", "413", "420", "20"])
