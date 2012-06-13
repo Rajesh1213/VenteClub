@@ -1,4 +1,4 @@
-<%#= cache @top_category do %>
+<%= cache @top_category do %>
     <%
        @events = @latest_event.top_category.events.current.all
        @upcoming_events = @latest_event.top_category.events.upcoming.all
@@ -48,4 +48,4 @@
         <%= render :partial => "main/events_partial", :locals => {:events => @past_events} %>
     <% end %>
 
-<%# end %>
+<% end %>
