@@ -9,9 +9,21 @@ class WorldwideTariffsController < ApplicationController
     @tariffs = WorldwideTariff.all
   end
 
+  def new
+    @page_title = "New Country"
+    unless request.post?
+      @tariff = WorldwideTariff.new
+    else
+      @tariff = WorldwideTariff.new(params[:tariff])
+      if @tariff.save
+        flash[:success] = "Country: #{@tariff.country} created"
+        redirect_to :action => :list
+      end
+    end
+  end
+
   def edit
     @tariff = WorldwideTariff.find(params[:id])
-
     @page_title = "Edit worldwide tariff for: #{@tariff.country}"
     if request.post? && @tariff.update_attributes(params[:tariff])
       flash[:success] = "Worldwide tariff for: #{@tariff.country} updated"

@@ -1,4 +1,8 @@
-<h2><%= @page_title %></h2>
+<h2 style="float: left;"><%= @page_title %></h2>
+<%= link_to ({:controller => :worldwide_tariffs, :action => :new}, :class => "btn btn-success", :style => "float: right;") do %>
+    <i class="icon-plus-sign icon-white"></i> New country
+<% end %>
+<div class="cleaner"></div>
 
 <table class="table table-condensed">
   <thead>
