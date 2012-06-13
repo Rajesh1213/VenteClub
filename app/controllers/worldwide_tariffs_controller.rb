@@ -40,4 +40,8 @@ class WorldwideTariffsController < ApplicationController
     end
   end
 
+  def del_all
+    WorldwideTariff.all.each { |wt| wt.destroy }
+  end
+
 end

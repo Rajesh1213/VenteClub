@@ -1,6 +1,6 @@
 class WorldwideTariff < ActiveRecord::Base
 
-  has_many :shipping_addresses
+  has_many :shipping_addresses, :dependent => :destroy
 
   before_validation :arr_to_attr
 
@@ -9,9 +9,9 @@ class WorldwideTariff < ActiveRecord::Base
   attr_accessor :arr_data
 
   validates :country, :presence => true
-  validates :additional, :numericality => {:greater_than => 0} #, :on => :update
-  validates :vat, :numericality => true #, :on => :update
-  validate :changed_attr#, :on => :update
+  validates :additional, :numericality => {:greater_than => 0}
+  validates :vat, :numericality => true
+  validate :changed_attr
 
   def price_for_weight(weight)
     weight = weight.to_f
