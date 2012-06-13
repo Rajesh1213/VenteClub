@@ -1,0 +1,19 @@
+<div class="space"></div>
+<div class="eventsWrapper">
+  <% events.each { |event| %>
+      <div class="eventPlaceholder">
+        <div class="eventImageWrapper">
+          <%= link_to({:controller => :main, :action => :event, :id => event}, :class => "eventImage") do %>
+              <%= image_tag "/pictures/e/" + event.small_image.file_name, :alt => event.name %>
+          <% end %>
+        </div>
+        <div class="slideWrapper">
+          <div class="eventInfo">
+            <%= event.name %>
+            <br/>
+            <%= event_date(event.end_at) %>
+          </div>
+        </div>
+      </div>
+  <% } %>
+</div>

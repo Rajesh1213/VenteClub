@@ -2,6 +2,7 @@
     <%
        @events = @latest_event.top_category.events.current.all
        @upcoming_events = @latest_event.top_category.events.upcoming.all
+       @past_events = @latest_event.top_category.events.past.all
     %>
     <div class="eventBig">
       <%= link_to (image_tag "/pictures/e_b/" + @latest_event.big_image.file_name, :class => "eventBigImg", :alt => @latest_event.name), {:controller => :main, :action => :event, :id => @latest_event} %>
@@ -30,47 +31,21 @@
         var vis_el = <%=  vis_el %>;
     </script>
 
-    <h1 class="eventStatus">New Events</h1>
-    <div class="space"></div>
-    <div class="eventsWrapper">
-      <% @events.each { |event| %>
-          <div class="eventPlaceholder">
-            <div class="eventImageWrapper">
-              <%= link_to({:controller => :main, :action => :event, :id => event}, :class => "eventImage") do %>
-                  <%= image_tag "/pictures/e/" + event.small_image.file_name, :alt => event.name %>
-              <% end %>
-            </div>
-            <div class="slideWrapper">
-              <div class="eventInfo">
-                <%= event.name %>
-                <br/>
-                <%= event_date(event.end_at) %>
-              </div>
-            </div>
-          </div>
-      <% } %>
-    </div>
+    <% if @events.size > 0 %>
+        <h1 class="eventStatus">New Events</h1>
+        <%= render :partial => "main/events_partial", :locals => {:events => @events} %>
+    <% end %>
+
     <% if @upcoming_events.size > 0 %>
         <div class="space"></div>
         <h1 class="eventStatus">Upcoming Events</h1>
-        <div class="space"></div>
-        <div class="eventsWrapper">
-          <% @upcoming_events.each { |event| %>
-              <div class="eventPlaceholder">
-                <div class="eventImageWrapper">
-                  <%= link_to({:controller => :main, :action => :event, :id => event}, :class => "eventImage") do %>
-                      <%= image_tag "/pictures/e/" + event.small_image.file_name, :alt => event.name %>
-                  <% end %>
-                </div>
-                <div class="slideWrapper">
-                  <div class="eventInfo">
-                    <%= event.name %>
-                    <br/>
-                    <%= event_date(event.end_at) %>
-                  </div>
-                </div>
-              </div>
-          <% } %>
-        </div>
+        <%= render :partial => "main/events_partial", :locals => {:events => @upcoming_events} %>
     <% end %>
+
+    <% if @past_events.size > 0 %>
+        <div class="space"></div>
+        <h1 class="eventStatus">Past Events</h1>
+        <%= render :partial => "main/events_partial", :locals => {:events => @past_events} %>
+    <% end %>
+
 <% end %>
