@@ -30,8 +30,10 @@ class ProductsController < ApplicationController
         flash[:success] = "Product: #{@product.name} created"
         if params[:commit] == "Save"
           redirect_to :action => :list, :state => @event.state
-        else
+        elsif params[:commit] == "Save and Continue"
           @product = @event.products.new
+        elsif params[:commit] == "Save and Duplicate"
+          @product = @product.duplicate
         end
       end
     end

@@ -110,7 +110,7 @@
   <% end %>
 
   <%= product.link_to_add(:images, :class => "btn btn-success") do %>
-      <i class="icon-plus-sign icon-white"></i> New image; Min width: 1600px (the bigger the better)
+      <i class="icon-plus-sign icon-white"></i> New image; Best fit: 1600x2145px (the bigger is better)
   <% end %>
 
 
@@ -118,6 +118,7 @@
     <%= product.submit("Save", :class => "btn btn-primary") %>
     <% if request[:action] == "new" %>
         <%= product.submit("Save and Continue", :class => "btn btn-primary") %>
+        <%= product.submit("Save and Duplicate", :class => "btn btn-primary") %>
     <% end %>
     <%= button_tag("Cancel", :type => "button", :class => "btn", :onclick => "window.history.back()") %>
   </div>
