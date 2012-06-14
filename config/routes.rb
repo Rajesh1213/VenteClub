@@ -49,7 +49,8 @@ VenteClub::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
 
-  root :to => 'main#index'
+  #root :to => 'main#index'
+  root :to => 'subscribe#index'
 
   match 'how_it_works' => 'static#how_it_works'
   match 'terms_of_service' => 'static#terms_of_service'

@@ -95,7 +95,7 @@ class LoginController < ApplicationController
     else
       original_uri = session[:original_uri]
       session.delete("original_uri")
-      redirect_to(original_uri || {:controller => :main, :action => :index})
+      redirect_to(original_uri || {:controller => :main, :action => :index, :id => TopCategory.first})
     end
   end
 

@@ -33,4 +33,9 @@ class Mailer < ActionMailer::Base
     end
   end
 
+  def welcome_subscriber(subscriber)
+    @subscriber = subscriber
+    mail(:to => @subscriber.mail, :subject => "Welcome to VenteClub")
+  end
+
 end

@@ -61,7 +61,6 @@ class CheckoutController < ApplicationController
       else
         "checkout"
     end
-
   end
 
 end

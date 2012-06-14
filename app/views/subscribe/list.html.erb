@@ -1,0 +1,20 @@
+<h2><%= @page_title %></h2>
+
+<table class="table table-condensed">
+  <thead>
+  <tr>
+    <th>Email</th>
+    <th>Created at</th>
+    <th>Email Opened at</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @subscribers.each { |subscriber| %>
+      <tr>
+        <td><%= subscriber.mail %></td>
+        <td><%= event_date(subscriber.created_at) %></td>
+        <td><%= (event_date(subscriber.updated_at) if subscriber.opened) || "no data" %></td>
+      </tr>
+  <% } %>
+  </tbody>
+</table>
