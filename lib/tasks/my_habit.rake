@@ -9,7 +9,7 @@ task :process_event => :environment do
       event = MyHabit.new().event_from_url(ENV["URL"], top_category)
       Mailer.event_ready(user, event).deliver
     rescue Exception => e
-      Mailer.event_ready(user, nil, e).deliver
+      Mailer.event_ready(user, nil, "Url: " + ENV["URL"] + " Error message: " + e.inspect.to_s).deliver
     end
   end
 end
