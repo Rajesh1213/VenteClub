@@ -552,6 +552,10 @@ img.eventBigImg {
     height: 210px;
 }
 
+.member-access h1, .member-access h4 {
+    color: #ffffff;
+}
+
 .member-access-title {
     color: #fff;
     font-weight: bold;

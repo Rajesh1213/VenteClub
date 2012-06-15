@@ -1,25 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
-</head>
-<body style="background-color: #ffffff;">
-<div style="margin: 0 auto;max-width: 1000px;background-color: #ffffff;">
-  <div style="text-align: left;">
-    <%= image_tag "img/logo.png", :title => "VenteClub", :alt => "VenteClub" %>
-  </div>
-  <div style="height: 20px;"></div>
-  <div style="background-color:#F1F1F1;border: 1px solid black;padding: 10px;">
-    <div style="background-color: #ffffff;padding: 40px; font-family: verdana;font-size: 12px;color: #000000;line-height: 18px;">
-      <%= render(:partial => "main/flash_messages") %>
-      <%= form_for(:subscriber, :as => :subscriber, :url => {:controller => :subscribe, :action => :index}) do |f| %>
-          <%= f.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
-          <%= f.label :mail %>
-          <%= f.text_field :mail, :required => true %>
-          <%= f.submit "Subscribe" %>
-      <% end %>
-    </div>
-  </div>
-</div>
-</body>
-</html>
+<h1>
+  Hello dear guest!
+</h1>
+<div class="cleaner" style="height: 10px;"></div>
+<h4>
+  We are working with new and very nice fashion site. If you want to be one of the first of our visitors please leave
+  your email and we'll notify you as soon as we are ready.
+</h4>
+<p class="member-access-title" style="padding-bottom: 10px;">E-MAIL</p>
+<%= form_for(:subscriber, :as => :subscriber, :url => {:controller => :subscribe, :action => :index}) do |f| %>
+    <%= f.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
+    <%= f.text_field :mail, :required => true, :class => "input-text", :type => "email" %>
+    <%= f.submit "SUBMIT", :class => "input-member" %>
+<% end %>

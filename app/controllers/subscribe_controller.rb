@@ -25,8 +25,10 @@ class SubscribeController < ApplicationController
 
   def set_layout
     case action_name
-      when "index" || "logo"
+      when "logo"
         nil
+      when "index"
+        "login"
       else
         "admin"
     end

@@ -30,7 +30,12 @@ class EventsController < ApplicationController
     @top_category = TopCategory.find(params[:id])
     @top_categories = TopCategory.all
     if request.post?
+
+      #top_category = TopCategory.find(params[:top_category_id])
+      #event = MyHabit.new().event_from_url(params[:url], top_category)
+
       call_rake :process_event, :url => params[:url], :top_category_id => params[:top_category_id].to_i, :user_id => @current_user.id
+
       flash[:warning] = "Event processing started in background. You will be noticed via email when done or if error happens. Please DO NOT use auto products/events processing till that time."
       redirect_to :action => :list, :state => "current"
     end
