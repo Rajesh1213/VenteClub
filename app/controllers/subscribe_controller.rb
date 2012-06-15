@@ -5,7 +5,7 @@ class SubscribeController < ApplicationController
 
   def index
     @subscriber = Subscriber.new(params[:subscriber])
-    flash.now[:success] = "Thanks!" if request.post? && @subscriber.save
+    flash.now[:success] = "You'd be surprised how much you will save by joining our club. Thank you!" if request.post? && @subscriber.save
   end
 
   def logo

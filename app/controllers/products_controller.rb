@@ -59,6 +59,27 @@ class ProductsController < ApplicationController
     end
   end
 
+  def from_victorias_secret
+    @javascript = true
+    @page_title = "New product from VictoriasSecret URL"
+    @event = Event.find(params[:id])
+    if request.post?
+      @event = Event.find(params[:event_id])
+      product = Product.new
+      #Headless.ly do
+      #  begin
+          product = VictoriasSecret.new().product_from_url(params[:url], @event)
+      #  rescue
+      #    flash.now[:error] = "Incorrect URL"
+      #  end
+      #end
+      unless flash[:error]
+        redirect_to :action => :edit, :id => product
+      end
+    end
+    render :action => :from_myhabit
+  end
+
   def edit
     @page_title = "Edit product"
     @javascript = true

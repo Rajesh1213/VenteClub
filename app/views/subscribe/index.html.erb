@@ -1,12 +1,11 @@
 <h1>
-  Hello dear guest!
+  VenteClub
 </h1>
 <div class="cleaner" style="height: 10px;"></div>
 <h4>
-  We are working with new and very nice fashion site. If you want to be one of the first of our visitors please leave
-  your email and we'll notify you as soon as we are ready.
+  VenteClub.com features daily design inspirations and sales at up to 70% off retail & FREE international shipping!
 </h4>
-<p class="member-access-title" style="padding-bottom: 10px;">E-MAIL</p>
+<p class="member-access-title" style="padding-bottom: 10px;">Enter your email to join the club</p>
 <%= form_for(:subscriber, :as => :subscriber, :url => {:controller => :subscribe, :action => :index}) do |f| %>
     <%= f.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
     <%= f.text_field :mail, :required => true, :class => "input-text", :type => "email" %>
