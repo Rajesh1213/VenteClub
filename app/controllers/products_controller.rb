@@ -61,7 +61,7 @@ class ProductsController < ApplicationController
 
   def from_victorias_secret
     @javascript = true
-    @page_title = "New product from VictoriasSecret URL"
+    @page_title = "New product from VictoriasSecret URL !!! DO NOT USE !!!"
     @event = Event.find(params[:id])
     if request.post?
       @event = Event.find(params[:event_id])
