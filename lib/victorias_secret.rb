@@ -15,83 +15,90 @@ class VictoriasSecret
   end
 
   def product_from_url(url, event, close_browser=true)
-    if close_browser
-      @browser.goto(url)
-      @browser.close
-    else
-      @browser.goto(url)
-    end
-    sizes = process_sizes
-    params = product_params(url, event)
-    product = Product.new(params)
+    @browser.goto(url)
+    name = @browser.h1(:class => 'x-large m-b-10 cufon-replaced').text
+    description = @browser.p(:class => 'm-b-10').text
+    product_matrix = get_product_matrix
+    sizes = process_sizes(product_matrix)
+    colors = process_colors(product_matrix)
+    product = Product.new
     i = 0
-    sizes.each { |size|
-      if i == 0
-        product.size = size
-        product.save
-      else
-        new_product = product.duplicate
-        new_product.size = size
-        new_product.save
-      end
+    images = process_first_product_images
+    colors.each { |color|
+      #if i == 0
+      #  images = process_first_product_images
+      #else
+      #  images = process_other_product_images(color)
+      #end
+      j = 0
+      sizes.each { |size|
+        if j == 0
+          product = new_product(name, description, color, size, images, event)
+          product.save
+        else
+          new_product = product.duplicate
+          new_product.size = size
+          new_product.save
+        end
+        j+= 1
+      }
       i+= 1
     }
+    @browser.close if close_browser
     product
   end
 
   private
 
-  def product_params(url, event)
-    result = Hash.new
-    result["name"] = @browser.h1(:class => 'x-large m-b-10 cufon-replaced').text
-    result["description"] = @browser.p(:class => 'm-b-10').text
+  def new_product(name, description, color, size, images, event)
+    params = Hash.new
+    params["name"] = name
+    params["description"] = description
     prices = process_prices
-    result["price"] = prices[:price]
-    result["old_price"] = prices[:old_price]
-    result["properties"] = process_properties
-    result["images"] = process_product_images
-    result["color_id"] = process_color
-    result["event_id"] = event.id
-    result
+    params["price"] = prices[:price]
+    params["old_price"] = prices[:old_price]
+    params["properties"] = process_properties
+    params["images"] = images
+    params["color"] = color
+    params["size"] = size
+    event.products.new(params)
   end
 
-  def process_color
-    required_asin = {}
-    product_hash["detailJSON"]["asins"].each { |asin|
-      required_asin = asin if asin["asin"] == cAsin
-    }
-    color_id = Color.find_by_name("-no color-").id
-    if required_asin != {}
-      html_val = html_color(product_hash, required_asin)
-      color = Color.find_by_html_val(html_val)
-      if color
-        color_id = color.id
-      else
-        color_name = ""
-        product_hash["detailJSON"]["variationMatrix"]["dimensionMatrix"].each { |property|
-          if property["name"] == "color_name"
-            property["values"].each { |color_data|
-              color_name = color_data["displayText"] if color_data["imageURL"] == required_asin["swatchImage"]
-            }
+  def process_colors(product_matrix)
+    colors = []
+    color_images_urls = @browser.div(:class => 'swatch-container grp').links.collect { |link| link.img.src }
+    product_matrix.each { |product|
+      color_code = product["COLOR_CDE"]
+      color_images_urls.each { |url|
+        if url.index("_" + color_code + ".jpg")
+          html_val = html_color(url)
+          color = Color.find_by_html_val(html_val)
+          if color
+            colors << color
+          else
+            color_name = product["COLOR_NAME"][color_code.size + 1..product["COLOR_NAME"].size].capitalize
             new_color = Color.create(:name => color_name, :html_val => html_val)
-            color_id = new_color.id
+            colors << new_color
           end
-        }
-      end
-    end
-    color_id
+        end
+      }
+    }
+    colors.uniq
   end
 
-  def html_color(product_hash, required_asin)
-    color_image_url = required_asin["swatchImage"]
-    color_image = get_file(color_image_url)
+  def html_color(img_url)
+    color_image = get_file(img_url)
     color = ProcessImage.new.get_color(color_image).to_s
     color
   end
 
-  def process_product_images
+  def process_other_product_images(color)
+
+  end
+
+  def process_first_product_images
     images = []
-    browser.div(:id => 'altImages').links.each { |link|
+    @browser.div(:id => 'altImages').links.each { |link|
       img = get_file(link.href)
       filename = ProcessImage.new.do_it(img, "product") + ".jpg"
       images << Image.new(:file_name => filename)
@@ -112,13 +119,13 @@ class VictoriasSecret
 
   def process_prices
     text_arr = @browser.p(:class => 'm-t-10').text.split(" ")
-    {:price => text_arr[3], :old_price => text_arr[1]}
+    {:price => BigDecimal.new(text_arr[3].gsub("$", "")), :old_price => BigDecimal.new(text_arr[1].gsub("$", ""))}
   end
 
-  def process_sizes
+  def process_sizes(product_matrix)
     sizes = []
     size_names = @browser.select_list(:id => 'sizeselectorlabel.size_0').options.map(&:text)
-    size_names.each { |size_name|
+    size_names[1..size_names.size].each { |size_name|
       size = Size.find_by_name(size_name)
       unless size
         size = Size.create(:name => size_name)
@@ -131,6 +138,12 @@ class VictoriasSecret
 
   def get_file(url)
     open(url).read
+  end
+
+  def get_product_matrix
+    js_id = @browser.input(:name => 'PRODUCTID').value
+    matrix_js = get_file("http://www.victoriassecret.com/atp/#{js_id}.json")
+    ActiveSupport::JSON.decode(matrix_js)["SKUS"]
   end
 
 end

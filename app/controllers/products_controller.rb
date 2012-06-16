@@ -46,29 +46,9 @@ class ProductsController < ApplicationController
     if request.post?
       @event = Event.find(params[:event_id])
       product = Product.new
-      Headless.ly do
-        begin
-          product = MyHabit.new().product_from_url(params[:url], @event)
-        rescue
-          flash.now[:error] = "Incorrect URL"
-        end
-      end
-      unless flash[:error]
-        redirect_to :action => :edit, :id => product
-      end
-    end
-  end
-
-  def from_victorias_secret
-    @javascript = true
-    @page_title = "New product from VictoriasSecret URL !!! DO NOT USE !!!"
-    @event = Event.find(params[:id])
-    if request.post?
-      @event = Event.find(params[:event_id])
-      product = Product.new
       #Headless.ly do
       #  begin
-          product = VictoriasSecret.new().product_from_url(params[:url], @event)
+      product = MyHabit.new().product_from_url(params[:url], @event)
       #  rescue
       #    flash.now[:error] = "Incorrect URL"
       #  end
@@ -77,7 +57,30 @@ class ProductsController < ApplicationController
         redirect_to :action => :edit, :id => product
       end
     end
-    render :action => :from_myhabit
+  end
+
+  def from_victorias_secret
+    @javascript = true
+    @page_title = "New product from VictoriasSecret URL"
+    @event = Event.find(params[:id])
+    if request.post?
+      @event = Event.find(params[:event_id])
+      product = Product.new
+      #Headless.ly do
+      #  begin
+      product = VictoriasSecret.new().product_from_url(params[:url], @event)
+      #  rescue
+      #    flash.now[:error] = "Incorrect URL"
+      #  end
+      #end
+      unless flash[:error]
+        redirect_to :action => :edit, :id => product
+      else
+        render :action => :from_myhabit
+      end
+    else
+      render :action => :from_myhabit
+    end
   end
 
   def edit
