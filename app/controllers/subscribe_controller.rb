@@ -13,7 +13,7 @@ class SubscribeController < ApplicationController
     if subscriber.size > 0
       subscriber[0].update_attribute(:opened, true)
     end
-    send_file "#{Rails.root}/app/assets/images/img/logo.png", :type => 'image/jpeg', :disposition => 'inline'
+    send_file "#{Rails.root}/app/assets/images/img/logo.png", :type => "image/jpeg", :disposition => "inline"
   end
 
   def list

@@ -19,21 +19,21 @@ class VictoriasSecret
     name = @browser.h1(:class => 'x-large m-b-10 cufon-replaced').text
     description = @browser.p(:class => 'm-b-10').text
     product_matrix = get_product_matrix
+    color_data = color_data_divs(product_matrix)
     sizes = process_sizes(product_matrix)
-    colors = process_colors(product_matrix)
+    colors = process_colors(product_matrix, color_data)
     product = Product.new
     i = 0
-    images = process_first_product_images
     colors.each { |color|
-      #if i == 0
-      #  images = process_first_product_images
-      #else
-      #  images = process_other_product_images(color)
-      #end
+      if i == 0
+        images = process_first_product_images
+      else
+        images = process_other_product_images(color_data[color[:color_code]])
+      end
       j = 0
       sizes.each { |size|
         if j == 0
-          product = new_product(name, description, color, size, images, event)
+          product = new_product(name, description, color[:color], size, images, event)
           product.save
         else
           new_product = product.duplicate
@@ -64,26 +64,27 @@ class VictoriasSecret
     event.products.new(params)
   end
 
-  def process_colors(product_matrix)
+  def process_colors(product_matrix, color_data)
     colors = []
-    color_images_urls = @browser.div(:class => 'swatch-container grp').links.collect { |link| link.img.src }
     product_matrix.each { |product|
-      color_code = product["COLOR_CDE"]
-      color_images_urls.each { |url|
-        if url.index("_" + color_code + ".jpg")
-          html_val = html_color(url)
-          color = Color.find_by_html_val(html_val)
-          if color
-            colors << color
-          else
-            color_name = product["COLOR_NAME"][color_code.size + 1..product["COLOR_NAME"].size].capitalize
-            new_color = Color.create(:name => color_name, :html_val => html_val)
-            colors << new_color
-          end
+      color_code = product["COLOR_CDE"].to_s
+      if color_data.has_key?(color_code)
+        html_val = html_color(color_img_url(color_data[color_code]))
+        color = Color.find_by_html_val(html_val)
+        if color
+          colors << {:color => color, :color_code => color_code}
+        else
+          color_name = product["COLOR_NAME"][color_code.size + 1..product["COLOR_NAME"].size].capitalize
+          new_color = Color.create(:name => color_name, :html_val => html_val)
+          colors << {:color => new_color, :color_code => color_code}
         end
-      }
+      end
     }
     colors.uniq
+  end
+
+  def color_img_url(color_div)
+    color_div.links.collect { |link| link.img.src }[0]
   end
 
   def html_color(img_url)
@@ -92,8 +93,26 @@ class VictoriasSecret
     color
   end
 
-  def process_other_product_images(color)
+  def color_data_divs(product_matrix)
+    color_data = {}
+    @browser.divs(:class => 'swatch').each { |color_div|
+      str = color_div.html.split("', '")[2]
+      if str
+        color_code = str[0..str.index("');") - 1].to_s
+        product_matrix.each { |product|
+          color_data[color_code] = color_div if product["COLOR_CDE"].to_s == color_code && !color_data.has_key?(color_code)
+        }
+      end
+    }
+    color_data
+  end
 
+  def process_other_product_images(color_div)
+    str = color_div.html.split("http://")[1]
+    url = "http://" + str[0..str.index("', '") - 1]
+    img = get_file(url)
+    filename = ProcessImage.new.do_it(img, "product") + ".jpg"
+    [Image.new(:file_name => filename)]
   end
 
   def process_first_product_images
