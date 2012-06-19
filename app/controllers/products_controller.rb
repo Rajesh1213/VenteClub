@@ -46,13 +46,13 @@ class ProductsController < ApplicationController
     if request.post?
       @event = Event.find(params[:event_id])
       product = Product.new
-      #Headless.ly do
-      #  begin
-      product = MyHabit.new().product_from_url(params[:url], @event)
-      #  rescue
-      #    flash.now[:error] = "Incorrect URL"
-      #  end
-      #end
+      Headless.ly do
+        begin
+          product = MyHabit.new().product_from_url(params[:url], @event)
+        rescue
+          flash.now[:error] = "Incorrect URL"
+        end
+      end
       unless flash[:error]
         redirect_to :action => :edit, :id => product
       end
