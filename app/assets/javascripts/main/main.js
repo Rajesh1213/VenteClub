@@ -19,3 +19,5 @@
 //= require main/shopping_cart
 //= require main/jquery-timers
 //= require admin/bootstrap
+//= require main/jquery_validationEngine-en
+//= require main/jquery_validationEngine

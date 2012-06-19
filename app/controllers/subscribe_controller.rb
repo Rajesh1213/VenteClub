@@ -5,7 +5,14 @@ class SubscribeController < ApplicationController
 
   def index
     @subscriber = Subscriber.new(params[:subscriber])
-    flash.now[:success] = "You'd be surprised how much you will save by joining our club. Thank you!" if request.post? && @subscriber.save
+    if request.post?
+      if @subscriber.save
+        #flash.now[:success] = "You'd be surprised how much you will save by joining our club. Thank you!"
+        render :json => [["subscriber_mail", true, " You'd be surprised how much you will save by joining our club.<br/>Thank you!<br/>Don't forget to like us on <a href='http://www.facebook.com/pages/Vente-Club/245746568846324'>our Facebook page!</a>"]]
+      else
+        render :json => [["subscriber_mail", false, " This email is already subscribed"]]
+      end
+    end
   end
 
   def logo

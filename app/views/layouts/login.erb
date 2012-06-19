@@ -19,5 +19,14 @@
   </div>
 </div>
 <%= render :partial => "layouts/footer" %>
+<%= javascript_include_tag "main/main" %>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#subscribe").validationEngine({
+            ajaxFormValidation:true,
+            ajaxFormValidationMethod:'post'
+        });
+    });
+</script>
 </body>
 </html>
