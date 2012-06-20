@@ -1,6 +1,6 @@
 #!/bin/sh
 git reset --hard
-git pull git@git.magukr.com:VenteClub.git
+git pull git@git.magukr.com:VenteClub.git master
 bundle
 rake assets:precompile
 whenever --update-crontab VenteClub
