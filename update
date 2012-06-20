@@ -2,5 +2,6 @@
 git reset --hard
 git pull git@git.magukr.com:VenteClub.git
 bundle
+rake assets:precompile
 whenever --update-crontab VenteClub
 touch tmp/restart.txt

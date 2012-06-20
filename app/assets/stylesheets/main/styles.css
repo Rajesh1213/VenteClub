@@ -517,6 +517,11 @@ img.eventBigImg {
     color: #636262;
 }
 
+.lower-content a {
+    color: #636262;
+    line-height: normal;
+}
+
 .lower-logo-twitter {
     float: right;
     height: 55px;
