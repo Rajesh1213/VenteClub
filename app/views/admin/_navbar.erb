@@ -58,21 +58,22 @@
                   <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
+                  <li class="<%= "active" if request[:controller] == "top_categories" %>">
+                    <%= link_to "Top categories", :controller => :top_categories, :action => :list %>
+                  </li>
+                  <li class="divider"></li>
                   <li class="<%= "active" if request[:controller] == "colors" %>">
                     <%= link_to "Colors", :controller => :colors, :action => :list %>
                   </li>
                   <li class="<%= "active" if request[:controller] == "sizes" %>">
                     <%= link_to "Sizes", :controller => :sizes, :action => :list %>
                   </li>
-                  <li class="<%= "active" if request[:controller] == "worldwide_tariffs" %>">
-                    <%= link_to "Worldwide tariffs", :controller => :worldwide_tariffs, :action => :list %>
-                  </li>
-                  <li class="<%= "active" if request[:controller] == "top_categories" %>">
-                    <%= link_to "Top categories", :controller => :top_categories, :action => :list %>
-                  </li>
                   <li class="divider"></li>
                   <li class="<%= "active" if request[:controller] == "product_types" %>">
                     <%= link_to "Product types", {:controller => :product_types, :action => :list} %>
+                  </li>
+                  <li class="<%= "active" if request[:controller] == "worldwide_tariffs" %>">
+                    <%= link_to "Worldwide tariffs", :controller => :worldwide_tariffs, :action => :list %>
                   </li>
                   <li class="divider"></li>
                   <li class="<%= "active" if request[:controller] == "admin" && request[:action] == "list" %>">
