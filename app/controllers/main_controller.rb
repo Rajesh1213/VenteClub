@@ -9,7 +9,8 @@ class MainController < ApplicationController
     unless params[:id]
       @latest_event = Event.current.first || Event.first
     else
-      @latest_event = TopCategory.find(params[:id]).events.current.first || Event.first
+      top_category = TopCategory.find(params[:id])
+      @latest_event = top_category.events.current.first || top_category.events.first || Event.first
     end
     @top_category = @latest_event.top_category
   end

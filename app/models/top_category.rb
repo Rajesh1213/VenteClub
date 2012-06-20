@@ -4,8 +4,6 @@ class TopCategory < ActiveRecord::Base
 
   default_scope :order => "sorting DESC"
 
-  #scope :today_events, joins(:events) & Event.today
-
   validates :name, :presence => true, :uniqueness => true
   validates :sorting, :numericality => true
 
