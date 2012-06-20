@@ -9,7 +9,7 @@ class MainController < ApplicationController
     unless params[:id]
       @latest_event = Event.current.first || Event.first
     else
-      top_category = TopCategory.find(params[:id])
+      top_category = TopCategory.find_by_id(params[:id]) || TopCategory.first
       @latest_event = top_category.events.current.first || top_category.events.first || Event.first
     end
     @top_category = @latest_event.top_category
@@ -17,11 +17,7 @@ class MainController < ApplicationController
 
   def event
     @javascript = true
-    if params[:id]
-      @event = Event.find(params[:id])
-    else
-      @event = Event.current.first
-    end
+    @event = Event.find_by_id(params[:id]) || Event.first
   end
 
   def product
