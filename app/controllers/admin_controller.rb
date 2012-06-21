@@ -6,7 +6,9 @@ class AdminController < ApplicationController
 
   def dashboard
     @page_title = "Dashboard"
-    @products_amount = Product.all.count
+    @products_amount = Product.count
+    @events_amount = Event.count
+    @orders_amount = Order.count
   end
 
   def account

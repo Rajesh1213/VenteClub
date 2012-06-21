@@ -8,7 +8,7 @@ class Product < ActiveRecord::Base
   has_many :product_orders, :dependent => :destroy
   has_many :orders, :through => :product_orders
 
-  default_scope :order => "name ASC"
+  default_scope :order => "products.name ASC"
 
   validates :event_id, :numericality => true
   validates :color_id, :numericality => true
@@ -29,8 +29,7 @@ class Product < ActiveRecord::Base
 
 
   def event_similar_products
-    #Product.includes(:color, :size).where(:event_id => self.event_id).find_all_by_name(self.name)
-    Product.where(:event_id => self.event_id).find_all_by_name(self.name)
+    Product.includes(:color, :size).where(:event_id => self.event_id).find_all_by_name(self.name)
   end
 
   def colors

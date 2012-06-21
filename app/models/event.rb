@@ -23,11 +23,13 @@ class Event < ActiveRecord::Base
   after_initialize :set_dates
 
   def self.today
-    find(:all, :conditions => ["start_at <= ? AND end_at > ?", Date.today, Date.today + 2.days])
+    self.current.where("end_at > ?", Date.today + 1.day)
+    #find(:all, :conditions => ["start_at <= ? AND end_at > ?", Date.today, Date.today + 2.days])
   end
 
   def self.ending_soon
-    find(:all, :conditions => ["end_at >= ? AND end_at <= ?", Date.today, Date.today + 2.days])
+    self.current.where("end_at <= ?", Date.today + 1.day)
+    #find(:all, :conditions => ["end_at >= ? AND end_at <= ?", Date.today, Date.today + 2.days])
   end
 
   def products_for_page
@@ -62,10 +64,12 @@ class Event < ActiveRecord::Base
   private
 
   def set_dates
-    self.start_at = DateTime.now unless self.start_at
-    self.end_at = start_at + 1.week unless self.end_at
-    self.build_small_image unless self.small_image
-    self.build_big_image unless self.big_image
+    unless self.id
+      self.start_at = DateTime.now unless self.start_at
+      self.end_at = start_at + 1.week unless self.end_at
+      self.build_small_image unless self.small_image
+      self.build_big_image unless self.big_image
+    end
   end
 
 end
