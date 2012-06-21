@@ -8,7 +8,7 @@
   Event: <%= @event.name %><br/>
   Processing result: <b><%= @event_result %></b><br/>
   <% if @error %>
-      <%= @error %>
+      <%= @error.html_safe %>
   <% end %>
 </p>
 </body>

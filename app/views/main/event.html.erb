@@ -8,7 +8,7 @@
         <h1><%= @event.name %></h1>
 
         <p>
-          <%= @event.description %>
+          <%= @event.description.html_safe %>
         </p>
 
         <div class="endDate">

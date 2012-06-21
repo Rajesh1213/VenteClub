@@ -29,7 +29,8 @@ class Product < ActiveRecord::Base
 
 
   def event_similar_products
-    Product.includes(:color, :size).where(:event_id => self.event_id).find_all_by_name(self.name)
+    #Product.includes(:color, :size).where(:event_id => self.event_id).find_all_by_name(self.name)
+    Product.where(:event_id => self.event_id).find_all_by_name(self.name)
   end
 
   def colors
