@@ -92,7 +92,7 @@ class Product < ActiveRecord::Base
     }
     Product.new(
         :event => self.event, :color => self.color, :size => self.size, :name => self.name, :description => self.description,
-        :price => self.price, :old_price => self.old_price, :amount => self.amount, :properties => properties, :images => images
+        :price => self.price, :old_price => self.old_price, :amount => self.amount, :properties => properties, :images => images, :original_url => self.original_url
     )
   end
 

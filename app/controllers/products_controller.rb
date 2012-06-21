@@ -1,7 +1,5 @@
 class ProductsController < ApplicationController
 
-  #require "my_habit"
-
   before_filter :authorize_admin
 
   layout "admin"
@@ -75,15 +73,15 @@ class ProductsController < ApplicationController
       if FileManipulation.from_file("#{Rails.root}/tmp/background_task") == ""
         @event = Event.find(params[:event_id])
         product = Product.new
-        Headless.ly do
-          FileManipulation.to_file("#{Rails.root}/tmp/background_task", "true")
-          begin
-            product = VictoriasSecret.new().product_from_url(params[:url], @event)
-          rescue
-            flash.now[:error] = "Incorrect URL"
-          end
-          FileManipulation.to_file("#{Rails.root}/tmp/background_task", "")
-        end
+        #Headless.ly do
+        #FileManipulation.to_file("#{Rails.root}/tmp/background_task", "true")
+        #begin
+        product = VictoriasSecret.new().product_from_url(params[:url], @event)
+        #  rescue
+        #    flash.now[:error] = "Incorrect URL"
+        #  end
+        #  FileManipulation.to_file("#{Rails.root}/tmp/background_task", "")
+        #end
       else
         flash.now[:error] = "You have active background task!"
       end

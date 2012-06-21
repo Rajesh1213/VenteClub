@@ -23,7 +23,7 @@ select.input-xlarge {
     width: 280px;
 }
 
-.btn.btn-danger.remove_nested_fields {
+.btn.btn-danger.remove_nested_fields, .btn.btn-info.open {
     float: left;
     margin-left: 460px;
     margin-bottom: -28px;

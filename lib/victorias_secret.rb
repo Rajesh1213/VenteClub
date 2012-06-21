@@ -27,18 +27,25 @@ class VictoriasSecret
     colors.each { |color|
       if i == 0
         images = process_first_product_images
+        images = process_other_product_images(color_data[color[:color_code]]) if images.size == 0
+        if images.size == 0
+          images = [image_from_url(@browser.image(:id => "vsImage").src)]
+        end
       else
         images = process_other_product_images(color_data[color[:color_code]])
+        images = product.duplicate.images if images.size == 0
       end
       j = 0
       sizes.each { |size|
         if j == 0
-          product = new_product(name, description, color[:color], size, images, event)
+          product = new_product(name, description, color[:color], size, images, event, url)
           product.save
+          p product.errors
         else
           new_product = product.duplicate
           new_product.size = size
           new_product.save
+          p new_product.errors
         end
         j+= 1
       }
@@ -50,7 +57,7 @@ class VictoriasSecret
 
   private
 
-  def new_product(name, description, color, size, images, event)
+  def new_product(name, description, color, size, images, event, url)
     params = Hash.new
     params["name"] = name
     params["description"] = description
@@ -61,6 +68,7 @@ class VictoriasSecret
     params["images"] = images
     params["color"] = color
     params["size"] = size
+    params["original_url"] = url
     event.products.new(params)
   end
 
@@ -96,9 +104,15 @@ class VictoriasSecret
   def color_data_divs(product_matrix)
     color_data = {}
     @browser.divs(:class => 'swatch').each { |color_div|
-      str = color_div.html.split("', '")[2]
+      div_html = color_div.html
+      str = div_html.split("', '")[2]
       if str
         color_code = str[0..str.index("');") - 1].to_s
+      else
+        str = div_html.split("this,'")[1]
+        color_code = str[0..str.index("-") - 1].to_s if str
+      end
+      if color_code
         product_matrix.each { |product|
           color_data[color_code] = color_div if product["COLOR_CDE"].to_s == color_code && !color_data.has_key?(color_code)
         }
@@ -109,20 +123,28 @@ class VictoriasSecret
 
   def process_other_product_images(color_div)
     str = color_div.html.split("http://")[1]
-    url = "http://" + str[0..str.index("', '") - 1]
-    img = get_file(url)
-    filename = ProcessImage.new.do_it(img, "product") + ".jpg"
-    [Image.new(:file_name => filename)]
+    if str.index("', '")
+      url = "http://" + str[0..str.index("', '") - 1]
+      [image_from_url(url)]
+    else
+      []
+    end
   end
 
   def process_first_product_images
     images = []
-    @browser.div(:id => 'altImages').links.each { |link|
-      img = get_file(link.href)
-      filename = ProcessImage.new.do_it(img, "product") + ".jpg"
-      images << Image.new(:file_name => filename)
-    }
+    if @browser.div(:id => 'altImages').exists?
+      @browser.div(:id => 'altImages').links.each { |link|
+        images << image_from_url(link.href)
+      }
+    end
     images.reverse!
+  end
+
+  def image_from_url(url)
+    img = get_file(url)
+    filename = ProcessImage.new.do_it(img, "product") + ".jpg"
+    Image.new(:file_name => filename)
   end
 
   def process_properties
@@ -137,8 +159,23 @@ class VictoriasSecret
   end
 
   def process_prices
-    text_arr = @browser.p(:class => 'm-t-10').text.split(" ")
-    {:price => BigDecimal.new(text_arr[3].gsub("$", "")), :old_price => BigDecimal.new(text_arr[1].gsub("$", ""))}
+    result = {}
+    text = @browser.p(:class => 'm-t-10').text
+    text_arr = text.split(" ")
+    if text_arr.size == 2
+      result = {:price => BigDecimal.new(text_arr[0].gsub("$", "")), :old_price => 0}
+    else
+      if text.index("Special")
+        result = {:price => BigDecimal.new(text_arr[0].gsub("$", "")), :old_price => 0}
+      else
+        if text_arr.size > 5
+          result = {:price => BigDecimal.new(text_arr[text_arr.size - 2].gsub("$", "")), :old_price => 0}
+        else
+          result = {:price => BigDecimal.new(text_arr[3].gsub("$", "")), :old_price => BigDecimal.new(text_arr[1].gsub("$", ""))}
+        end
+      end
+    end
+    result
   end
 
   def process_sizes(product_matrix)

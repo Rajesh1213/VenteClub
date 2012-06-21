@@ -75,7 +75,9 @@
 
     <div class="propertiesWrapper">
       <%= hidden_field_tag "last_clicked" %>
-      <span class="oldPrice"><%= number_to_currency @product.old_price %></span>
+      <% if @product.old_price > 0 %>
+          <span class="oldPrice"><%= number_to_currency @product.old_price %></span>
+      <% end %>
       <span class="price"><%= number_to_currency @product.price %></span>
     </div>
     <div class="propertiesWrapper">

@@ -51,7 +51,7 @@ class MyHabit
     #end
     product_hash = product_hash_from_url(js_url)
     sizes = process_sizes(product_hash)
-    params = product_params_from_hash(product_hash, product_cAsin(url), event)
+    params = product_params_from_hash(product_hash, product_cAsin(url), event, url)
     product = Product.new(params)
     i = 0
     sizes.each { |size|
@@ -140,7 +140,7 @@ class MyHabit
 
   # product processing
 
-  def product_params_from_hash(product_hash, cAsin, event)
+  def product_params_from_hash(product_hash, cAsin, event, url)
     result = Hash.new
     result["name"] = product_hash["detailJSON"]["short_title"]
     result["description"] = product_hash["productDescription"]["shortProdDesc"]
@@ -150,6 +150,7 @@ class MyHabit
     result["images"] = process_product_images(product_hash, cAsin)
     result["color_id"] = process_color(product_hash, cAsin)
     result["event_id"] = event.id
+    result["original_url"] = url
     result
   end
 

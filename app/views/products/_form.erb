@@ -7,6 +7,18 @@
       <%= product.select(:event_id, @event.top_category.events.collect { |event| [event.name, event.id] }, {}, {:required => true, :class => "input-xlarge"}) %>
     </div>
   </div>
+  <% unless product.object.original_url.blank? %>
+      <%= link_to(product.object.original_url, :class => "btn btn-info open", :target => :blank) do %>
+          <i class="icon-eye-open icon-white"></i> Open
+      <% end %>
+  <% end %>
+  <div class="cleaner"></div>
+  <div class="control-group">
+    <%= product.label(:original_url, "Original URL:", :class => "control-label") %>
+    <div class="controls">
+      <%= product.text_field(:original_url, :class => "input-xlarge") %>
+    </div>
+  </div>
   <div class="control-group">
     <%= product.label(:name, "Name:", :class => "control-label") %>
     <div class="controls">
@@ -22,7 +34,6 @@
   <div class="control-group">
     <%= product.label(:color_id, "Color:", :class => "control-label") %>
     <div class="controls">
-      <%#= product.select(:color_id, Color.all.collect { |color| [color.name, color.id] }, {}, {:required => true, :class => "input-xlarge"}) %>
       <select required="required" name="product[color_id]" id="product_color_id" class="input-xlarge">
         <% Color.all.each { |color| %>
             <option value="<%= color.id %>" style="background-color: <%= color.html_val %>;" <%= 'selected="selected"' if product.object.color_id == color.id %>><%= color.name %></option>

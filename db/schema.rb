@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120614143424) do
+ActiveRecord::Schema.define(:version => 20120621203841) do
 
   create_table "colors", :force => true do |t|
     t.string   "name"
@@ -87,11 +87,12 @@ ActiveRecord::Schema.define(:version => 20120614143424) do
     t.integer  "size_id"
     t.string   "name"
     t.text     "description"
-    t.integer  "amount",                                     :default => 0
-    t.decimal  "price",       :precision => 15, :scale => 2, :default => 0.0
-    t.datetime "created_at",                                                  :null => false
-    t.datetime "updated_at",                                                  :null => false
-    t.decimal  "old_price",   :precision => 15, :scale => 2, :default => 0.0
+    t.integer  "amount",                                      :default => 0
+    t.decimal  "price",        :precision => 15, :scale => 2, :default => 0.0
+    t.datetime "created_at",                                                   :null => false
+    t.datetime "updated_at",                                                   :null => false
+    t.decimal  "old_price",    :precision => 15, :scale => 2, :default => 0.0
+    t.text     "original_url"
   end
 
   create_table "properties", :force => true do |t|
