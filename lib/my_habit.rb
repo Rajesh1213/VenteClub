@@ -120,6 +120,7 @@ class MyHabit
     return sale unless sale.empty?
     sale = sale_from_dept_hash(dept_sales["upcoming"], url)
     return sale unless sale.empty?
+    raise Exception, "Sale not accessible for Vova's account!'"
   end
 
   def sale_from_dept_hash(sales, url)

@@ -33,8 +33,10 @@ class EventsController < ApplicationController
     @top_categories = TopCategory.all
     if request.post?
       if FileManipulation.from_file("#{Rails.root}/tmp/background_task") == ""
+
         #top_category = TopCategory.find(params[:top_category_id])
         #event = MyHabit.new().event_from_url(params[:url], top_category)
+        #p event.inspect
 
         call_rake :process_event, :url => params[:url], :top_category_id => params[:top_category_id].to_i, :user_id => @current_user.id
 
