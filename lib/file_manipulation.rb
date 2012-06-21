@@ -9,9 +9,11 @@ class FileManipulation
 
   def self.from_file(filename)
     data = ""
-    File.open(filename, 'r') do |f|
-      data = f.read
-      f.close
+    if File.exist?(filename)
+      File.open(filename, 'r') do |f|
+        data = f.read
+        f.close
+      end
     end
     data
   end

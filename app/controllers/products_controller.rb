@@ -44,18 +44,26 @@ class ProductsController < ApplicationController
     @page_title = "New product from MyHabit URL"
     @event = Event.find(params[:id])
     if request.post?
-      @event = Event.find(params[:event_id])
-      product = Product.new
-      Headless.ly do
-        begin
-          product = MyHabit.new().product_from_url(params[:url], @event)
-        rescue
-          flash.now[:error] = "Incorrect URL"
+      if FileManipulation.from_file("#{Rails.root}/tmp/background_task") == ""
+        @event = Event.find(params[:event_id])
+        product = Product.new
+        Headless.ly do
+          FileManipulation.to_file("#{Rails.root}/tmp/background_task", "true")
+          begin
+            product = MyHabit.new().product_from_url(params[:url], @event)
+          rescue
+            flash.now[:error] = "Incorrect URL"
+          end
+          FileManipulation.to_file("#{Rails.root}/tmp/background_task", "")
         end
+        unless flash[:error]
+          redirect_to :action => :edit, :id => product
+        end
+      else
+        flash.now[:error] = "You have active background task!"
       end
-      unless flash[:error]
-        redirect_to :action => :edit, :id => product
-      end
+    else
+      flash.now[:warning] = "Background processing active" if FileManipulation.from_file("#{Rails.root}/tmp/background_task") != ""
     end
   end
 
@@ -64,14 +72,20 @@ class ProductsController < ApplicationController
     @page_title = "New product from VictoriasSecret URL"
     @event = Event.find(params[:id])
     if request.post?
-      @event = Event.find(params[:event_id])
-      product = Product.new
-      Headless.ly do
-        begin
-          product = VictoriasSecret.new().product_from_url(params[:url], @event)
-        rescue
-          flash.now[:error] = "Incorrect URL"
+      if FileManipulation.from_file("#{Rails.root}/tmp/background_task") == ""
+        @event = Event.find(params[:event_id])
+        product = Product.new
+        Headless.ly do
+          FileManipulation.to_file("#{Rails.root}/tmp/background_task", "true")
+          begin
+            product = VictoriasSecret.new().product_from_url(params[:url], @event)
+          rescue
+            flash.now[:error] = "Incorrect URL"
+          end
+          FileManipulation.to_file("#{Rails.root}/tmp/background_task", "")
         end
+      else
+        flash.now[:error] = "You have active background task!"
       end
       unless flash[:error]
         redirect_to :action => :edit, :id => product
@@ -79,6 +93,7 @@ class ProductsController < ApplicationController
         render :action => :from_myhabit
       end
     else
+      flash.now[:warning] = "Background processing active" if FileManipulation.from_file("#{Rails.root}/tmp/background_task") != ""
       render :action => :from_myhabit
     end
   end

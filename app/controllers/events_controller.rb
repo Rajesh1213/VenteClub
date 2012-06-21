@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
 
+  require "file_manipulation"
+
   before_filter :authorize_admin
 
   layout "admin"
@@ -30,7 +32,7 @@ class EventsController < ApplicationController
     @top_category = TopCategory.find(params[:id])
     @top_categories = TopCategory.all
     if request.post?
-      if !$background_task
+      if FileManipulation.from_file("#{Rails.root}/tmp/background_task") == ""
         #top_category = TopCategory.find(params[:top_category_id])
         #event = MyHabit.new().event_from_url(params[:url], top_category)
 
@@ -39,10 +41,10 @@ class EventsController < ApplicationController
         flash[:warning] = "Event processing started in background. You will be noticed via email when done or if error happens. Please DO NOT use auto products/events processing till that time."
         redirect_to :action => :list, :state => "current"
       else
-        flash.now[:error] = "You have already background task!"
+        flash.now[:error] = "You have active background task!"
       end
     else
-      flash.now[:warning] = "Background processing active" if $background_task
+      flash.now[:warning] = "Background processing active" if FileManipulation.from_file("#{Rails.root}/tmp/background_task") != ""
     end
   end
 
