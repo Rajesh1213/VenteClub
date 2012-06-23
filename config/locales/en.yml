@@ -8,6 +8,16 @@ en:
         pass: "Password"
       color:
         html_val: "HTML code"
+      subscriber:
+        mail: ""
+    errors:
+      models:
+        subscriber:
+          attributes:
+            mail:
+              blank: "Please enter email address"
+              invalid: "Invalid email address"
+              taken: "Email already exists"
 
   date:
     formats:

@@ -8,6 +8,6 @@
 <p class="member-access-title" style="padding-bottom: 10px;">Enter your email to join the club</p>
 <%= form_for(:subscriber, :as => :subscriber, :url => {:controller => :subscribe, :action => :index}, :html => {:id => "subscribe"}) do |f| %>
     <%= f.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
-    <%= f.text_field :mail, :class => "input-text validate[required,custom[email]]" %>
-    <%= f.submit "SUBMIT", :class => "input-member" %>
+    <%= f.text_field :mail, :class => "input-text" %>
+    <%= f.submit "SUBMIT", :class => "input-member", :id => "submit_btn" %>
 <% end %>

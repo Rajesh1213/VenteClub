@@ -4,13 +4,15 @@ class SubscribeController < ApplicationController
   layout :set_layout
 
   def index
+    @javascript = true
     @subscriber = Subscriber.new(params[:subscriber])
     if request.post?
       if @subscriber.save
         #flash.now[:success] = "You'd be surprised how much you will save by joining our club. Thank you!"
-        render :json => [["subscriber_mail", true, " You'd be surprised how much you will save by joining our club.<br/>Thank you!<br/>Don't forget to like us on <a href='http://www.facebook.com/pages/Vente-Club/245746568846324'>our Facebook page!</a>"]]
+        #render :json => [["subscriber_mail", true, " You'd be surprised how much you will save by joining our club.<br/>Thank you!<br/>Don't forget to like us on <a href='http://www.facebook.com/pages/Vente-Club/245746568846324'>our Facebook page!</a>"]]
+        render :json => [["subscriber_mail", false, " Thank you for joining VenteClub"]]
       else
-        render :json => [["subscriber_mail", false, " This email is already subscribed"]]
+        render :json => [["subscriber_mail", false, @subscriber.errors.full_messages.first]]
       end
     end
   end

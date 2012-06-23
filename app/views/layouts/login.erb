@@ -19,14 +19,7 @@
   </div>
 </div>
 <%= render :partial => "layouts/footer" %>
-<%= javascript_include_tag "main/main" %>
-<script>
-    jQuery(document).ready(function () {
-        jQuery("#subscribe").validationEngine({
-            ajaxFormValidation:true,
-            ajaxFormValidationMethod:'post'
-        });
-    });
-</script>
+<%= javascript_include_tag "main/main" if @javascript %>
+<%= javascript_include_tag("main/" + request[:controller] + "/" + request[:action]) if @javascript %>
 </body>
 </html>
