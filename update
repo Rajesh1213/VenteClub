@@ -3,5 +3,6 @@ git reset --hard
 git pull git@git.magukr.com:VenteClub.git master
 bundle install
 rake assets:precompile
+rake db:migrate RAILS_ENV=production
 whenever --update-crontab VenteClub
 touch tmp/restart.txt
