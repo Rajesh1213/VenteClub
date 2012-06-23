@@ -1,6 +1,6 @@
 <%= cache @top_category do %>
     <%
-       @events = @latest_event.top_category.events.current.all
+       @events = @latest_event.top_category.events.current.all[1..@latest_event.top_category.events.current.all.size]
        @upcoming_events = @latest_event.top_category.events.upcoming.all
        @past_events = @latest_event.top_category.events.past.all
     %>
@@ -32,7 +32,6 @@
     </script>
 
     <% if @events.size > 0 %>
-        <h1 class="eventStatus">New Events</h1>
         <%= render :partial => "main/events_partial", :locals => {:events => @events} %>
     <% end %>
 

@@ -29,11 +29,11 @@
     </div>
     <div class="vc-link">
       <ul>
-        <li><%= link_to "TERMS OF SERVICE", :controller => :static, :action => :terms_of_service %></li>
-        <li><%= link_to "PRIVACY NOTICE", :controller => :static, :action => :privacy_notice %></li>
-        <li><%= link_to "SECURITY NOTICE", :controller => :static, :action => :security_notice %></li>
-        <li><%= link_to "TERMS OF USE", :controller => :static, :action => :terms_of_use %></li>
-        <li><%= link_to "RETURN AND REFUND", :controller => :static, :action => :return_and_refund_policy %></li>
+        <li><%= link_to "TERMS OF SERVICE", {:controller => :static, :action => :terms_of_service}, {:target => "_blank"} %></li>
+        <li><%= link_to "PRIVACY NOTICE", {:controller => :static, :action => :privacy_notice}, {:target => "_blank"} %></li>
+        <li><%= link_to "SECURITY NOTICE", {:controller => :static, :action => :security_notice}, {:target => "_blank"} %></li>
+        <li><%= link_to "TERMS OF USE", {:controller => :static, :action => :terms_of_use}, {:target => "_blank"} %></li>
+        <li><%= link_to "RETURN AND REFUND", {:controller => :static, :action => :return_and_refund_policy}, {:target => "_blank"} %></li>
       </ul>
     </div>
     <div class="vc-link">

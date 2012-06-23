@@ -76,6 +76,14 @@ $(document).ready(function () {
 
     $('#product_size').tooltip({title:"Disabled options are not available for selected color"});
 
+    $('#size_chart').click(function () {
+        var w = 600;
+        var h = 600;
+        var leftPosition = (screen.width - w) / 2;
+        var topPosition = (screen.height - h) / 2;
+        window.open("/size_chart", "Size chart", "screenX=" + leftPosition.toString() + ",screenY=" + topPosition.toString() + ",innerWidth=600,innerHeight=600,location=no,menubar=no,scrollbars=no,status=no,titlebar=no,toolbar=no,resizable=no,directories=no");
+    });
+
 });
 
 function updateData() {

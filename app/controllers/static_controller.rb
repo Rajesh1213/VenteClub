@@ -4,7 +4,7 @@ class StaticController < ApplicationController
   before_filter :read_cart
   before_filter :menu_data
 
-  layout "main"
+  layout "main", :except => "size_chart"
 
   def how_it_works
   end
@@ -22,6 +22,9 @@ class StaticController < ApplicationController
   end
 
   def return_and_refund_policy
+  end
+
+  def size_chart
   end
 
 end

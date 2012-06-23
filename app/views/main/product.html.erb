@@ -44,9 +44,13 @@
 
     <% if @product.has_size? %>
         <div class="propertiesWrapper">
-          <span class="propertyName" style="margin-left: 12px;">Size: </span>
-          <select id="product_size">
-            <option value="-1">All sizes</option>
+          <span class="propertyName" style="margin-left: 12px;">Size</span>
+          <small style="text-decoration: underline;cursor: pointer;margin-left: 12px;" id="size_chart" title="size chart">
+            size chart
+          </small>
+          <br/>
+          <select id="product_size" style="margin: 12px;padding: 2px;border: 1px solid #656868;">
+            <option value="-1">Please select size</option>
             <% @product.sizes.each { |size| %>
                 <option value="<%= size.id %>"<%= ' disabled="disabled"' unless @product.available_sizes.include?(size) %>><%= size.name %></option>
             <% } %>

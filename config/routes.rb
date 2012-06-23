@@ -58,6 +58,7 @@ VenteClub::Application.routes.draw do
   match 'security_notice' => 'static#security_notice'
   match 'terms_of_use' => 'static#terms_of_use'
   match 'return_and_refund_policy' => 'static#return_and_refund_policy'
+  match 'size_chart' => 'static#size_chart'
   match 'shipping_calculator' => 'shipping_calculator#index'
 
   match '/:id' => 'main#index'
