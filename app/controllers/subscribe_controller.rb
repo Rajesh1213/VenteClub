@@ -30,6 +30,13 @@ class SubscribeController < ApplicationController
     @subscribers = Subscriber.all
   end
 
+  def delete
+    if Subscriber.find(params[:id]).destroy
+      flash[:warning] = "Subscriber deleted"
+      redirect_to :action => :list
+    end
+  end
+
   private
 
   def set_layout
