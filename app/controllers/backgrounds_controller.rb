@@ -8,7 +8,7 @@ class BackgroundsController < ApplicationController
     @page_title = "Email background"
     @javascript = true
     if request.post?
-      if params[:new_file_name]
+      if !params[:new_file_name].blank?
         if File.exist?("#{Rails.root}/public/tmp/backgrounds/#{params[:new_file_name]}")
           File.copy("#{Rails.root}/public/tmp/backgrounds/#{params[:new_file_name]}", "#{Rails.root}/public/pictures/backgrounds/email_bg.jpg")
           File.delete("#{Rails.root}/public/tmp/backgrounds/#{params[:new_file_name]}")
@@ -23,7 +23,7 @@ class BackgroundsController < ApplicationController
     @page_title = "Login background"
     @javascript = true
     if request.post?
-      if params[:new_file_name]
+      if !params[:new_file_name].blank?
         if File.exist?("#{Rails.root}/public/tmp/backgrounds/#{params[:new_file_name]}")
           File.copy("#{Rails.root}/public/tmp/backgrounds/#{params[:new_file_name]}", "#{Rails.root}/public/pictures/backgrounds/login_bg.jpg")
           File.delete("#{Rails.root}/public/tmp/backgrounds/#{params[:new_file_name]}")
