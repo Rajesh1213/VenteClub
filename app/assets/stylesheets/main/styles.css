@@ -114,7 +114,7 @@ a {
 /***	Homepage 	****/
 .wrapper {
     display: block;
-    background: #000 url(../img/body-bg.jpg) no-repeat;
+    background: #ffffff url(/pictures/backgrounds/login_bg.jpg) no-repeat;
     padding: 0 508px 0 101px;
     border: 14px solid #f1f1f1;
     height: 482px;

@@ -5,7 +5,7 @@ class ProductTypesController < ApplicationController
   layout "admin"
 
   def list
-    @page_title = "Product types list"
+    @page_title = "Shipping calculator. Product types list"
     @product_types = ProductType.all
   end
 

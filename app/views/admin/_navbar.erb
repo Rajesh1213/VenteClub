@@ -58,10 +58,7 @@
                   <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="<%= "active" if request[:controller] == "top_categories" %>">
-                    <%= link_to "Top categories", :controller => :top_categories, :action => :list %>
-                  </li>
-                  <li class="divider"></li>
+                  <li class="nav-header">Common properties</li>
                   <li class="<%= "active" if request[:controller] == "colors" %>">
                     <%= link_to "Colors", :controller => :colors, :action => :list %>
                   </li>
@@ -69,6 +66,7 @@
                     <%= link_to "Sizes", :controller => :sizes, :action => :list %>
                   </li>
                   <li class="divider"></li>
+                  <li class="nav-header" style="padding: 3px 12px;">Shipping calculator</li>
                   <li class="<%= "active" if request[:controller] == "product_types" %>">
                     <%= link_to "Product types", {:controller => :product_types, :action => :list} %>
                   </li>
@@ -76,6 +74,18 @@
                     <%= link_to "Worldwide tariffs", :controller => :worldwide_tariffs, :action => :list %>
                   </li>
                   <li class="divider"></li>
+                  <li class="nav-header">Background images</li>
+                  <li class="<%= "active" if request[:controller] == "backgrounds" && request[:action] == "email" %>">
+                    <%= link_to "Email", {:controller => :backgrounds, :action => :email} %>
+                  </li>
+                  <li class="<%= "active" if request[:controller] == "backgrounds" && request[:action] == "login" %>">
+                    <%= link_to "Login", :controller => :backgrounds, :action => :login %>
+                  </li>
+                  <li class="divider"></li>
+                  <li class="nav-header">General</li>
+                  <li class="<%= "active" if request[:controller] == "top_categories" %>">
+                    <%= link_to "Top categories", :controller => :top_categories, :action => :list %>
+                  </li>
                   <li class="<%= "active" if request[:controller] == "admin" && request[:action] == "list" %>">
                     <%= link_to "Admins", {:controller => :admin, :action => :list} %>
                   </li>

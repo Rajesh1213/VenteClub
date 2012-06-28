@@ -24,6 +24,10 @@ class ProcessImage
           resize_event_big_image(new_filename)
         elsif model_name == "flat_rate_product"
           resize_flat_rate_product_image(new_filename)
+        elsif model_name == "background_email"
+          resize_background_email_image(new_filename)
+        elsif model_name == "background_login"
+          resize_background_login_image(new_filename)
         end
         del_tmp_image(new_filename)
       rescue => e
@@ -43,6 +47,26 @@ class ProcessImage
     height = 100
     image = resize_image_manipulations(image, width, height)
     url = "#{Rails.root}/public/tmp/frp/#{filename}" + ".jpg"
+    image.write(url) { self.quality = 90 }
+    File.chmod(0664, url)
+  end
+
+  def resize_background_login_image(filename)
+    image = Magick::ImageList.new("#{Rails.root}/public/tmp/#{filename}")
+    width = 978
+    height = 482
+    image = resize_image_manipulations(image, width, height)
+    url = "#{Rails.root}/public/tmp/backgrounds/#{filename}" + ".jpg"
+    image.write(url) { self.quality = 90 }
+    File.chmod(0664, url)
+  end
+
+  def resize_background_email_image(filename)
+    image = Magick::ImageList.new("#{Rails.root}/public/tmp/#{filename}")
+    width = 362
+    height = 550
+    image = resize_image_manipulations(image, width, height)
+    url = "#{Rails.root}/public/tmp/backgrounds/#{filename}" + ".jpg"
     image.write(url) { self.quality = 90 }
     File.chmod(0664, url)
   end

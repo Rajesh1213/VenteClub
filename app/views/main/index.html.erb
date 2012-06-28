@@ -31,7 +31,7 @@
         var vis_el = <%=  vis_el %>;
     </script>
 
-    <% if @events.size > 0 %>
+    <% if @events && @events.size > 0 %>
         <%= render :partial => "main/events_partial", :locals => {:events => @events} %>
     <% end %>
 

@@ -1,0 +1,16 @@
+<h2><%= @page_title %></h2>
+
+<div class="control-group">
+  <%= image_tag "/pictures/backgrounds/email_bg.jpg", :id => "current_image", :style => "padding: 10px 0px;" %>
+  <%= form_tag do %>
+      <div class="controls">
+        <%= hidden_field_tag(:new_file_name) %>
+        <div id="file-uploader"></div>
+        <div class="progress" style="width: 280px;display: none;" id="progress">
+          <div class="bar" id="bar"></div>
+        </div>
+        <div class="btn btn-success" id="browse">Browse for a new background image - 362x550</div>
+        <%= submit_tag "Save", :class => "btn btn-primary" %>
+      </div>
+  <% end %>
+</div>

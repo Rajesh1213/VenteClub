@@ -17,8 +17,8 @@
           <%= link_to @event.original_url, @event.original_url, :target => '_blank' unless @event.original_url.blank? %>
         </div>
         <div class="sizeFilter">
-          Select your size:
-          <select name="size_filter" id="size_filter">
+          Please select size:
+          <select name="size_filter" id="size_filter" style="padding: 2px;border: 1px solid #656868;">
             <option value="-1">All Sizes</option>
             <% @event.sizes.each { |size| %>
                 <% if size.name != "-no size-" %>

@@ -5,7 +5,7 @@ class WorldwideTariffsController < ApplicationController
   layout "admin"
 
   def list
-    @page_title = "Worldwide tariffs"
+    @page_title = "Shipping calculator. Worldwide tariffs"
     @tariffs = WorldwideTariff.all
   end
 

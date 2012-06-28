@@ -25,6 +25,7 @@ gem 'geocoder'
 gem 'nested_form', :git => "git://github.com/ryanb/nested_form.git"
 gem 'headless'
 gem 'watir-webdriver', '0.5.7'
+gem 'activemerchant', :git => "git://github.com/Shopify/active_merchant.git"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
