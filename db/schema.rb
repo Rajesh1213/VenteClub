@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120621203841) do
+ActiveRecord::Schema.define(:version => 20120704232138) do
 
   create_table "colors", :force => true do |t|
     t.string   "name"
@@ -24,10 +24,11 @@ ActiveRecord::Schema.define(:version => 20120621203841) do
     t.string   "card_type"
     t.string   "card_number"
     t.string   "cardholder_name"
-    t.integer  "expiration_month", :default => 1
+    t.integer  "expiration_month",            :default => 1
     t.integer  "expiration_year"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.string   "customer_payment_profile_id", :default => ""
   end
 
   create_table "events", :force => true do |t|
@@ -163,6 +164,7 @@ ActiveRecord::Schema.define(:version => 20120621203841) do
     t.string   "last_name"
     t.integer  "shop_category_id"
     t.boolean  "us_ship"
+    t.string   "customer_profile_id",              :default => ""
   end
 
   create_table "worldwide_tariffs", :force => true do |t|

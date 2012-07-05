@@ -9,37 +9,66 @@ class StaticController < ApplicationController
   def how_it_works
 
 
-    # Use the TrustCommerce test servers
-    ActiveMerchant::Billing::Base.mode = :test
-
-    gateway = ActiveMerchant::Billing::OrbitalGateway.new(
-        :merchant_id => '1111',
-        :login => 'TestMerchant',
-        :password => 'password')
-
-    # ActiveMerchant accepts all amounts as Integer values in cents
     amount = 1000 # $10.00
+    amount_to_charge = 11
 
-    # The card verification value is also known as CVV2, CVC2, or CID
     credit_card = ActiveMerchant::Billing::CreditCard.new(
-        :first_name => 'Bob',
-        :last_name => 'Bobsen',
-        :number => '4242424242424242',
+        #:first_name => 'Bobik',
+        #:last_name => 'Bobsen',
+        :number => '424242424243422',
         :month => '8',
         :year => '2012',
-        :verification_value => '123')
+        :verification_value => '123'
+    )
 
-    # Validating the card automatically detects the card type
-    if credit_card.valid?
-      # Capture $10 from the credit card
-      response = gateway.purchase(amount, credit_card, {:order_id => "1234"})
+    #
+    #p GATEWAY_CIM.create_customer_profile(
+    #      :profile => {
+    #          :merchant_customer_id => "333334"
+    #      }
+    #  ).params["customer_profile_id"]
+    #
 
-      if response.success?
-        puts "Successfully charged $#{sprintf("%.2f", amount / 100)} to the credit card #{credit_card.display_number}"
-      else
-        raise StandardError, response.message
-      end
-    end
+    #p GATEWAY_CIM.create_customer_payment_profile(
+    #      :customer_profile_id => "39644510",
+    #      :payment_profile => {
+    #          :payment => {
+    #              :credit_card => credit_card
+    #          }
+    #      }
+    #  ).inspect
+
+    #if credit_card.valid?
+    #  response = GATEWAY.purchase(amount, credit_card, {:order_id => "1234"})
+    #  if response.success?
+    #    puts "Successfully charged $#{sprintf("%.2f", amount / 100)} to the credit card #{credit_card.display_number}"
+    #  else
+    #    raise StandardError, response.message
+    #  end
+    #else
+    #
+    #end
+
+
+    #if credit_card.valid?
+    #  response = GATEWAY.authorize(amount_to_charge*100, credit_card, :billing_address =>
+    #      {:name => 'Mark McBride',
+    #       :address1 => '33 New Montgomery St.',
+    #       :city => 'San Francisco',
+    #       :state => 'CA',
+    #       :country => 'US',
+    #       :zip => '760001',
+    #       :phone => '(555)555-5555'})
+    #
+    #  if response.success?
+    #    GATEWAY.capture(amount_to_charge, response.authorization)
+    #    render :text => 'Success:' + response.message.to_s and return
+    #  else
+    #    render :text => 'Fail:' + response.message.to_s and return
+    #  end
+    #else
+    #  render :text => 'Credit card not valid: ' + credit_card.validate.to_s and return
+    #end
 
 
   end

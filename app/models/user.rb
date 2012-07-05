@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   validates :last_name, :presence => true
   validates :mail, :presence => true, :uniqueness => true, :format => {:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i}
   validates :pass, :presence => true, :length => {:minimum => 6}, :confirmation => true
+  validates :customer_profile_id, :presence => true, :on => :update
 
   default_scope :order => "created_at ASC"
 
@@ -16,9 +17,10 @@ class User < ActiveRecord::Base
 
   attr_accessor :pass_confirmation
 
-  attr_protected :role_id
+  attr_protected :role_id, :customer_profile_id
 
-  before_create :send_mail, :update_pass
+  before_create :update_pass, :send_mail
+  after_create :create_customer_profile
   before_update :update_pass
 
   def full_name
@@ -57,6 +59,17 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def create_customer_profile
+    response = GATEWAY_CIM.create_customer_profile(
+        :profile => {
+            :merchant_customer_id => self.id.to_s
+        }
+    ).params
+    if response["customer_profile_id"]
+      self.customer_profile_id = response["customer_profile_id"]
+    end
+  end
 
   def send_mail
     Mailer.welcome_email(self).deliver

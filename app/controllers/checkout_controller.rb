@@ -48,6 +48,8 @@ class CheckoutController < ApplicationController
     end
   end
 
+
+
   private
 
   def check_login_confirmed

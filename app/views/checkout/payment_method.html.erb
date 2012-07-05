@@ -12,7 +12,7 @@
           <%= f.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
           <div class="dataRow">
             <%= f.label(:card_type, "Card type:") %>
-            <%= f.select :card_type, options_for_select(["American Express", "Diners Club", "Discover", "JCB", "MasterCard", "Visa"]) %>
+            <%= f.select :card_type, options_for_select([["American Express", "american_express"], ["Diners Club", "diners_club"], ["Discover", "discover"], ["JCB", "jcb"], ["MasterCard", "master"], ["Visa", "visa"]], @credit_card.card_type) %>
           </div>
           <div class="dataRow">
             <%= f.label(:card_number, "Card number:") %>
@@ -24,8 +24,10 @@
           </div>
           <div class="dataRow">
             <%= f.label(:expiration_month, "Expiration date:") %>
-            <%= f.select(:expiration_month, options_for_select(1..12, 1), {}, {:style => "width:50px;float:left;margin-left:32px;", :required => true}) %>
-            <%= f.select(:expiration_year, options_for_select(Date.today.year..Date.today.year + 10, Date.today.year), {}, {:style => "width:75px;float:left;margin-left:20px", :required => true}) %>
+            <%= f.select(:expiration_month, options_for_select(1..12, @credit_card.expiration_month), {}, {:style => "width:50px;float:left;margin-left:32px;", :required => true}) %>
+            <%= f.select(:expiration_year, options_for_select(Date.today.year..Date.today.year + 10, @credit_card.expiration_year), {}, {:style => "width:75px;float:left;margin-left:20px;", :required => true}) %>
+            <%= f.label(:cvv, "CVV code:", :style => "width:75px;float:left;margin-left:20px;") %>
+            <%= f.text_field(:cvv, :style => "width:55px;float:left;margin-left:20px;", :required => true) %>
           </div>
           <%= f.submit("Continue Checkout >>", :class => "input-member", :style => "width: 150px;") %>
           <div class="cleaner"></div>

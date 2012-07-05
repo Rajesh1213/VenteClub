@@ -24,7 +24,7 @@ a {
 .header {
     background: #fff;
     padding: 10px 0 0;
-    height: 122px;
+    height: 75px;
     position: relative;
 }
 
@@ -43,7 +43,7 @@ a {
 }
 
 .header img {
-    margin: 24px 0 0;
+    /*margin: 24px 0 0;*/
 }
 
 /***	Homepage 	****/
@@ -121,7 +121,7 @@ a {
 }
 
 .main-wrapper {
-    background: #f1f1f1;
+    /*background: #f1f1f1;*/
     font-size: 12px;
     padding: 14px;
 }
@@ -357,7 +357,7 @@ img.eventBigImg {
 .dataRow input {
     width: 317px;
     float: right;
-    padding: 8px;
+    padding: 9px;
     font-size: 14px;
 }
 
@@ -1069,7 +1069,7 @@ table.shippingResults td.currency, table.shippingResults th.currency {
 .cartWrapper {
     position: absolute;
     right: 0;
-    top: 52px;
+    top: 35px;
 }
 
 .cartTop {
@@ -1292,7 +1292,7 @@ table.shippingResults td.currency, table.shippingResults th.currency {
     width: 100px;
 }
 
-.dataRow .field_with_errors input {
+.dataRow .field_with_errors input, .dataRow .field_with_errors select {
     border: 1px solid #ff0000;
 }
 
