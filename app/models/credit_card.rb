@@ -24,6 +24,17 @@ class CreditCard < ActiveRecord::Base
   private
 
   def add_customer_payment_profile_id
+    if self.user.customer_profile_id.blank?
+      response = GATEWAY_CIM.create_customer_profile(
+          :profile => {
+              :merchant_customer_id => self.user.id.to_s
+          }
+      ).params
+      if response["customer_profile_id"]
+        self.user.update_attribute("customer_profile_id", response["customer_profile_id"])
+      end
+
+    end
     credit_card = card_from_params
     response = GATEWAY_CIM.create_customer_payment_profile(
         :customer_profile_id => self.user.customer_profile_id,

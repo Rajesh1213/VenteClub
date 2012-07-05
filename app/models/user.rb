@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
         }
     ).params
     if response["customer_profile_id"]
-      self.customer_profile_id = response["customer_profile_id"]
+      self.update_attribute("customer_profile_id", response["customer_profile_id"])
     end
   end
 
