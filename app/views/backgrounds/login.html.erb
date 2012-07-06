@@ -1,7 +1,7 @@
 <h2><%= @page_title %></h2>
 
 <div class="control-group">
-  <%= image_tag "/pictures/backgrounds/login_bg.jpg", :id => "current_image", :style => "padding: 10px 0px;" %>
+  <%= image_tag "/pictures/backgrounds/login_bg.jpg" + "?rand=" + DateTime.now.to_i.to_s, :id => "current_image", :style => "padding: 10px 0px;" %>
   <%= form_tag do %>
       <div class="controls">
         <%= hidden_field_tag(:new_file_name) %>
