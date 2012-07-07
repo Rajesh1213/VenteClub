@@ -2,34 +2,38 @@
   Payment Method
 </div>
 <div class="checkoutContent">
+
   <div class="column">
     <h1>
-      Credit card information:
+      Choose a payment method:
+    </h1>
+    <% @current_user.credit_cards.all.each { |credit_card| %>
+        <div class="shippingAddressWrapper">
+          <%= link_to("PAY WITH >>", {:controller => :checkout, :action => :bill_to, :id => credit_card}, :class => "input-newmember") %>
+          <div class="addressContent">
+            <b><%= credit_card.card_type %></b>
+            <br/>
+            <%= credit_card.card_number %>
+            <br/>
+            <%= credit_card.cardholder_name %>
+            <br/>
+            <%= credit_card.expiration_month %>/<%= credit_card.expiration_year %>
+            <br/>
+            <%= link_to("Edit", :controller => :checkout, :action => :edit_card, :id => credit_card) %>
+          </div>
+          <div class="cleaner"></div>
+        </div>
+    <% } %>
+  </div>
+
+  <div class="column">
+    <h1>
+      Or enter a new credit card information:
     </h1>
 
     <div class="content-body" style="float: left;">
-      <%= form_for :credit_card, :as => @credit_card, :url => {}, :method => :post, :html => {:class => "form-horizontal"} do |f| %>
-          <%= f.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
-          <div class="dataRow">
-            <%= f.label(:card_type, "Card type:") %>
-            <%= f.select :card_type, options_for_select([["American Express", "american_express"], ["Diners Club", "diners_club"], ["Discover", "discover"], ["JCB", "jcb"], ["MasterCard", "master"], ["Visa", "visa"]], @credit_card.card_type) %>
-          </div>
-          <div class="dataRow">
-            <%= f.label(:card_number, "Card number:") %>
-            <%= f.text_field(:card_number, :required => true) %>
-          </div>
-          <div class="dataRow">
-            <%= f.label(:cardholder_name, "Cardholder name:") %>
-            <%= f.text_field(:cardholder_name, :required => true) %>
-          </div>
-          <div class="dataRow">
-            <%= f.label(:expiration_month, "Expiration date:") %>
-            <%= f.select(:expiration_month, options_for_select(1..12, @credit_card.expiration_month), {}, {:style => "width:50px;float:left;margin-left:32px;", :required => true}) %>
-            <%= f.select(:expiration_year, options_for_select(Date.today.year..Date.today.year + 10, @credit_card.expiration_year), {}, {:style => "width:75px;float:left;margin-left:20px;", :required => true}) %>
-            <%= f.label(:cvv, "CVV code:", :style => "width:75px;float:left;margin-left:20px;") %>
-            <%= f.text_field(:cvv, :style => "width:55px;float:left;margin-left:20px;", :required => true) %>
-          </div>
-          <%= f.submit("Continue Checkout >>", :class => "input-member", :style => "width: 150px;") %>
+      <%= form_for :credit_card, :as => @credit_card, :url => {}, :method => :post, :html => {:class => "form-horizontal"} do |credit_card| %>
+          <%= render :partial => "checkout/credit_card_fields", :locals => {:credit_card => credit_card} %>
           <div class="cleaner"></div>
       <% end %>
     </div>

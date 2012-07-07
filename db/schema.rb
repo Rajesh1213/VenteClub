@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120704232138) do
+ActiveRecord::Schema.define(:version => 20120706132530) do
 
   create_table "colors", :force => true do |t|
     t.string   "name"
@@ -125,8 +125,9 @@ ActiveRecord::Schema.define(:version => 20120704232138) do
     t.string   "postal_code"
     t.string   "phone"
     t.integer  "country_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "billing_user_id"
   end
 
   create_table "sizes", :force => true do |t|

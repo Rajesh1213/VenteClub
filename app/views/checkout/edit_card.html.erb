@@ -1,0 +1,12 @@
+<div class="checkoutHeader">
+  Edit Credit Card
+</div>
+<div class="checkoutContent">
+  <div class="content-body" style="float: left;">
+    <%= form_for @credit_card, :as => :credit_card, :url => {:controller => :checkout, :action => :edit_card}, :method => :post, :html => {:class => "form-horizontal"} do |credit_card| %>
+        <%= render :partial => "checkout/credit_card_fields", :locals => {:credit_card => credit_card} %>
+        <div class="cleaner"></div>
+    <% end %>
+  </div>
+  <div class="cleaner"></div>
+</div>

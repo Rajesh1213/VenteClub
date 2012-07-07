@@ -121,7 +121,7 @@ a {
 }
 
 .main-wrapper {
-    /*background: #f1f1f1;*/
+    background: #f1f1f1;
     font-size: 12px;
     padding: 14px;
 }
@@ -182,6 +182,16 @@ img.eventBigImg {
     display: table-cell;
     vertical-align: middle;
     line-height: 0px;
+}
+
+a.productImage {
+    width: 233px;
+    height: 312px;
+}
+
+a.eventImage {
+    width: 312px;
+    height: 219px;
 }
 
 .eventImage img {
@@ -299,7 +309,19 @@ img.eventBigImg {
     padding: 19px;
     font-size: 12px;
     width: 663px;
-    min-height: 907px;
+    min-height: 265px;
+    border-bottom: none;
+}
+
+.myWrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.myWrapperBottom {
+    background-image: url("my_wrapper_bg.png");
+    height: 1px;
+    margin-bottom: -1px;
 }
 
 .content-title {
@@ -596,16 +618,20 @@ img.eventBigImg {
     float: right;
     background: #d9d9d9;
     margin: 4px 0;
-    width: 100px;
-    height: 33px;
+    height: 30px;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 11px;
     color: #000;
     cursor: pointer;
     text-transform: uppercase;
     text-align: center;
     text-decoration: none;
     line-height: 12px;
+    padding: 0 8px;
+    letter-spacing: 0;
+    color: #000000;
+    border-style: none !important;
+    -webkit-appearance: none;
 }
 
 .input-newmember {
@@ -613,7 +639,7 @@ img.eventBigImg {
 }
 
 a.input-member, a.input-newmember {
-    font-size: 11px;
+    font-size: 10px;
     padding-top: 8px;
     height: 22px;
     display: block;
@@ -646,12 +672,12 @@ a.input-member, a.input-newmember {
 
 /***	Sidebar	****/
 .left-sidebar {
-    float: left;
     background-color: #CACACA;
     border: 1px solid #a6a6a6;
     padding: 19px;
     width: 223px;
-    min-height: 907px;
+    position: absolute;
+    height: 3000px;
 }
 
 .title {

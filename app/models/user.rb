@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   has_many :shipping_addresses, :dependent => :destroy
+  has_many :billing_addresses, :class_name => "ShippingAddress", :foreign_key => :billing_user_id, :dependent => :destroy
   has_many :orders, :dependent => :destroy
   has_many :credit_cards, :dependent => :destroy
 
@@ -13,6 +14,7 @@ class User < ActiveRecord::Base
   default_scope :order => "created_at ASC"
 
   accepts_nested_attributes_for :shipping_addresses, :allow_destroy => true
+  accepts_nested_attributes_for :billing_addresses, :allow_destroy => true
   accepts_nested_attributes_for :credit_cards, :allow_destroy => true
 
   attr_accessor :pass_confirmation

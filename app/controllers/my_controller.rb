@@ -18,7 +18,7 @@ class MyController < ApplicationController
 
   end
 
-  def addresses
+  def shipping_addresses
     @user = @current_user.clone
     @javascript = true
     @countries = WorldwideTariff.all
@@ -26,6 +26,17 @@ class MyController < ApplicationController
       flash.now[:success] = "Shipping addresses updated"
     else
       @user.shipping_addresses.new if @user.shipping_addresses.size == 0
+    end
+  end
+
+  def billing_addresses
+    @user = @current_user.clone
+    @javascript = true
+    @countries = WorldwideTariff.all
+    if request.post? && @user.update_attributes(params[:user])
+      flash.now[:success] = "Billing addresses updated"
+    else
+      @user.billing_addresses.new if @user.billing_addresses.size == 0
     end
   end
 

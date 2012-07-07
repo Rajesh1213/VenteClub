@@ -44,6 +44,7 @@ class CreditCard < ActiveRecord::Base
             }
         }
     ).params
+    p response.inspect
     if response["customer_payment_profile_id"]
       self.customer_payment_profile_id = response["customer_payment_profile_id"]
       self.card_number = credit_card.display_number
@@ -52,12 +53,12 @@ class CreditCard < ActiveRecord::Base
 
   def check_credit_card
     credit_card = card_from_params
-    unless credit_card.valid?
+    if self.errors.size == 0 && !credit_card.valid?
+      self.errors.add(:card_type, credit_card.errors["brand"].join(", ")) if credit_card.errors["brand"].size > 0
+      self.errors.add(:card_number, credit_card.errors["number"].join(", ")) if credit_card.errors["number"].size > 0
       self.errors.add(:cardholder_name, " - First name " + credit_card.errors["first_name"].join(", ")) if credit_card.errors["first_name"].size > 0
       self.errors.add(:cardholder_name, " - Last name " + credit_card.errors["last_name"].join(", ")) if credit_card.errors["last_name"].size > 0
-      self.errors.add(:card_number, credit_card.errors["number"].join(", ")) if credit_card.errors["number"].size > 0
       self.errors.add(:expiration_month, credit_card.errors["year"].join(", ")) if credit_card.errors["year"].size > 0
-      self.errors.add(:card_type, credit_card.errors["brand"].join(", ")) if credit_card.errors["brand"].size > 0
     end
   end
 

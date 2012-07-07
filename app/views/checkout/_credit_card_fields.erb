@@ -1,0 +1,21 @@
+<%= credit_card.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
+<div class="dataRow">
+  <%= credit_card.label(:card_type, "Card type:") %>
+  <%= credit_card.select :card_type, options_for_select([["American Express", "american_express"], ["Diners Club", "diners_club"], ["Discover", "discover"], ["JCB", "jcb"], ["MasterCard", "master"], ["Visa", "visa"]], @credit_card.card_type) %>
+</div>
+<div class="dataRow">
+  <%= credit_card.label(:card_number, "Card number:") %>
+  <%= credit_card.text_field(:card_number, :required => true) %>
+</div>
+<div class="dataRow">
+  <%= credit_card.label(:cardholder_name, "Cardholder name:") %>
+  <%= credit_card.text_field(:cardholder_name, :required => true) %>
+</div>
+<div class="dataRow">
+  <%= credit_card.label(:expiration_month, "Expiration date:") %>
+  <%= credit_card.select(:expiration_month, options_for_select(1..12, @credit_card.expiration_month), {}, {:style => "width:50px;float:left;margin-left:32px;", :required => true}) %>
+  <%= credit_card.select(:expiration_year, options_for_select(Date.today.year..Date.today.year + 10, @credit_card.expiration_year), {}, {:style => "width:75px;float:left;margin-left:20px;", :required => true}) %>
+  <%= credit_card.label(:cvv, "CVV code:", :style => "width:75px;float:left;margin-left:20px;") %>
+  <%= credit_card.text_field(:cvv, :style => "width:55px;float:left;margin-left:20px;", :required => true) %>
+</div>
+<%= credit_card.submit("Continue Checkout >>", :class => "input-member", :id => "save_btn") %>

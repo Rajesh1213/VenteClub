@@ -1,7 +1,7 @@
 <p class="member-access-title">YOUR E-MAIL</p>
 <%= form_tag(:controller => :login, :action => :forgot_pass) do %>
     <%= text_field_tag "mail", "", :required => true, :class => "input-text", :type => "email" %>
-    <%= submit_tag "SEND INSTRUCTIONS", :class => "input-member", :style => "width:120px;" %>
+    <%= submit_tag "SEND INSTRUCTIONS", :class => "input-member" %>
 <% end %>
 <div class="cleaner" style="height: 20px;"></div>
 <%= link_to "CANCEL", :root, :class => "input-newmember" %>

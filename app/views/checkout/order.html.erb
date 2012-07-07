@@ -1,0 +1,67 @@
+<div class="checkoutHeader">
+  Place order
+</div>
+<div class="checkoutContent">
+  <div class="column" style="width: 658px;">
+    <h1>Shipping to:</h1>
+
+    <div class="shippingAddressWrapper">
+      <div class="addressContent" style="float: left; margin-left: 100px;">
+        <b><%= @shipping_address.full_name %></b>
+        <br/>
+        <%= @shipping_address.address_line_1 %>
+        <br/>
+        <% unless @shipping_address.address_line_2.blank? %>
+            <%= @shipping_address.address_line_2 %>
+            <br/>
+        <% end %>
+        <%= @shipping_address.address_line_3 %>
+        <br/>
+        <%= @shipping_address.country.country %>
+        <br/>
+        <%= @shipping_address.phone %>
+        <br/>
+        <%= link_to("Edit", :controller => :checkout, :action => :edit_shipping_address, :id => @shipping_address) %>
+      </div>
+      <div class="cleaner"></div>
+    </div>
+
+    <h1>Items in your order:</h1>
+
+    <div class="shippingAddressWrapper">
+      <table style="float: left; margin-left: 100px;">
+        <tbody>
+        <% @order.products.each { |product| %>
+            <tr style="vertical-align: top;">
+              <td class="cartImage">
+                <%= image_tag("/pictures/s/" + product.images.first.file_name, :alt => product.name, :title => product.name) %>
+              </td>
+              <td>
+                <b><%= product.name %><%= ", " + product.color.name if product.has_color? %></b>
+                <% if product.has_size? %>
+                    <br/>
+                    Size: <%= product.size.name %>
+                <% end %>
+                <br/>
+                <b style="color: #B61D22;"><%= number_to_currency(product.price) %></b> - Quantity: 1
+              </td>
+            </tr>
+        <% } %>
+        </tbody>
+      </table>
+      <div class="cleaner"></div>
+    </div>
+
+  </div>
+
+  <div class="column" style="width: 300px;">
+    <%= link_to "PLACE ORDER >>", "", :class => "input-newmember" %>
+    <div class="cleaner"></div>
+    <br/>
+    Order Total: $<%= @cart_order.total_price_human %>
+    <br/>
+    in progress
+    <div class="cleaner"></div>
+  </div>
+  <div class="cleaner"></div>
+</div>

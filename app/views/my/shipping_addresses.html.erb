@@ -1,9 +1,9 @@
 <div class="content">
-  <p class="content-title">My Addresses</p>
+  <p class="content-title">My Shipping Addresses</p>
 
   <div class="content-body">
 
-    <%= nested_form_for @user, :as => :user, :url => {:controller => :my, :action => :addresses}, :method => :post, :html => {:class => "form-horizontal", :id => "addr_form"} do |user| %>
+    <%= nested_form_for @user, :as => :user, :url => {:controller => :my, :action => :shipping_addresses}, :method => :post, :html => {:class => "form-horizontal", :id => "addr_form"} do |user| %>
         <%= user.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
 
         <%= user.fields_for :shipping_addresses do |shipping_address| %>
@@ -46,7 +46,8 @@
             <%= shipping_address.link_to_remove("Delete", :class => "input-member delete") %>
             <div class="cleaner" style="height: 20px;"></div>
         <% end %>
-        <%= user.link_to_add("New Address", :shipping_addresses, :class => "input-newmember") %>
+        <%= user.link_to_add("New Shipping Address", :shipping_addresses, :class => "input-newmember") %>
+
         <%= user.submit("Save changes", :class => "input-member", :id => "save_btn") %>
     <% end %>
 

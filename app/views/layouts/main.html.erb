@@ -44,8 +44,16 @@
 </div>
 <div class="main-wrapper">
   <%= render(:partial => "main/flash_messages") %>
-  <%= render :partial => "my/left_sidebar" if request[:controller] == "my" %>
-  <%= yield %>
+
+  <% if request[:controller] == "my" %>
+      <div class="myWrapper">
+        <%= render :partial => "my/left_sidebar" %>
+        <%= yield %>
+      </div>
+      <div class="myWrapperBottom"></div>
+  <% else %>
+      <%= yield %>
+  <% end %>
 
   <div class="space"></div>
   <div class="lower-sidebar">

@@ -1,0 +1,56 @@
+<div class="content">
+  <p class="content-title">My Billing Addresses</p>
+
+  <div class="content-body">
+
+    <%= nested_form_for @user, :as => :user, :url => {:controller => :my, :action => :billing_addresses}, :method => :post, :html => {:class => "form-horizontal", :id => "addr_form"} do |user| %>
+        <%= user.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
+
+        <%= user.fields_for :billing_addresses do |billing_address| %>
+            <div class="dataRow">
+              <%= billing_address.label(:first_name, "First name:") %>
+              <%= billing_address.text_field(:first_name, :required => true) %>
+            </div>
+            <div class="dataRow">
+              <%= billing_address.label(:last_name, "Last name:") %>
+              <%= billing_address.text_field(:last_name, :required => true) %>
+            </div>
+            <div class="dataRow">
+              <%= billing_address.label(:address_line_1, "Address line 1:") %>
+              <%= billing_address.text_field(:address_line_1, :required => true) %>
+            </div>
+            <div class="dataRow">
+              <%= billing_address.label(:address_line_2, "Address line 2:") %>
+              <%= billing_address.text_field(:address_line_2) %>
+            </div>
+            <div class="dataRow">
+              <%= billing_address.label(:city, "City:") %>
+              <%= billing_address.text_field(:city, :required => true) %>
+            </div>
+            <div class="dataRow">
+              <%= billing_address.label(:state, "State:") %>
+              <%= billing_address.text_field(:state, :required => true) %>
+            </div>
+            <div class="dataRow">
+              <%= billing_address.label(:postal_code, "Postal code:") %>
+              <%= billing_address.text_field(:postal_code, :required => true) %>
+            </div>
+            <div class="dataRow">
+              <%= billing_address.label(:country_id, "Country:") %>
+              <%= billing_address.select(:country_id, options_from_collection_for_select(@countries, :id, :country, (billing_address.object.country_id if billing_address.object.country_id)), :required => true) %>
+            </div>
+            <div class="dataRow">
+              <%= billing_address.label(:phone, "Phone:") %>
+              <%= billing_address.text_field(:phone, :required => true) %>
+            </div>
+            <%= billing_address.link_to_remove("Delete", :class => "input-member delete") %>
+            <div class="cleaner" style="height: 20px;"></div>
+        <% end %>
+        <%= user.link_to_add("New Billing Address", :billing_addresses, :class => "input-newmember") %>
+
+        <%= user.submit("Save changes", :class => "input-member", :id => "save_btn") %>
+    <% end %>
+
+    <div class="cleaner"></div>
+  </div>
+</div>

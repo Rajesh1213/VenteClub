@@ -1,6 +1,7 @@
 class WorldwideTariff < ActiveRecord::Base
 
   has_many :shipping_addresses, :dependent => :destroy, :foreign_key => :country_id
+  has_many :billing_addresses, :class_name => "ShippingAddress", :foreign_key => :billing_user_id, :dependent => :destroy
 
   before_validation :arr_to_attr
 

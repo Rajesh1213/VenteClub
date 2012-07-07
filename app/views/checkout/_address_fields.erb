@@ -1,0 +1,38 @@
+<%= address.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
+<div class="dataRow">
+  <%= address.label(:first_name, "First name:") %>
+  <%= address.text_field(:first_name, :required => true) %>
+</div>
+<div class="dataRow">
+  <%= address.label(:last_name, "Last name:") %>
+  <%= address.text_field(:last_name, :required => true) %>
+</div>
+<div class="dataRow">
+  <%= address.label(:address_line_1, "Address line 1:") %>
+  <%= address.text_field(:address_line_1, :required => true) %>
+</div>
+<div class="dataRow">
+  <%= address.label(:address_line_2, "Address line 2:") %>
+  <%= address.text_field(:address_line_2) %>
+</div>
+<div class="dataRow">
+  <%= address.label(:city, "City:") %>
+  <%= address.text_field(:city, :required => true) %>
+</div>
+<div class="dataRow">
+  <%= address.label(:state, "State:") %>
+  <%= address.text_field(:state, :required => true) %>
+</div>
+<div class="dataRow">
+  <%= address.label(:postal_code, "Postal code:") %>
+  <%= address.text_field(:postal_code, :required => true) %>
+</div>
+<div class="dataRow">
+  <%= address.label(:country_id, "Country:") %>
+  <%= address.select(:country_id, options_from_collection_for_select(@countries, :id, :country, address.object.country_id), :required => true) %>
+</div>
+<div class="dataRow">
+  <%= address.label(:phone, "Phone:") %>
+  <%= address.text_field(:phone, :required => true) %>
+</div>
+<%= address.submit("Continue Checkout >>", :class => "input-member", :id => "save_btn") %>
