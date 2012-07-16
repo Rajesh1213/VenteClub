@@ -1,7 +1,7 @@
 class AjaxController < ApplicationController
 
-  before_filter :authorize_user, :only => [:shopping_cart_add, :shopping_cart_del]
-  before_filter :read_cart, :only => [:shopping_cart_add, :shopping_cart_del]
+  before_filter :authorize_user, :only => [:shopping_cart_add, :shopping_cart_del, :change_quantity]
+  before_filter :read_cart, :only => [:shopping_cart_add, :shopping_cart_del, :change_quantity]
 
   def update_data
     if request.post?
@@ -23,7 +23,10 @@ class AjaxController < ApplicationController
   def shopping_cart_add
     if request.post?
       product = Product.find(params[:id])
-      @cart_order.products << product unless @cart_order.products.include?(product)
+      unless @cart_order.products.include?(product)
+        @cart_order.products << product
+        session[:quantity][product.id] = 1
+      end
       render :partial => "layouts/shopping_cart"
     end
   end
@@ -32,7 +35,18 @@ class AjaxController < ApplicationController
     if request.post?
       product = Product.find(params[:id])
       @cart_order.products.delete(product)
-      render :json => {:success => true, :total => @cart_order.total_price_human, :cart_items => @cart_order.items_human, :items_count => @cart_order.products.size}
+      session[:quantity][product.id] = nil
+      render :json => {:success => true, :total => @cart_order.items_price_human, :cart_items => @cart_order.items_human, :items_count => @cart_order.products.size}
+    end
+  end
+
+  def change_quantity
+    if request.post?
+      product = Product.find(params[:id])
+      session[:quantity][product.id] = request[:quantity].to_i
+      read_cart
+      #render :json => {:success => true}
+      render :partial => "layouts/shopping_cart"
     end
   end
 

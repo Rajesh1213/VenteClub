@@ -24,51 +24,91 @@ class CheckoutController < ApplicationController
   def ship_to
     @shipping_address = @current_user.shipping_addresses.new
     @countries = WorldwideTariff.all
-    redirect_to :action => :payment_method if request.post? && @current_user.shipping_addresses.create(params[:shipping_address])
+    if request.post?
+      if params[:shipping_address]
+        shipping_address = @current_user.shipping_addresses.new(params[:shipping_address])
+        if shipping_address.save
+          session[:shipping_address] = shipping_address.id
+          redirect_to :action => :payment_method
+        end
+      else
+        shipping_address = @current_user.shipping_addresses.find(params[:id])
+        session[:shipping_address] = shipping_address.id
+        redirect_to :action => :payment_method
+      end
+    end
   end
 
   def edit_shipping_address
     @shipping_address = @current_user.shipping_addresses.find(params[:id])
     @countries = WorldwideTariff.all
-    redirect_to :action => :payment_method if request.post? && @shipping_address.update_attributes(params[:shipping_address])
+    if request.post? && @shipping_address.update_attributes(params[:shipping_address])
+      session[:shipping_address] = @shipping_address.id
+      redirect_to :action => :payment_method
+    end
   end
 
   def payment_method
-    @credit_card = @current_user.credit_cards.new(params[:credit_card])
+    @credit_card = @current_user.credit_cards.new
     if request.post?
-      exist_card = @current_user.credit_cards.find_by_card_type_and_card_number_and_expiration_month_and_expiration_year(@credit_card.card_type, @credit_card.card_number, @credit_card.expiration_month, @credit_card.expiration_year)
-      if exist_card
-        @credit_card = exist_card
-        flash.now[:success] = "Credit card exist"
+      if params[:credit_card]
+        @credit_card = @current_user.credit_cards.new(params[:credit_card])
+        if @credit_card.save
+          session[:credit_card] = @credit_card.id
+          redirect_to :action => :bill_to
+        end
       else
-        redirect_to :action => :bill_to if @credit_card.save
+        credit_card = @current_user.credit_cards.find(params[:id])
+        session[:credit_card] = credit_card.id
+        redirect_to :action => :bill_to
       end
     end
   end
 
   def edit_card
     @credit_card = @current_user.credit_cards.find(params[:id])
-    redirect_to :action => :bill_to if request.post? && @credit_card.update_attributes(params[:credit_card])
+    if request.post? && @credit_card.update_attributes(params[:credit_card])
+      session[:credit_card] = @credit_card.id
+      redirect_to :action => :bill_to
+    end
   end
 
   def bill_to
     @billing_address = @current_user.billing_addresses.new
     @countries = WorldwideTariff.all
-    redirect_to :action => :order if request.post? && @current_user.billing_addresses.create(params[:billing_address])
+    if request.post?
+      if params[:billing_address]
+        billing_address = @current_user.billing_addresses.new(params[:billing_address])
+        if billing_address.save
+          session[:billing_address] = billing_address.id
+          redirect_to :action => :order
+        end
+      else
+        billing_address = @current_user.billing_addresses.find(params[:id])
+        session[:billing_address] = billing_address.id
+        redirect_to :action => :order
+      end
+    end
   end
 
   def edit_billing_address
     @billing_address = @current_user.billing_addresses.find(params[:id])
     @countries = WorldwideTariff.all
-    redirect_to :action => :order if request.post? && @billing_address.update_attributes(params[:billing_address])
+    if request.post? && @billing_address.update_attributes(params[:billing_address])
+      session[:billing_address] = @billing_address.id
+      redirect_to :action => :order
+    end
   end
 
   def order
-    @shipping_address = @current_user.shipping_addresses.first
-    @billing_address = @current_user.billing_addresses.first
-    @credit_card = @current_user.credit_cards.first
-    read_cart
+    @shipping_address = @current_user.shipping_addresses.find(session[:shipping_address])
+    @billing_address = @current_user.billing_addresses.find(session[:billing_address])
+    @credit_card = @current_user.credit_cards.find(session[:credit_card])
     @order = @cart_order
+  end
+
+  def change_quantities
+
   end
 
   private

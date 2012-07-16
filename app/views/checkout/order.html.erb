@@ -2,48 +2,38 @@
   Place order
 </div>
 <div class="checkoutContent">
-  <div class="column" style="width: 658px;">
+  <div class="column" style="width: 643px;border-right: 1px solid #F1F1F1;padding: 7px;">
     <h1>Shipping to:</h1>
 
-    <div class="shippingAddressWrapper">
-      <div class="addressContent" style="float: left; margin-left: 100px;">
-        <b><%= @shipping_address.full_name %></b>
-        <br/>
-        <%= @shipping_address.address_line_1 %>
-        <br/>
-        <% unless @shipping_address.address_line_2.blank? %>
-            <%= @shipping_address.address_line_2 %>
-            <br/>
-        <% end %>
-        <%= @shipping_address.address_line_3 %>
-        <br/>
-        <%= @shipping_address.country.country %>
-        <br/>
-        <%= @shipping_address.phone %>
-        <br/>
-        <%= link_to("Edit", :controller => :checkout, :action => :edit_shipping_address, :id => @shipping_address) %>
-      </div>
-      <div class="cleaner"></div>
+    <div class="shippingAddressWrapper" style="width: 270px; overflow: visible;">
+      <%= render :partial => "checkout/address_template", :locals => {:address => @shipping_address, :edit_action => "edit_shipping_address"} %>
     </div>
+    <div class="cleaner" style="border-bottom: 1px solid #F1F1F1;"></div>
 
     <h1>Items in your order:</h1>
+    <%= link_to :action => :change_quantities do %>
+        <span style="color: #656868;float: right;top: -14px;position: relative;text-decoration: underline;">Change quantities or delete</span>
+    <% end %>
 
     <div class="shippingAddressWrapper">
       <table style="float: left; margin-left: 100px;">
         <tbody>
-        <% @order.products.each { |product| %>
+        <% @order.products.uniq.each { |product| %>
             <tr style="vertical-align: top;">
               <td class="cartImage">
                 <%= image_tag("/pictures/s/" + product.images.first.file_name, :alt => product.name, :title => product.name) %>
               </td>
-              <td>
+              <td style="vertical-align: middle;">
                 <b><%= product.name %><%= ", " + product.color.name if product.has_color? %></b>
                 <% if product.has_size? %>
                     <br/>
                     Size: <%= product.size.name %>
                 <% end %>
                 <br/>
-                <b style="color: #B61D22;"><%= number_to_currency(product.price) %></b> - Quantity: 1
+                <b style="color: #B61D22;"><%= number_to_currency(product.price) %></b> -
+                Quantity: <%= session[:quantity][product.id] %>
+                <br/>
+                Estimated delivery date: <%= l(Date.today + 5.days, :format => :long) %>
               </td>
             </tr>
         <% } %>
@@ -54,14 +44,67 @@
 
   </div>
 
-  <div class="column" style="width: 300px;">
+  <div class="rightColumn">
     <%= link_to "PLACE ORDER >>", "", :class => "input-newmember" %>
     <div class="cleaner"></div>
-    <br/>
-    Order Total: $<%= @cart_order.total_price_human %>
-    <br/>
-    in progress
+    <span style="color: #656868;">Your card will be charged</span>
+
+    <div class="cleaner" style="border-bottom: 1px solid #F1F1F1; padding: 3.5px 0px;"></div>
+    <table style="width: 100%;">
+      <tbody>
+      <tr>
+        <td>
+          Items:
+        </td>
+        <td>
+          $<%= @cart_order.items_price_human %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Shipping & handling:
+        </td>
+        <td>
+          $<%= @cart_order.shipping_and_handling_price_human %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Tax:
+        </td>
+        <td>
+          $<%= @cart_order.tax_price_human %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="cleaner" style="border-bottom: 1px solid #F1F1F1;"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span style="font-weight: bold;">Order total:</span>
+        </td>
+        <td>
+          <span style="font-weight: bold;">$<%= @cart_order.total_price_human %></span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="cleaner" style="border-bottom: 1px solid #F1F1F1; padding: 3.5px 0px;"></div>
+
+    <h1>Payment method:</h1>
+    <%= render :partial => "checkout/card_template", :locals => {:credit_card => @credit_card} %>
+    <div class="cleaner" style="border-bottom: 1px solid #F1F1F1; padding: 3.5px 0px;"></div>
+
+    <h1>Billing address:</h1>
+    <%= render :partial => "checkout/address_template", :locals => {:address => @billing_address, :edit_action => "edit_billing_address"} %>
+    <div class="cleaner" style="border-bottom: 1px solid #F1F1F1; padding: 3.5px 0px;"></div>
+
+    <%= link_to "PLACE ORDER >>", "", :class => "input-newmember" %>
     <div class="cleaner"></div>
+    <span style="color: #656868;">Your card will be charged</span>
+
   </div>
   <div class="cleaner"></div>
 </div>

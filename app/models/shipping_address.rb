@@ -2,6 +2,7 @@ class ShippingAddress < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :country, :class_name => 'WorldwideTariff'
+  belongs_to :order
 
   validates :first_name, :presence => true
   validates :last_name, :presence => true

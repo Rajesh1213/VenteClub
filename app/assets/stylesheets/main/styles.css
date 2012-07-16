@@ -1291,6 +1291,16 @@ table.shippingResults td.currency, table.shippingResults th.currency {
     width: 479px;
 }
 
+.checkoutContent .rightColumn {
+    float: left;
+    padding: 7px;
+    width: 286px;
+}
+
+.checkoutContent .rightColumn .addressContent {
+    margin-left: 7px;
+}
+
 .checkoutContent h1 {
     color: #000000;
     font-size: 14px;
@@ -1322,6 +1332,6 @@ table.shippingResults td.currency, table.shippingResults th.currency {
     border: 1px solid #ff0000;
 }
 
-.shippingAddressWrapper .addressContent a {
+.addressContent a {
     color: #656868;
 }

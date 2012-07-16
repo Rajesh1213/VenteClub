@@ -26,7 +26,7 @@
         </tr>
         </thead>
         <tbody>
-        <% @cart_order.products.each { |product| %>
+        <% @cart_order.products.uniq.each { |product| %>
             <tr id="item_wrapper_<%= product.id %>">
               <td class="cartImage">
                 <%= link_to((image_tag "/pictures/s/" + product.images.first.file_name), {:controller => :main, :action => :product, :id => product}, :class => "", :alt => product.name, :title => product.name) %>
@@ -50,13 +50,13 @@
                     <% quantity = product.amount
                        quantity = 2 if product.amount > 2
                     %>
-                    <%= select_tag("quantity_" + product.id.to_s, options_for_select((1..quantity).to_a), :class => "quantitySelect") %>
+                    <%= select_tag("quantity_" + product.id.to_s, options_for_select((1..quantity).to_a, session[:quantity][product.id]), :class => "quantitySelect") %>
                 <% else %>
                     Sold Out
                 <% end %>
               </td>
               <td>
-                <%= number_to_currency(product.price) %>
+                <%= number_to_currency(product.price * session[:quantity][product.id]) %>
               </td>
               <td>
                 <%= link_to image_tag("main/del_icon.png"), "#1", :class => "del_product", :id => "del_" + product.id.to_s, :title => "Delete" %>
@@ -68,7 +68,7 @@
       <div class="cleaner" style="height: 10px;"></div>
       <%= link_to "CHECKOUT >>", {:controller => :checkout, :action => :login_confirmation}, :class => "input-member" %>
       <div class="cartTotal">
-        Total: $<span id="total"><%= @cart_order.total_price_human %></span>
+        Total: $<span id="total"><%= @cart_order.items_price_human %></span>
       </div>
     </div>
     <div class="cleaner"></div>

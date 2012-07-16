@@ -9,19 +9,8 @@
     </h1>
     <% @current_user.credit_cards.all.each { |credit_card| %>
         <div class="shippingAddressWrapper">
-          <%= link_to("PAY WITH >>", {:controller => :checkout, :action => :bill_to, :id => credit_card}, :class => "input-newmember") %>
-          <div class="addressContent">
-            <b><%= credit_card.card_type %></b>
-            <br/>
-            <%= credit_card.card_number %>
-            <br/>
-            <%= credit_card.cardholder_name %>
-            <br/>
-            <%= credit_card.expiration_month %>/<%= credit_card.expiration_year %>
-            <br/>
-            <%= link_to("Edit", :controller => :checkout, :action => :edit_card, :id => credit_card) %>
-          </div>
-          <div class="cleaner"></div>
+          <%= link_to("PAY WITH >>", {:controller => :checkout, :action => :payment_method, :id => credit_card}, :class => "input-newmember", :method => :post) %>
+          <%= render :partial => "checkout/card_template", :locals => {:credit_card => credit_card} %>
         </div>
     <% } %>
   </div>

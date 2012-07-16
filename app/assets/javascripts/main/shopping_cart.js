@@ -29,6 +29,17 @@ $(document).ready(function () {
         onSelect = true;
     });
 
+    $(".quantitySelect").live("change", function () {
+        var id = this.id.split("_")[1];
+        var quantity = $(this).val();
+        $.post("/ajax/change_quantity/", {authenticity_token:$('meta[name=csrf-token]').attr("content"), id:id, quantity:quantity},
+            function (data) {
+                $(".cartWrapper").html(data);
+                $(".cartData").show();
+                $(".cartTop").css("background-color", "#C6C7C7");
+            });
+    });
+
     $('.cartData').live({
             mouseenter:function () {
                 $(".cartTop").css("background-color", "#C6C7C7");

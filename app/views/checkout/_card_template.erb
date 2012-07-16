@@ -1,0 +1,12 @@
+<div class="addressContent">
+  <b><%= credit_card.card_type %></b>
+  <br/>
+  <%= credit_card.card_number %>
+  <br/>
+  <%= credit_card.cardholder_name %>
+  <br/>
+  Exp: <%= credit_card.expiration_month %>/<%= credit_card.expiration_year %>
+  <br/>
+  <%= link_to("Edit", :controller => :checkout, :action => :edit_card, :id => credit_card) %>
+</div>
+<div class="cleaner"></div>

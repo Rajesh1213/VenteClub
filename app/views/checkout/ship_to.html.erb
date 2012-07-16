@@ -8,25 +8,8 @@
     </h1>
     <% @current_user.shipping_addresses.all.each { |shipping_address| %>
         <div class="shippingAddressWrapper">
-          <%= link_to("SHIP TO >>", {:controller => :checkout, :action => :payment_method, :id => shipping_address}, :class => "input-newmember") %>
-          <div class="addressContent">
-            <b><%= shipping_address.full_name %></b>
-            <br/>
-            <%= shipping_address.address_line_1 %>
-            <br/>
-            <% unless shipping_address.address_line_2.blank? %>
-                <%= shipping_address.address_line_2 %>
-                <br/>
-            <% end %>
-            <%= shipping_address.address_line_3 %>
-            <br/>
-            <%= shipping_address.country.country %>
-            <br/>
-            <%= shipping_address.phone %>
-            <br/>
-            <%= link_to("Edit", :controller => :checkout, :action => :edit_shipping_address, :id => shipping_address) %>
-          </div>
-          <div class="cleaner"></div>
+          <%= link_to("SHIP TO >>", {:controller => :checkout, :action => :ship_to, :id => shipping_address}, :class => "input-newmember", :method => :post) %>
+          <%= render :partial => "checkout/address_template", :locals => {:address => shipping_address, :edit_action => "edit_shipping_address"} %>
         </div>
     <% } %>
   </div>

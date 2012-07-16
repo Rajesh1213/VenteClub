@@ -46,18 +46,27 @@ class ApplicationController < ActionController::Base
   def read_cart
     if @current_user
       begin
+        session[:quantity] = [] unless session[:quantity]
         product_ids = Marshal::load(cookies[:order])
         cart_products = Product.find(product_ids)
         @cart_order = @current_user.orders.new(:products => cart_products)
+        cart_products.each { |product|
+          if session[:quantity][product.id] && session[:quantity][product.id] > 1
+            (session[:quantity][product.id] - 1).times do
+              @cart_order.products << product
+            end
+          end
+        }
       rescue
         @cart_order = @current_user.orders.new
+        session[:quantity] = []
       end
     end
   end
 
   def write_cart
     if @current_user && @current_user.role == "user" && @cart_order
-      products = @cart_order.products.collect { |product| product.id }
+      products = @cart_order.products.uniq.collect { |product| product.id }
       cookies.permanent[:order] = Marshal::dump(products)
     end
   end

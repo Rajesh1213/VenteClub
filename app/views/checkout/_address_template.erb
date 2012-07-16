@@ -1,0 +1,18 @@
+<div class="addressContent">
+  <b><%= address.full_name %></b>
+  <br/>
+  <%= address.address_line_1 %>
+  <br/>
+  <% unless address.address_line_2.blank? %>
+      <%= address.address_line_2 %>
+      <br/>
+  <% end %>
+  <%= address.address_line_3 %>
+  <br/>
+  <%= address.country.country %>
+  <br/>
+  <%= address.phone %>
+  <br/>
+  <%= link_to("Edit", :controller => :checkout, :action => edit_action, :id => address) %>
+</div>
+<div class="cleaner"></div>

@@ -1,7 +1,7 @@
 <%= credit_card.error_messages(:class => "alert alert-block alert-error", :header_message => nil, :message => nil) %>
 <div class="dataRow">
   <%= credit_card.label(:card_type, "Card type:") %>
-  <%= credit_card.select :card_type, options_for_select([["American Express", "american_express"], ["Diners Club", "diners_club"], ["Discover", "discover"], ["JCB", "jcb"], ["MasterCard", "master"], ["Visa", "visa"]], @credit_card.card_type) %>
+  <%= credit_card.select(:card_type, options_for_select([["- - - Please select your card type - - -", ""], ["American Express", "american_express"], ["Diners Club", "diners_club"], ["Discover", "discover"], ["JCB", "jcb"], ["MasterCard", "master"], ["Visa", "visa"]], @credit_card.card_type), {}, {:required => true}) %>
 </div>
 <div class="dataRow">
   <%= credit_card.label(:card_number, "Card number:") %>
